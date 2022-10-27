@@ -25,6 +25,7 @@
         app:layout_constraintEnd_toStartOf="@id/mid_space"
         app:srcCompat="@drawable/blank_square" />
 
+
     <ImageView
         android:id="@+id/bot_left_space"
         android:layout_width="120dp"
