@@ -30,7 +30,7 @@
 
         <!-- XML for the cats ImageView for the vertical and horizontal layouts-->
         <ImageView
-            android:id="@+id/imageView"
+            android:id="@+id/cardImage"
             android:layout_width="0dp"
             android:layout_height="194dp"
             android:scaleType="centerCrop"
@@ -41,36 +41,14 @@
 
         <!-- XML for the cat names TextView for the vertical and horizontal layouts-->
         <TextView
-            android:id="@+id/catName"
+            android:id="@+id/cardName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:padding="8dp"
             android:text="@string/default_text"
             android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/imageView" />
-
-        <!-- XML for the cats sexes TextView for the vertical and horizontal layouts-->
-        <TextView
-            android:id="@+id/catSex"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@string/default_text"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/catName" />
-
-        <!-- XML for the cats ages TextView for the vertical and horizontal layouts-->
-        <TextView
-            android:id="@+id/catAge"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:padding="8dp"
-            android:text="@string/default_text"
-            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/catName" />
+            app:layout_constraintTop_toBottomOf="@id/cardImage" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
