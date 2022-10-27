@@ -4,6 +4,7 @@ import android.media.Image
 import android.os.Bundle
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat.startDragAndDrop
 import com.example.tripletriad.databinding.ActivityPlayBinding
 
 class Board : AppCompatActivity() {
@@ -44,7 +45,6 @@ class Board : AppCompatActivity() {
         setContentView(R.layout.activity_play)
 
         playerCardOne = findViewById(R.id.player_card_one)
-
         playerCardTwo = findViewById(R.id.player_card_two)
         playerCardThree = findViewById(R.id.player_card_three)
         playerCardFour = findViewById(R.id.player_card_four)
