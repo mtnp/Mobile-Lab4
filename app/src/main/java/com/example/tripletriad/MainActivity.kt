@@ -28,6 +28,9 @@ class MainActivity : AppCompatActivity() {
 
         // Launch the SettingsActivity on settingsBtn click
         binding.settingsBtn.setOnClickListener { launchSettings() }
+
+        // Launch the RulebookActivity on settingsBtn click
+        binding.rulebookBtn.setOnClickListener { launchRulebook() }
     }
 
     private fun launchPlay() {
@@ -42,6 +45,11 @@ class MainActivity : AppCompatActivity() {
 
     private fun launchSettings() {
         listIntent = Intent(this, SettingsActivity::class.java)
+        startActivity(listIntent)
+    }
+
+    private fun launchRulebook() {
+        listIntent = Intent(this, RulebookActivity::class.java)
         startActivity(listIntent)
     }
 }

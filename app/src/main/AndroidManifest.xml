@@ -14,6 +14,9 @@
         android:theme="@style/Theme.TripleTriad"
         tools:targetApi="31">
         <activity
+            android:name=".RulebookActivity"
+            android:exported="false" />
+        <activity
             android:name=".CardListActivity"
             android:exported="false" />
         <activity
