@@ -3,7 +3,7 @@ package com.example.tripletriad.model
 import androidx.annotation.DrawableRes
 
 data class ListCard (
-    @DrawableRes val imageResourceId: Int,
+    @DrawableRes var imageResourceId: Int,
     val name: String,
     val north: Int,
     val east: Int,

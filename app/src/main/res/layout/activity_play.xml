@@ -99,7 +99,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
         app:layout_constraintEnd_toStartOf="@id/player_card_two"
-        app:srcCompat="@drawable/card1"
+        app:srcCompat="@drawable/error"
         />
 
     <ImageView
@@ -110,7 +110,7 @@
         app:layout_constraintStart_toEndOf="@id/player_card_one"
         app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
         app:layout_constraintEnd_toStartOf="@id/player_card_three"
-        app:srcCompat="@drawable/card2" />
+        app:srcCompat="@drawable/error" />
 
     <ImageView
         android:id="@+id/player_card_three"
@@ -120,7 +120,7 @@
         app:layout_constraintStart_toEndOf="@id/player_card_two"
         app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
         app:layout_constraintEnd_toStartOf="@id/player_card_four"
-        app:srcCompat="@drawable/card3" />
+        app:srcCompat="@drawable/error" />
 
     <ImageView
         android:id="@+id/player_card_four"
@@ -130,7 +130,7 @@
         app:layout_constraintStart_toEndOf="@id/player_card_three"
         app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
         app:layout_constraintEnd_toStartOf="@id/player_card_five"
-        app:srcCompat="@drawable/card4" />
+        app:srcCompat="@drawable/error" />
 
     <ImageView
         android:id="@+id/player_card_five"
@@ -140,7 +140,7 @@
         app:layout_constraintStart_toEndOf="@id/player_card_four"
         app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
         app:layout_constraintEnd_toEndOf="parent"
-        app:srcCompat="@drawable/card5" />
+        app:srcCompat="@drawable/error" />
 
 
     <!-- opponent hand -->

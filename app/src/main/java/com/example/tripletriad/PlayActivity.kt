@@ -12,14 +12,29 @@ import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
 import com.example.tripletriad.databinding.ActivityPlayBinding
+import com.example.tripletriad.data.DataSource
+import com.example.tripletriad.model.ListCard
 
 class PlayActivity : AppCompatActivity() {
+    private val myList = DataSource.cards
     // creates a 3x3 board filled with blank, grey cards
     var board: Array<Array<Card>> = Array(3){ Array(3){ Card() } }
     private lateinit var binding: ActivityPlayBinding
     private var draggingCard: Drawable?= null
     private var drawInt: Int = -1
     private var currentCard: Card ?= null
+
+//    private var playerCardOne: ListCard?= null
+//    private var playerCardTwo: ListCard?= null
+//    private var playerCardThree: ListCard?= null
+//    private var playerCardFour: ListCard?= null
+//    private var playerCardFive: ListCard?= null
+//
+//    private var opponentCardOne: ListCard?= null
+//    private var opponentCardTwo: ListCard?= null
+//    private var opponentCardThree: ListCard?= null
+//    private var opponentCardFour: ListCard?= null
+//    private var opponentCardFive: ListCard?= null
 
     private var playerCardOne: ImageView?= null
     private var playerCardTwo: ImageView?= null
@@ -51,25 +66,51 @@ class PlayActivity : AppCompatActivity() {
         setContentView(R.layout.activity_play)
 
 
+        var playerListCardOne = myList[0]
+        var playerListCardTwo = myList[1]
+        var playerListCardThree = myList[2]
+        var playerListCardFour = myList[3]
+        var playerListCardFive = myList[10]
+
         playerCardOne = findViewById(R.id.player_card_one)
         playerCardTwo = findViewById(R.id.player_card_two)
         playerCardThree = findViewById(R.id.player_card_three)
         playerCardFour = findViewById(R.id.player_card_four)
         playerCardFive = findViewById(R.id.player_card_five)
 
+        playerCardOne?.setImageResource(playerListCardOne.imageResourceId)
+        playerCardTwo?.setImageResource(playerListCardTwo.imageResourceId)
+        playerCardThree?.setImageResource(playerListCardThree.imageResourceId)
+        playerCardFour?.setImageResource(playerListCardFour.imageResourceId)
+        playerCardFive?.setImageResource(playerListCardFive.imageResourceId)
+
+        makeDragger(playerCardOne, playerListCardOne.imageResourceId)
+        makeDragger(playerCardTwo, playerListCardTwo.imageResourceId)
+        makeDragger(playerCardThree, playerListCardThree.imageResourceId)
+        makeDragger(playerCardFour, playerListCardFour.imageResourceId)
+        makeDragger(playerCardFive, playerListCardFive.imageResourceId)
+
         // bad, don't keep this drawable impl
-        makeDragger(playerCardOne, R.drawable.card1)
-        makeDragger(playerCardTwo, R.drawable.card2)
-        makeDragger(playerCardThree, R.drawable.card3)
-        makeDragger(playerCardFour, R.drawable.card4)
-        makeDragger(playerCardFive, R.drawable.card5)
+//        makeDragger(playerCardOne, R.drawable.card1)
+//        makeDragger(playerCardTwo, R.drawable.card2)
+//        makeDragger(playerCardThree, R.drawable.card3)
+//        makeDragger(playerCardFour, R.drawable.card4)
+//        makeDragger(playerCardFive, R.drawable.card5)
 
 
-        opponentCardOne = findViewById(R.id.opponent_card_one)
-        opponentCardTwo = findViewById(R.id.opponent_card_two)
-        opponentCardThree = findViewById(R.id.opponent_card_three)
-        opponentCardFour = findViewById(R.id.opponent_card_four)
-        opponentCardFive = findViewById(R.id.opponent_card_five)
+
+        var opponentListCardOne = myList[0]
+        var opponentListCardTwo = myList[1]
+        var opponentListCardThree = myList[2]
+        var opponentListCardFour = myList[3]
+        var opponentListCardFive = myList[4]
+
+//        opponentCardOne!!.imageResourceId = R.drawable.cardback
+//        opponentCardTwo!!.imageResourceId = R.drawable.cardback
+//        opponentCardThree!!.imageResourceId = R.drawable.cardback
+//        opponentCardFour!!.imageResourceId = R.drawable.cardback
+//        opponentCardFive!!.imageResourceId = R.drawable.cardback
+
 
 
         topLeftSpace = findViewById(R.id.top_left_space)
@@ -138,10 +179,11 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
-    fun makeDragger(view: ImageView?= null, badimpl: Int){
+    fun makeDragger(view: ImageView?= null, id: Int){
         view?.setOnLongClickListener{
             draggingCard = view.getDrawable()
-            drawInt = badimpl
+            //drawInt = badimpl
+            drawInt = id
             Toast.makeText(this, "Picked Up Card", Toast.LENGTH_SHORT).show()
             val clipImage = draggingCard
             val clipText = "This is clipdata text"
