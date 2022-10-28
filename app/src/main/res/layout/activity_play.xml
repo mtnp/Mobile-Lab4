@@ -93,78 +93,105 @@
     <!-- player hand -->
     <ImageView
         android:id="@+id/player_card_one"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
+        app:layout_constraintEnd_toStartOf="@id/player_card_two"
+        app:srcCompat="@drawable/card1"
+        />
+
     <ImageView
         android:id="@+id/player_card_two"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        app:layout_constraintStart_toEndOf="@id/player_card_one"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintStart_toEndOf="@id/player_card_one"
+        app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
+        app:layout_constraintEnd_toStartOf="@id/player_card_three"
+        app:srcCompat="@drawable/card2" />
+
     <ImageView
         android:id="@+id/player_card_three"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        app:layout_constraintStart_toEndOf="@id/player_card_two"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintStart_toEndOf="@id/player_card_two"
+        app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
+        app:layout_constraintEnd_toStartOf="@id/player_card_four"
+        app:srcCompat="@drawable/card3" />
+
     <ImageView
         android:id="@+id/player_card_four"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        app:layout_constraintStart_toEndOf="@id/player_card_three"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintStart_toEndOf="@id/player_card_three"
+        app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
+        app:layout_constraintEnd_toStartOf="@id/player_card_five"
+        app:srcCompat="@drawable/card4" />
+
     <ImageView
         android:id="@+id/player_card_five"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
-        app:layout_constraintStart_toEndOf="@id/player_card_four"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintStart_toEndOf="@id/player_card_four"
+        app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/card5" />
 
 
     <!-- opponent hand -->
     <ImageView
         android:id="@+id/opponent_card_one"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/top_left_space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintEnd_toStartOf="@id/opponent_card_two"
+        app:srcCompat="@drawable/cardback" />
+
     <ImageView
         android:id="@+id/opponent_card_two"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/top_left_space"
         app:layout_constraintStart_toEndOf="@id/opponent_card_one"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintEnd_toStartOf="@id/opponent_card_three"
+        app:srcCompat="@drawable/cardback" />
+
     <ImageView
         android:id="@+id/opponent_card_three"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/top_left_space"
         app:layout_constraintStart_toEndOf="@id/opponent_card_two"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintEnd_toStartOf="@id/opponent_card_four"
+        app:srcCompat="@drawable/cardback" />
+
     <ImageView
         android:id="@+id/opponent_card_four"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/top_left_space"
         app:layout_constraintStart_toEndOf="@id/opponent_card_three"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank_square" />
+        app:layout_constraintEnd_toStartOf="@id/opponent_card_five"
+        app:srcCompat="@drawable/cardback" />
+
     <ImageView
         android:id="@+id/opponent_card_five"
-        android:layout_width="80dp"
-        android:layout_height="120dp"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintBottom_toTopOf="@+id/top_left_space"
         app:layout_constraintStart_toEndOf="@id/opponent_card_four"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/blank_square" />
-
-
+        app:layout_constraintEnd_toEndOf="parent"
+        app:srcCompat="@drawable/cardback" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
