@@ -11,7 +11,7 @@ object DataSource {
     val cards: List<ListCard> = listOf(
         ListCard (
             //dummy values
-            R.drawable.blank_square,
+            R.drawable.dodo,
             "Dodo",
             4,
             2,
@@ -20,7 +20,7 @@ object DataSource {
         ),
         ListCard (
             //dummy values
-        R.drawable.blank_square,
+        R.drawable.tonberry,
         "Tonberry",
             2,
             2,
@@ -29,7 +29,7 @@ object DataSource {
         ),
 
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.sabotender,
             "Sabotender",
             4,
             3,
@@ -37,7 +37,7 @@ object DataSource {
             3
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.spriggan,
             "Spriggan",
             2,
             3,
@@ -45,7 +45,7 @@ object DataSource {
             4
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.pudding,
             "Pudding",
             2,
             4,
@@ -53,7 +53,7 @@ object DataSource {
             5
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.bomb,
             "Bomb",
             3,
             4,
@@ -61,7 +61,7 @@ object DataSource {
             3
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.mandragora,
             "Mandragora",
             4,
             2,
@@ -69,7 +69,7 @@ object DataSource {
             3
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.coblyn,
             "Coblyn",
             3,
             3,
@@ -77,7 +77,7 @@ object DataSource {
             4
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.morbol,
             "Morbol",
             5,
             2,
@@ -85,7 +85,7 @@ object DataSource {
             5
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.coeurl,
             "Coeurl",
             2,
             5,
@@ -93,7 +93,7 @@ object DataSource {
             5
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.ahriman,
             "Ahriman",
             5,
             5,
@@ -101,7 +101,7 @@ object DataSource {
             2
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.goobbue,
             "Goobbue",
             2,
             5,
@@ -109,7 +109,7 @@ object DataSource {
             2
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.chocobo,
             "Chocobo",
             3,
             7,
@@ -117,7 +117,7 @@ object DataSource {
             1
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.amaljaa,
             "Amalj\'aa",
             1,
             4,
@@ -125,7 +125,7 @@ object DataSource {
             1
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.ixal,
             "Ixal",
             6,
             1,
@@ -133,7 +133,7 @@ object DataSource {
             4
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.sylph,
             "Sylph",
             2,
             4,
@@ -141,7 +141,7 @@ object DataSource {
             4
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.kobold,
             "Kobold",
             2,
             2,
@@ -149,7 +149,7 @@ object DataSource {
             3
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.sahigan,
             "Sahagin",
             4,
             5,
@@ -157,7 +157,7 @@ object DataSource {
             3
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.tataru,
             "Tataru Taru",
             7,
             2,
@@ -165,7 +165,7 @@ object DataSource {
             2
         ),
         ListCard (
-            R.drawable.blank_square,
+            R.drawable.moogle,
             "Moogle",
             2,
             1,

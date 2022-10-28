@@ -33,7 +33,7 @@
             android:id="@+id/cardImage"
             android:layout_width="0dp"
             android:layout_height="194dp"
-            android:scaleType="centerCrop"
+            android:scaleType="fitCenter"
             android:src="@drawable/error"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
