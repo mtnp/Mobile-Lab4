@@ -6,6 +6,7 @@ import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.DragEvent
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -14,6 +15,7 @@ import androidx.annotation.DrawableRes
 import com.example.tripletriad.databinding.ActivityPlayBinding
 import com.example.tripletriad.data.DataSource
 import com.example.tripletriad.model.ListCard
+import java.util.*
 
 class PlayActivity : AppCompatActivity() {
     private val myList = DataSource.cards
@@ -165,8 +167,12 @@ class PlayActivity : AppCompatActivity() {
                 val owner = v.parent as ViewGroup
                 //owner.removeView(v)
                 val destination = view as ImageView
-                destination.setImageResource(drawInt)
-                v.visibility = View.VISIBLE
+                if(Objects.equals(view.drawable.getConstantState(), this.getResources().getDrawable(R.drawable.blank_square).getConstantState())){
+                    destination.setImageResource(drawInt)
+                    v.visibility = View.INVISIBLE
+                }
+
+               // destination.setBackgroundColor(getResources().getColor(R.color.teal_200))
                 true
             }
             DragEvent.ACTION_DRAG_ENDED -> {
@@ -182,7 +188,6 @@ class PlayActivity : AppCompatActivity() {
     fun makeDragger(view: ImageView?= null, id: Int){
         view?.setOnLongClickListener{
             draggingCard = view.getDrawable()
-            //drawInt = badimpl
             drawInt = id
             Toast.makeText(this, "Picked Up Card", Toast.LENGTH_SHORT).show()
             val clipImage = draggingCard
@@ -197,6 +202,25 @@ class PlayActivity : AppCompatActivity() {
             true
         }
     }
+
+//    override fun onTouch(view: ImageView, motionEvent: MotionEvent) : Boolean{
+//        var dX = 0.0f
+//        var dY = 0.0f
+//        when(motionEvent.getAction()){
+//            MotionEvent.ACTION_DOWN -> {
+//                dX = view.getX() - motionEvent.getRawX()
+//                dY = view.getY() - motionEvent.getRawY()
+//            }
+//            MotionEvent.ACTION_MOVE -> {
+//
+//            }
+//            MotionEvent.ACTION_UP -> {
+//
+//            }
+//            else -> false
+//        }
+//        true
+//    }
 
     fun placeCard(card: Card, row: Int, col: Int){
         if(board[row][col].color != -1){ // spot is already taken
