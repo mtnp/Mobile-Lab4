@@ -1,6 +1,7 @@
 package com.example.tripletriad.model
 
 import androidx.annotation.DrawableRes
+import com.example.tripletriad.R
 
 data class ListCard (
     @DrawableRes var imageResourceId: Int,

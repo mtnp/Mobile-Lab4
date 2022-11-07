@@ -18,7 +18,8 @@ import com.example.tripletriad.model.ListCard
 import java.util.*
 
 class PlayActivity : AppCompatActivity() {
-    private val myList = DataSource.cards
+    private val myList = DataSource.cards //ListCard
+    private val enemyList: Array<Card> = Array(5){Card()} //Card
     // creates a 3x3 board filled with blank, grey cards
     var board: Array<Array<Card>> = Array(3){ Array(3){ Card() } }
     private lateinit var binding: ActivityPlayBinding
@@ -74,12 +75,14 @@ class PlayActivity : AppCompatActivity() {
         var playerListCardFour = myList[3]
         var playerListCardFive = myList[10]
 
+        // link cards to xml imageViews
         playerCardOne = findViewById(R.id.player_card_one)
         playerCardTwo = findViewById(R.id.player_card_two)
         playerCardThree = findViewById(R.id.player_card_three)
         playerCardFour = findViewById(R.id.player_card_four)
         playerCardFive = findViewById(R.id.player_card_five)
 
+        // xml cards are set to the corresponding images
         playerCardOne?.setImageResource(playerListCardOne.imageResourceId)
         playerCardTwo?.setImageResource(playerListCardTwo.imageResourceId)
         playerCardThree?.setImageResource(playerListCardThree.imageResourceId)
@@ -92,6 +95,28 @@ class PlayActivity : AppCompatActivity() {
         makeDragger(playerCardFour, playerListCardFour.imageResourceId)
         makeDragger(playerCardFive, playerListCardFive.imageResourceId)
 
+        opponentCardOne = findViewById(R.id.opponent_card_one)
+        opponentCardTwo = findViewById(R.id.opponent_card_two)
+        opponentCardThree = findViewById(R.id.opponent_card_three)
+        opponentCardFour = findViewById(R.id.opponent_card_four)
+        opponentCardFive = findViewById(R.id.opponent_card_five)
+
+        fillEnemyList()
+        var opponentListCardOne = enemyList[0]
+        var opponentListCardTwo = enemyList[1]
+        var opponentListCardThree = enemyList[2]
+        var opponentListCardFour = enemyList[3]
+        var opponentListCardFive = enemyList[4]
+
+        // enable if all-open rule is true, keep true for testing
+        opponentCardOne?.setImageResource(opponentListCardOne.imageId)
+        opponentCardTwo?.setImageResource(opponentListCardTwo.imageId)
+        opponentCardThree?.setImageResource(opponentListCardThree.imageId)
+        opponentCardFour?.setImageResource(opponentListCardFour.imageId)
+        opponentCardFive?.setImageResource(opponentListCardFive.imageId)
+
+
+
         // bad, don't keep this drawable impl
 //        makeDragger(playerCardOne, R.drawable.card1)
 //        makeDragger(playerCardTwo, R.drawable.card2)
@@ -100,12 +125,6 @@ class PlayActivity : AppCompatActivity() {
 //        makeDragger(playerCardFive, R.drawable.card5)
 
 
-
-        var opponentListCardOne = myList[0]
-        var opponentListCardTwo = myList[1]
-        var opponentListCardThree = myList[2]
-        var opponentListCardFour = myList[3]
-        var opponentListCardFive = myList[4]
 
 //        opponentCardOne!!.imageResourceId = R.drawable.cardback
 //        opponentCardTwo!!.imageResourceId = R.drawable.cardback
@@ -140,8 +159,16 @@ class PlayActivity : AppCompatActivity() {
         topRightSpace?.setOnDragListener(dragListener)
         rightSpace?.setOnDragListener(dragListener)
         botRightSpace?.setOnDragListener(dragListener)
+
+        //play game
     }
 
+    fun playGame(){
+
+    }
+
+
+    // board spaces are drop spaces
     val dragListener = View.OnDragListener{ view, event ->
         when(event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
@@ -185,11 +212,51 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
+    fun spaceToCord(view: ImageView?= null): Array<Int> {
+        var thing = ""
+        when(view){
+            topLeftSpace ->{
+                return arrayOf(0, 0)
+            }
+            leftSpace ->{
+                return arrayOf(1, 0)
+            }
+            botLeftSpace ->{
+                return arrayOf(2, 0)
+            }
+
+            topMidSpace ->{
+                return arrayOf(0, 1)
+            }
+            midSpace ->{
+                return arrayOf(1, 1)
+            }
+            botMidSpace ->{
+                return arrayOf(2, 1)
+            }
+
+            topRightSpace ->{
+                return arrayOf(2, 2)
+            }
+            rightSpace ->{
+                return arrayOf(2, 2)
+            }
+            botRightSpace ->{
+                return arrayOf(2, 2)
+            }
+        }
+        Toast.makeText(this, thing, Toast.LENGTH_SHORT).show()
+        // something went wrong
+        return arrayOf(-1, -1)
+    }
+
+    // make player cards draggable
     fun makeDragger(view: ImageView?= null, id: Int){
         view?.setOnLongClickListener{
+            // move code to drag listener
             draggingCard = view.getDrawable()
             drawInt = id
-            Toast.makeText(this, "Picked Up Card", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "Picked Up " + id + "", Toast.LENGTH_SHORT).show()
             val clipImage = draggingCard
             val clipText = "This is clipdata text"
             val item = ClipData.Item(clipText)
@@ -197,9 +264,9 @@ class PlayActivity : AppCompatActivity() {
             val data = ClipData(clipText, mimeTypes, item)
 
             val dragShadowBuilder = View.DragShadowBuilder(view)
-            it.startDragAndDrop(data, dragShadowBuilder, view, 0)
+            view.startDragAndDrop(data, dragShadowBuilder, view, 0)
             //view.visibility = View.INVISIBLE
-            true
+            false
         }
     }
 
@@ -221,6 +288,10 @@ class PlayActivity : AppCompatActivity() {
 //        }
 //        true
 //    }
+
+    fun playAI(){
+
+    }
 
     fun placeCard(card: Card, row: Int, col: Int){
         if(board[row][col].color != -1){ // spot is already taken
@@ -270,6 +341,20 @@ class PlayActivity : AppCompatActivity() {
             if(card.westVal > board[row][col - 1].eastVal && isOpponentCard(row, col - 1, thisColor)){
                 board[row][col - 1].color = thisColor
             }
+        }
+    }
+
+    fun fillEnemyList(){
+        var alreadyUsed = mutableSetOf<Int>()
+        while(alreadyUsed.size < 5){
+            val randomListCardIndex = (0..myList.size - 1).random()
+            alreadyUsed.add(randomListCardIndex)
+        }
+        for(i in 0..4){
+            val randomListCard = myList[alreadyUsed.elementAt(i)]
+            val randomCard = Card(randomListCard.imageResourceId, randomListCard.name, randomListCard.north, randomListCard.east,
+                                randomListCard.south, randomListCard.west)
+            enemyList[i] =  randomCard
         }
     }
 }
