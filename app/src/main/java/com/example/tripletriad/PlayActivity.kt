@@ -168,11 +168,15 @@ class PlayActivity : AppCompatActivity() {
                 true
             }
             DragEvent.ACTION_DROP -> {
+                if(checkBoardFull()){
+                    false
+                }
                 // TODO: ListCard can't retrace its id in myList, so use clipData like an intent
                 val item = event.clipData.getItemAt(0)
                 val dragData = item.text
                 val draggedNumbers = dragData.toString().split(",").map { it.toInt() }.toIntArray()
                 val draggedCard = arrayToCard(draggedNumbers)
+                draggedCard.color = 0
 
                 view.invalidate()
 
@@ -196,7 +200,7 @@ class PlayActivity : AppCompatActivity() {
 
                     placeCard(draggedCard, row, col)
                     Log.d("D", "North:" + draggedNumbers[0] + " East:" + draggedNumbers[1] + " South:" + draggedNumbers[2] + " West:" + draggedNumbers[3])
-                    Log.d("D", "Placed card at square: " + row +", " + col)
+                    Log.d("D", "Player placed card at square: " + row +", " + col)
                     destination.setImageResource(drawInt)
                     destination.setBackgroundColor(resources.getColor(currentColor))
                     v.visibility = View.INVISIBLE
@@ -240,10 +244,10 @@ class PlayActivity : AppCompatActivity() {
             }
 
             topRightSpace ->{
-                return intArrayOf(2, 2)
+                return intArrayOf(0, 2)
             }
             rightSpace ->{
-                return intArrayOf(2, 2)
+                return intArrayOf(1, 2)
             }
             botRightSpace ->{
                 return intArrayOf(2, 2)
@@ -275,8 +279,12 @@ class PlayActivity : AppCompatActivity() {
     }
 
     fun playAI(){
-        var cardIndex = cardsPlaced / 2 + 1;
+        if(checkBoardFull()){
+            return
+        }
+        var cardIndex = cardsPlaced / 2
         val card = enemyList[cardIndex]
+        card.color = 1
         val cords = AILinear()
         val row = cords[0]
         val col = cords[1]
@@ -336,19 +344,19 @@ class PlayActivity : AppCompatActivity() {
 
     // updates the backend board
     fun placeCard(card: Card, row: Int, col: Int){
-        if(board[row][col].color != -1){
+        if(!spotIsEmpty(row, col)){
         // spot is already taken
 
         }
         else{ // flip other cards if they exist and are opponent's cards
             board[row][col] = card
-            interactOtherCards(row, col, card)
+            //interactOtherCards(row, col, card)
             cardsPlaced++
         }
     }
 
     // return true if board is full
-    fun checkBoard() : Boolean{
+    fun checkBoardFull() : Boolean{
         for(r in 0..2){
             for(c in 0..2){
                 if(board[r][c].color == -1)
@@ -429,6 +437,7 @@ class PlayActivity : AppCompatActivity() {
         for(row in 0..2){
             for(col in 0..2){
                 if(spotIsEmpty(row, col)){
+                    Log.d("D", "AI Found row:" + row + " col:"+ col +" to be empty.")
                     return intArrayOf(row, col)
                 }
             }
