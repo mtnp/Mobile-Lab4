@@ -10,7 +10,7 @@ class Card (imageId: Int = R.drawable.cardback, name: String = "DEFAULT", northV
             field = value
         }
 
-    var color:Int = -1 // -1 is grey, 0 is blue, and 1 is red
+    var color:Int = -1 // -1 is none, 0 is blue, and 1 is red
         get() = field
         set(value){
             field = value

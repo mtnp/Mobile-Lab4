@@ -5,6 +5,7 @@ import android.content.ClipDescription
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.DragEvent
 import android.view.MotionEvent
 import android.view.View
@@ -25,7 +26,11 @@ class PlayActivity : AppCompatActivity() {
     private lateinit var binding: ActivityPlayBinding
     private var draggingCard: Drawable?= null
     private var drawInt: Int = -1
-    private var currentCard: Card ?= null
+
+    // black is error color; turn colors are blue/red; for now teal/purple
+    private var currentColor: Int = R.color.black
+    private var cardsPlaced: Int = 0
+
 
 //    private var playerCardOne: ListCard?= null
 //    private var playerCardTwo: ListCard?= null
@@ -89,11 +94,11 @@ class PlayActivity : AppCompatActivity() {
         playerCardFour?.setImageResource(playerListCardFour.imageResourceId)
         playerCardFive?.setImageResource(playerListCardFive.imageResourceId)
 
-        makeDragger(playerCardOne, playerListCardOne.imageResourceId)
-        makeDragger(playerCardTwo, playerListCardTwo.imageResourceId)
-        makeDragger(playerCardThree, playerListCardThree.imageResourceId)
-        makeDragger(playerCardFour, playerListCardFour.imageResourceId)
-        makeDragger(playerCardFive, playerListCardFive.imageResourceId)
+        makeDragger(playerCardOne, playerListCardOne)
+        makeDragger(playerCardTwo, playerListCardTwo)
+        makeDragger(playerCardThree, playerListCardThree)
+        makeDragger(playerCardFour, playerListCardFour)
+        makeDragger(playerCardFive, playerListCardFive)
 
         opponentCardOne = findViewById(R.id.opponent_card_one)
         opponentCardTwo = findViewById(R.id.opponent_card_two)
@@ -108,30 +113,13 @@ class PlayActivity : AppCompatActivity() {
         var opponentListCardFour = enemyList[3]
         var opponentListCardFive = enemyList[4]
 
+
         // enable if all-open rule is true, keep true for testing
         opponentCardOne?.setImageResource(opponentListCardOne.imageId)
         opponentCardTwo?.setImageResource(opponentListCardTwo.imageId)
         opponentCardThree?.setImageResource(opponentListCardThree.imageId)
         opponentCardFour?.setImageResource(opponentListCardFour.imageId)
         opponentCardFive?.setImageResource(opponentListCardFive.imageId)
-
-
-
-        // bad, don't keep this drawable impl
-//        makeDragger(playerCardOne, R.drawable.card1)
-//        makeDragger(playerCardTwo, R.drawable.card2)
-//        makeDragger(playerCardThree, R.drawable.card3)
-//        makeDragger(playerCardFour, R.drawable.card4)
-//        makeDragger(playerCardFive, R.drawable.card5)
-
-
-
-//        opponentCardOne!!.imageResourceId = R.drawable.cardback
-//        opponentCardTwo!!.imageResourceId = R.drawable.cardback
-//        opponentCardThree!!.imageResourceId = R.drawable.cardback
-//        opponentCardFour!!.imageResourceId = R.drawable.cardback
-//        opponentCardFive!!.imageResourceId = R.drawable.cardback
-
 
 
         topLeftSpace = findViewById(R.id.top_left_space)
@@ -160,12 +148,8 @@ class PlayActivity : AppCompatActivity() {
         rightSpace?.setOnDragListener(dragListener)
         botRightSpace?.setOnDragListener(dragListener)
 
-        //play game
     }
 
-    fun playGame(){
-
-    }
 
 
     // board spaces are drop spaces
@@ -184,9 +168,11 @@ class PlayActivity : AppCompatActivity() {
                 true
             }
             DragEvent.ACTION_DROP -> {
+                // TODO: ListCard can't retrace its id in myList, so use clipData like an intent
                 val item = event.clipData.getItemAt(0)
                 val dragData = item.text
-                Toast.makeText(this, dragData, Toast.LENGTH_SHORT).show()
+                val draggedNumbers = dragData.toString().split(",").map { it.toInt() }.toIntArray()
+                val draggedCard = arrayToCard(draggedNumbers)
 
                 view.invalidate()
 
@@ -194,12 +180,26 @@ class PlayActivity : AppCompatActivity() {
                 val owner = v.parent as ViewGroup
                 //owner.removeView(v)
                 val destination = view as ImageView
-                if(Objects.equals(view.drawable.getConstantState(), this.getResources().getDrawable(R.drawable.blank_square).getConstantState())){
+                if(Objects.equals(view.drawable.constantState, this.resources.getDrawable(R.drawable.blank_square).constantState)){
+                    // this space is available, can place card here
+                    var cordArray = spaceToCord(destination)
+                    var row = cordArray[0]
+                    var col = cordArray[1]
+
+                    // game starts at 0 cards placed and is player's turn
+                    if(cardsPlaced % 2 == 0){
+                        currentColor = R.color.teal_200
+                    }
+                    else{
+                        currentColor = R.color.purple_200
+                    }
+
+                    placeCard(draggedCard, row, col)
+                    Log.d("D", "North:" + draggedNumbers[0] + " East:" + draggedNumbers[1] + " South:" + draggedNumbers[2] + " West:" + draggedNumbers[3])
                     destination.setImageResource(drawInt)
+                    destination.setBackgroundColor(resources.getColor(currentColor))
                     v.visibility = View.INVISIBLE
                 }
-
-               // destination.setBackgroundColor(getResources().getColor(R.color.teal_200))
                 true
             }
             DragEvent.ACTION_DRAG_ENDED -> {
@@ -212,6 +212,8 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
+    // returns an array with 2 ints for row and col based on which
+    // square the card was placed
     fun spaceToCord(view: ImageView?= null): Array<Int> {
         var thing = ""
         when(view){
@@ -245,20 +247,20 @@ class PlayActivity : AppCompatActivity() {
                 return arrayOf(2, 2)
             }
         }
-        Toast.makeText(this, thing, Toast.LENGTH_SHORT).show()
+        // Toast.makeText(this, thing, Toast.LENGTH_SHORT).show()
         // something went wrong
         return arrayOf(-1, -1)
     }
 
     // make player cards draggable
-    fun makeDragger(view: ImageView?= null, id: Int){
+    fun makeDragger(view: ImageView?= null, listCard: ListCard){
         view?.setOnLongClickListener{
             // move code to drag listener
-            draggingCard = view.getDrawable()
-            drawInt = id
-            Toast.makeText(this, "Picked Up " + id + "", Toast.LENGTH_SHORT).show()
-            val clipImage = draggingCard
-            val clipText = "This is clipdata text"
+            // TODO: figure out how to send multiple clipText thru clipData
+            draggingCard = view.drawable
+            drawInt = listCard.imageResourceId
+            Toast.makeText(this, "Picked Up " + listCard.name + "", Toast.LENGTH_SHORT).show()
+            val clipText = "" + listCard.north + "," + listCard.east + "," + listCard.south + "," + listCard.west
             val item = ClipData.Item(clipText)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(clipText, mimeTypes, item)
@@ -266,40 +268,38 @@ class PlayActivity : AppCompatActivity() {
             val dragShadowBuilder = View.DragShadowBuilder(view)
             view.startDragAndDrop(data, dragShadowBuilder, view, 0)
             //view.visibility = View.INVISIBLE
-            false
+            true
         }
     }
-
-//    override fun onTouch(view: ImageView, motionEvent: MotionEvent) : Boolean{
-//        var dX = 0.0f
-//        var dY = 0.0f
-//        when(motionEvent.getAction()){
-//            MotionEvent.ACTION_DOWN -> {
-//                dX = view.getX() - motionEvent.getRawX()
-//                dY = view.getY() - motionEvent.getRawY()
-//            }
-//            MotionEvent.ACTION_MOVE -> {
-//
-//            }
-//            MotionEvent.ACTION_UP -> {
-//
-//            }
-//            else -> false
-//        }
-//        true
-//    }
 
     fun playAI(){
 
     }
 
+    // updates the backend board
     fun placeCard(card: Card, row: Int, col: Int){
-        if(board[row][col].color != -1){ // spot is already taken
-            // do nothing or display message that card can't be placed here
+        if(board[row][col].color != -1){
+        // spot is already taken
+
         }
         else{ // flip other cards if they exist and are opponent's cards
+            board[row][col] = card
             interactOtherCards(row, col, card)
+            cardsPlaced++
         }
+    }
+
+    // return true if board is full
+    fun checkBoard() : Boolean{
+        for(r in 0..2){
+            for(c in 0..2){
+                if(board[r][c].color == -1)
+                    // found a space that has been used yet
+                    return false
+            }
+        }
+
+        return true
     }
 
 
@@ -356,5 +356,14 @@ class PlayActivity : AppCompatActivity() {
                                 randomListCard.south, randomListCard.west)
             enemyList[i] =  randomCard
         }
+    }
+
+    fun listCardToCard(listCard: ListCard) : Card{
+        return Card(listCard.imageResourceId, listCard.name,
+            listCard.north, listCard.east, listCard.south, listCard.west)
+    }
+
+    fun arrayToCard(numbers: IntArray): Card{
+        return Card(R.drawable.cardback, "DEFAULT", numbers[0], numbers[1], numbers[2], numbers[3])
     }
 }
