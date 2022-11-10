@@ -1,6 +1,8 @@
 package com.example.tripletriad
 
 import android.content.Intent
+import android.media.MediaPlayer
+import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -13,6 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var listIntent: Intent
+    private lateinit var mp: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,6 +34,11 @@ class MainActivity : AppCompatActivity() {
 
         // Launch the RulebookActivity on settingsBtn click
         binding.rulebookBtn.setOnClickListener { launchRulebook() }
+//        playMusic()
+
+        mp = MediaPlayer.create(this, R.raw.song)
+        mp.isLooping = true
+        mp.start()
     }
 
     private fun launchPlay() {
@@ -52,4 +60,11 @@ class MainActivity : AppCompatActivity() {
         listIntent = Intent(this, RulebookActivity::class.java)
         startActivity(listIntent)
     }
+
+//    private fun playMusic() {
+//        mediaPlayer.setDataSource(this, Uri.parse(
+//            "android.resource://" + this.packageName + "/" + R.raw.song))
+//        mediaPlayer.prepare()
+//        mediaPlayer.start()
+//    }
 }
