@@ -15,7 +15,7 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var listIntent: Intent
-    private lateinit var mp: MediaPlayer
+//    private lateinit var mp: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -36,9 +36,11 @@ class MainActivity : AppCompatActivity() {
         binding.rulebookBtn.setOnClickListener { launchRulebook() }
 //        playMusic()
 
-        mp = MediaPlayer.create(this, R.raw.song)
-        mp.isLooping = true
-        mp.start()
+//        mp = MediaPlayer.create(this, R.raw.song)
+//        mp.isLooping = true
+//        mp.start()
+
+        MusicPlayer.playSound(this)
     }
 
     private fun launchPlay() {
