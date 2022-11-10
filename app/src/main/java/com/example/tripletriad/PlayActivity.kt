@@ -196,9 +196,11 @@ class PlayActivity : AppCompatActivity() {
 
                     placeCard(draggedCard, row, col)
                     Log.d("D", "North:" + draggedNumbers[0] + " East:" + draggedNumbers[1] + " South:" + draggedNumbers[2] + " West:" + draggedNumbers[3])
+                    Log.d("D", "Placed card at square: " + row +", " + col)
                     destination.setImageResource(drawInt)
                     destination.setBackgroundColor(resources.getColor(currentColor))
                     v.visibility = View.INVISIBLE
+                    playAI()
                 }
                 true
             }
@@ -214,42 +216,42 @@ class PlayActivity : AppCompatActivity() {
 
     // returns an array with 2 ints for row and col based on which
     // square the card was placed
-    fun spaceToCord(view: ImageView?= null): Array<Int> {
+    fun spaceToCord(view: ImageView?= null): IntArray {
         var thing = ""
         when(view){
             topLeftSpace ->{
-                return arrayOf(0, 0)
+                return intArrayOf(0, 0)
             }
             leftSpace ->{
-                return arrayOf(1, 0)
+                return intArrayOf(1, 0)
             }
             botLeftSpace ->{
-                return arrayOf(2, 0)
+                return intArrayOf(2, 0)
             }
 
             topMidSpace ->{
-                return arrayOf(0, 1)
+                return intArrayOf(0, 1)
             }
             midSpace ->{
-                return arrayOf(1, 1)
+                return intArrayOf(1, 1)
             }
             botMidSpace ->{
-                return arrayOf(2, 1)
+                return intArrayOf(2, 1)
             }
 
             topRightSpace ->{
-                return arrayOf(2, 2)
+                return intArrayOf(2, 2)
             }
             rightSpace ->{
-                return arrayOf(2, 2)
+                return intArrayOf(2, 2)
             }
             botRightSpace ->{
-                return arrayOf(2, 2)
+                return intArrayOf(2, 2)
             }
         }
         // Toast.makeText(this, thing, Toast.LENGTH_SHORT).show()
         // something went wrong
-        return arrayOf(-1, -1)
+        return intArrayOf(-1, -1)
     }
 
     // make player cards draggable
@@ -273,7 +275,63 @@ class PlayActivity : AppCompatActivity() {
     }
 
     fun playAI(){
+        var cardIndex = cardsPlaced / 2 + 1;
+        val card = enemyList[cardIndex]
+        val cords = AILinear()
+        val row = cords[0]
+        val col = cords[1]
+        Log.d("D", "AI Row:" + row + " AI Col:" + col)
 
+        val view = cordToSpace(row, col)
+        Log.d("D", "AI Space:" + view?.id)
+        Log.d("D", "AI Turn...Cards Placed:" + cardsPlaced)
+
+        if(cardsPlaced % 2 == 0){
+            currentColor = R.color.teal_200
+        }
+        else{
+            currentColor = R.color.purple_200
+        }
+        placeCard(card, row, col)
+        view?.setImageResource(card.imageId)
+        view?.setBackgroundColor(resources.getColor(currentColor))
+        board[row][col].color = 1
+
+    }
+
+    fun cordToSpace(row: Int, col: Int): ImageView? {
+        when {
+            row == 0 && col == 0 -> {
+                return topLeftSpace
+            }
+            row == 1 && col == 0 -> {
+                return leftSpace
+            }
+            row == 2 && col == 0 -> {
+                return botLeftSpace
+            }
+
+            row == 0 && col == 1 -> {
+                return topMidSpace
+            }
+            row == 1 && col == 1 -> {
+                return midSpace
+            }
+            row == 2 && col == 1 -> {
+                return botMidSpace
+            }
+
+            row == 0 && col == 2 -> {
+                return topRightSpace
+            }
+            row == 1 && col == 2 -> {
+                return rightSpace
+            }
+            row == 2 && col == 2 -> {
+                return botRightSpace
+            }
+        }
+        return midSpace
     }
 
     // updates the backend board
@@ -365,5 +423,22 @@ class PlayActivity : AppCompatActivity() {
 
     fun arrayToCard(numbers: IntArray): Card{
         return Card(R.drawable.cardback, "DEFAULT", numbers[0], numbers[1], numbers[2], numbers[3])
+    }
+
+    fun AILinear(): IntArray{
+        for(row in 0..2){
+            for(col in 0..2){
+                if(spotIsEmpty(row, col)){
+                    return intArrayOf(row, col)
+                }
+            }
+        }
+
+        return intArrayOf(-1, -1)
+    }
+
+
+    fun spotIsEmpty(row: Int, col: Int): Boolean{
+        return board[row][col].color == -1
     }
 }

@@ -22,19 +22,19 @@ class Card (imageId: Int = R.drawable.cardback, name: String = "DEFAULT", northV
             field = value
         }
 
-    var eastVal = northVal
+    var eastVal = eastVal
         get() = field
         set(value){
             field = value
         }
 
-    var southVal = northVal
+    var southVal = southVal
         get() = field
         set(value){
             field = value
         }
 
-    var westVal = northVal
+    var westVal = westVal
         get() = field
         set(value){
             field = value
