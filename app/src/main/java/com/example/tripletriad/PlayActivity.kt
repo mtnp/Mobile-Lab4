@@ -373,12 +373,18 @@ class PlayActivity : AppCompatActivity() {
         }
 
         Log.d("D", "Board is filled, game is over")
-        if(playerPoints > AIPoints)
+        if(playerPoints > AIPoints) {
             Log.d("D", "Player WIN")
-        else if(playerPoints == AIPoints)
+            Toast.makeText(this, "Player WIN", Toast.LENGTH_LONG).show()
+        }
+        else if(playerPoints == AIPoints) {
             Log.d("D", "TIE")
-        else
+            Toast.makeText(this, "Player TIE", Toast.LENGTH_LONG).show()
+        }
+        else {
             Log.d("D", "Player LOSE")
+            Toast.makeText(this, "Player LOSE", Toast.LENGTH_LONG).show()
+        }
         return true
     }
 
@@ -472,6 +478,18 @@ class PlayActivity : AppCompatActivity() {
                 }
             }
         }
+
+        return intArrayOf(-1, -1)
+    }
+
+    fun AIRandom(): IntArray{
+
+
+        return intArrayOf(-1, -1)
+    }
+
+    fun AIOptimal(): IntArray{
+
 
         return intArrayOf(-1, -1)
     }

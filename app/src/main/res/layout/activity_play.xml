@@ -8,18 +8,19 @@
 
     <!-- BOARD SECTION START -->
     <!-- left column -->
+
     <ImageView
         android:id="@+id/top_left_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toTopOf="@id/left_space"
         app:layout_constraintEnd_toStartOf="@id/top_mid_space"
         app:srcCompat="@drawable/blank_square" />
 
     <ImageView
         android:id="@+id/left_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@id/mid_space"
@@ -28,8 +29,8 @@
 
     <ImageView
         android:id="@+id/bot_left_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintTop_toBottomOf="@id/left_space"
         app:layout_constraintEnd_toStartOf="@id/bot_mid_space"
         app:srcCompat="@drawable/blank_square" />
@@ -37,8 +38,8 @@
     <!-- middle column -->
     <ImageView
         android:id="@+id/mid_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -47,8 +48,8 @@
 
     <ImageView
         android:id="@+id/top_mid_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintBottom_toTopOf="@id/mid_space"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,8 +57,8 @@
 
     <ImageView
         android:id="@+id/bot_mid_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/mid_space"
@@ -66,16 +67,16 @@
     <!-- right column -->
     <ImageView
         android:id="@+id/top_right_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintStart_toEndOf="@id/top_mid_space"
         app:layout_constraintBottom_toTopOf="@id/right_space"
         app:srcCompat="@drawable/blank_square" />
 
     <ImageView
         android:id="@+id/right_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintStart_toEndOf="@id/mid_space"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -83,8 +84,8 @@
 
     <ImageView
         android:id="@+id/bot_right_space"
-        android:layout_width="120dp"
-        android:layout_height="120dp"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
         app:layout_constraintTop_toBottomOf="@id/right_space"
         app:layout_constraintStart_toEndOf="@id/bot_mid_space"
         app:srcCompat="@drawable/blank_square" />
