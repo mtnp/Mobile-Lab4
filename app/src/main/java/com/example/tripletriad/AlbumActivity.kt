@@ -21,5 +21,6 @@ class AlbumActivity : AppCompatActivity() {
 
         // Enable up button for backward navigation
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
     }
 }

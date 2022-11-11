@@ -2,6 +2,7 @@ package com.example.tripletriad
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.RadioButton
 import android.widget.TextView
 
 class SettingsActivity : AppCompatActivity() {
@@ -9,9 +10,13 @@ class SettingsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val musicToggle = findViewById<TextView>(R.id.BGM)
-        musicToggle.setOnClickListener {
+        val musicOn: RadioButton = findViewById(R.id.onBtn)
+        val musicOff: RadioButton = findViewById(R.id.offBtn)
+        musicOn.setOnClickListener {
             MusicPlayer.mpStop()
         }
+//        musicOff.setOnClickListener {
+//            MusicPlayer.playSound()
+//        }
     }
 }

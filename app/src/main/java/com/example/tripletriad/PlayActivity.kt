@@ -73,6 +73,8 @@ class PlayActivity : AppCompatActivity() {
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_play)
 
+        // play music
+        MusicPlayer.playSound(this)
 
         var playerListCardOne = myList[0]
         var playerListCardTwo = myList[1]
@@ -148,6 +150,16 @@ class PlayActivity : AppCompatActivity() {
         rightSpace?.setOnDragListener(dragListener)
         botRightSpace?.setOnDragListener(dragListener)
 
+    }
+
+    override fun onPause() {
+        MusicPlayer.mpStop()
+        super.onPause()
+    }
+
+    override fun onRestart() {
+        MusicPlayer.playSound(this)
+        super.onRestart()
     }
 
 

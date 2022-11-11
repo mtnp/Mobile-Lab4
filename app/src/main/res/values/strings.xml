@@ -6,4 +6,6 @@
     <string name="english">English</string>
     <string name="spanish">Espanol</string>
     <string name="default_text">DEFAULT TEXT</string>
+    <string name="on">On</string>
+    <string name="off">Off</string>
 </resources>

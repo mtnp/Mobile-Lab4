@@ -36,22 +36,18 @@ class MainActivity : AppCompatActivity() {
         binding.rulebookBtn.setOnClickListener { launchRulebook() }
 //        playMusic()
 
-//        mp = MediaPlayer.create(this, R.raw.song)
-//        mp.isLooping = true
-//        mp.start()
-
-        onResume()
+        //startService(Intent(this, MusicPlayer::class.java))
     }
 
-    override fun onPause() {
-        MusicPlayer.mpStop()
-        super.onPause()
-    }
-
-    override fun onRestart() {
-        MusicPlayer.playSound(this)
-        super.onRestart()
-    }
+//    override fun onPause() {
+//        stopService(Intent(this, MusicPlayer::class.java))
+//        super.onPause()
+//    }
+//
+//    override fun onRestart() {
+//        startService(Intent(this, MusicPlayer::class.java))
+//        super.onRestart()
+//    }
 
     private fun launchPlay() {
         listIntent = Intent(this, PlayActivity::class.java)

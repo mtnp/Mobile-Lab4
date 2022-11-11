@@ -28,6 +28,30 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/SFX" />
 
+    <RadioGroup
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/BGM">
+
+        <RadioButton
+            android:id="@+id/onBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/on"
+            />
+        <RadioButton
+            android:id="@+id/offBtn"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/off"
+            />
+
+
+
+    </RadioGroup>
+
     <TextView
         android:id="@+id/Language"
         android:layout_width="wrap_content"
