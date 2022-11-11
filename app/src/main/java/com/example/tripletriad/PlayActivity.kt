@@ -350,7 +350,7 @@ class PlayActivity : AppCompatActivity() {
         }
         else{ // flip other cards if they exist and are opponent's cards
             board[row][col] = card
-            //interactOtherCards(row, col, card)
+            interactOtherCards(row, col, card)
             cardsPlaced++
         }
     }
@@ -383,29 +383,45 @@ class PlayActivity : AppCompatActivity() {
 
         // check north side
         if(isWithinBounds(row - 1, col)){
+            Log.d("D", "North Interaction")
             if(card.northVal > board[row - 1][col].southVal && isOpponentCard(row - 1, col, thisColor)){
+                Log.d("D", "North flip")
                 board[row - 1][col].color = thisColor
+                val northView = cordToSpace(row - 1, col)
+                northView?.setBackgroundColor(resources.getColor(currentColor))
             }
         }
 
         // check east side
         if(isWithinBounds(row, col + 1)){
+            Log.d("D", "east Interaction")
             if(card.eastVal > board[row][col + 1].westVal && isOpponentCard(row, col + 1, thisColor)){
+                Log.d("D", "east flip")
                 board[row][col + 1].color = thisColor
+                val eastView = cordToSpace(row, col + 1)
+                eastView?.setBackgroundColor(resources.getColor(currentColor))
             }
         }
 
         // check south side
         if(isWithinBounds(row + 1, col)){
+            Log.d("D", "south Interaction")
             if(card.southVal > board[row + 1][col].northVal  && isOpponentCard(row + 1, col, thisColor)){
+                Log.d("D", "south flip")
                 board[row + 1][col].color = thisColor
+                val southView = cordToSpace(row + 1, col)
+                southView?.setBackgroundColor(resources.getColor(currentColor))
             }
         }
 
         // check west side
         if(isWithinBounds(row, col - 1)){
+            Log.d("D", "west Interaction")
             if(card.westVal > board[row][col - 1].eastVal && isOpponentCard(row, col - 1, thisColor)){
+                Log.d("D", "west flip")
                 board[row][col - 1].color = thisColor
+                val westView = cordToSpace(row, col - 1)
+                westView?.setBackgroundColor(resources.getColor(currentColor))
             }
         }
     }
