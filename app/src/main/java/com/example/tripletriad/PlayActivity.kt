@@ -357,14 +357,28 @@ class PlayActivity : AppCompatActivity() {
 
     // return true if board is full
     fun checkBoardFull() : Boolean{
+        var playerPoints = 0
+        var AIPoints = 0
         for(r in 0..2){
             for(c in 0..2){
-                if(board[r][c].color == -1)
+                var color = board[r][c].color
+                if(color == -1)
                     // found a space that has been used yet
                     return false
+                else if(color == 0)
+                    playerPoints++
+                else
+                    AIPoints++
             }
         }
 
+        Log.d("D", "Board is filled, game is over")
+        if(playerPoints > AIPoints)
+            Log.d("D", "Player WIN")
+        else if(playerPoints == AIPoints)
+            Log.d("D", "TIE")
+        else
+            Log.d("D", "Player LOSE")
         return true
     }
 
