@@ -40,7 +40,17 @@ class MainActivity : AppCompatActivity() {
 //        mp.isLooping = true
 //        mp.start()
 
+        onResume()
+    }
+
+    override fun onPause() {
+        MusicPlayer.mpStop()
+        super.onPause()
+    }
+
+    override fun onRestart() {
         MusicPlayer.playSound(this)
+        super.onRestart()
     }
 
     private fun launchPlay() {
