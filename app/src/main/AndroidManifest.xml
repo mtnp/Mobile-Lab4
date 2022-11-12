@@ -2,6 +2,8 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tripletriad">
+    
+    <uses-permission android:name="android.permission.INTERNET"/>
 
     <application
         android:allowBackup="true"
@@ -13,22 +15,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.TripleTriad"
         tools:targetApi="31">
+
+        <activity android:name=".RulebookActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity"/>
+        </activity>
+
+        <activity android:name=".AlbumActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <activity android:name=".SettingsActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
         <activity
-            android:name=".RulebookActivity"
-            android:exported="false" />
-        <activity
-            android:name=".CardListActivity"
-            android:exported="false" />
-        <activity
-            android:name=".AlbumActivity"
-            android:exported="false" />
-        <activity
-            android:name=".SettingsActivity"
-            android:exported="false" />
-        <activity
-            android:name=".PlayActivity"
-            android:exported="false" />
-        <activity
+            android:name=".PlayActivity" >
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity" />
+    </activity>
+
+    <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>
