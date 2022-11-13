@@ -25,8 +25,7 @@ class CardAdapter (
      */
     class CardViewHolder(view: View?): RecyclerView.ViewHolder(view!!) {
         // Declares and initialize all of the list item UI components
-        // This includes the picture of the cat, their name, their sex,
-        // and their age.
+        // This includes the picture and name of the card
 
         val cardImage : ImageView = view!!.findViewById(R.id.cardImage)
         val cardName : TextView = view!!.findViewById(R.id.cardName)
@@ -44,15 +43,14 @@ class CardAdapter (
         return CardViewHolder(view)
     }
 
-    // this is for cats
+    // this is for cards
     override fun getItemCount(): Int = myList.size
 
     override fun onBindViewHolder(holder: CardViewHolder, position: Int) {
         val resources = context?.resources
 
-        // We get the information for the current cat, set the image resource
-        // to that cat's picture, set the text for its name, set the text for
-        // its sex, and sets the text for its age
+        // We get the information for the current card, set the image resource
+        // to that card's picture and set the text to its name
         val card = myList[position]
         holder.cardImage.setImageResource(card.imageResourceId)
         holder.cardName.text = card.name
