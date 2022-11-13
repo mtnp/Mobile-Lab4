@@ -66,7 +66,7 @@ class PlayActivity : AppCompatActivity() {
     private var rightSpace: ImageView?= null
     private var botRightSpace: ImageView?= null
 
-
+    private var musicPlaying: Boolean = true
 
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
@@ -75,6 +75,22 @@ class PlayActivity : AppCompatActivity() {
 
         // play music
         MusicPlayer.playSound(this)
+
+        // set up music toggle
+        var muteBtn : ImageView = findViewById(R.id.muteBtn)
+        muteBtn.setImageResource(R.drawable.volume)
+        muteBtn.setOnClickListener {
+            if (musicPlaying) {
+                MusicPlayer.mpStop()
+                musicPlaying = false
+                muteBtn.setImageResource(R.drawable.volumemute)
+            }
+            else {
+                MusicPlayer.playSound(this)
+                musicPlaying = true
+                muteBtn.setImageResource(R.drawable.volume)
+            }
+        }
 
         var playerListCardOne = myList[0]
         var playerListCardTwo = myList[1]
