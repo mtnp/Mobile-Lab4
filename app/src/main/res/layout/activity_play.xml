@@ -14,11 +14,10 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         app:layout_constraintBottom_toTopOf="@id/player_card_one"
-        app:layout_constraintEnd_toEndOf="@id/left_space"
-        app:layout_constraintHorizontal_bias="0.214"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/opponent_card_one"
-        app:layout_constraintVertical_bias="0.495" />
+        app:layout_constraintVertical_bias="0.495"
+        app:srcCompat="@drawable/volume" />
 
     <ImageView
         android:id="@+id/top_left_space"

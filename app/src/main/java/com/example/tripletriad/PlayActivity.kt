@@ -14,9 +14,11 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.annotation.DrawableRes
+import androidx.lifecycle.ViewModelProvider
 import com.example.tripletriad.databinding.ActivityPlayBinding
 import com.example.tripletriad.data.DataSource
 import com.example.tripletriad.model.ListCard
+import com.example.tripletriad.model.PlayActivityViewModel
 import java.util.*
 
 class PlayActivity : AppCompatActivity() {
@@ -73,6 +75,10 @@ class PlayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_play)
+
+        // for screen rotation data persistence
+        var viewModel: PlayActivityViewModel =
+            ViewModelProvider(this).get(PlayActivityViewModel::class.java)
 
         // play music
         MusicPlayer.playSound(this)
