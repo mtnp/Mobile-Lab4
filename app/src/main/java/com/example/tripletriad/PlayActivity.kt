@@ -3,6 +3,7 @@ package com.example.tripletriad
 import android.content.ClipData
 import android.content.ClipDescription
 import android.graphics.drawable.Drawable
+import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
@@ -208,7 +209,7 @@ class PlayActivity : AppCompatActivity() {
 
                 view.invalidate()
 
-                val v = event.localState as View
+                val v = event.localState as ImageView
                 val owner = v.parent as ViewGroup
                 //owner.removeView(v)
                 val destination = view as ImageView
@@ -231,7 +232,9 @@ class PlayActivity : AppCompatActivity() {
                     Log.d("D", "Player placed card at square: " + row +", " + col)
                     destination.setImageResource(drawInt)
                     destination.setBackgroundColor(resources.getColor(currentColor))
-                    v.visibility = View.INVISIBLE
+                    //v.visibility = View.INVISIBLE
+                    v.setImageResource(R.drawable.emptyslot)
+                    v.setEnabled(false)
                     playAI()
                 }
                 true
@@ -310,10 +313,12 @@ class PlayActivity : AppCompatActivity() {
         if(checkBoardFull()){
             return
         }
-        var cardIndex = cardsPlaced / 2
+        var cardIndex = randomHand()
         val card = enemyList[cardIndex]
+        val cardView = indexToCardViewAI(cardIndex)
+
         card.color = 1
-        val cords = AILinear()
+        val cords = AIRandom()
         val row = cords[0]
         val col = cords[1]
         Log.d("D", "AI Row:" + row + " AI Col:" + col)
@@ -328,11 +333,57 @@ class PlayActivity : AppCompatActivity() {
         else{
             currentColor = R.color.purple_200
         }
+
         placeCard(card, row, col)
+        cardView?.setImageResource(R.drawable.emptyslot)
         view?.setImageResource(card.imageId)
         view?.setBackgroundColor(resources.getColor(currentColor))
         board[row][col].color = 1
 
+    }
+
+    fun linearHand(): Int{
+        return cardsPlaced / 2
+    }
+
+    fun randomHand(): Int{
+        var result = (0..4).random()
+        var card = indexToCardViewAI(result)
+
+        while(card?.drawable?.constantState?.equals
+                (resources.getDrawable(R.drawable.emptyslot).constantState)!!){
+            result = (0..4).random()
+            card = indexToCardViewAI(result)
+
+        }
+
+        return result
+    }
+
+    fun optimalHand(): Int{
+        return -1
+    }
+
+    fun indexToCardViewAI(index: Int): ImageView? {
+        when(index){
+            0 -> {
+                return opponentCardOne
+            }
+            1 -> {
+                return opponentCardTwo
+            }
+            2 -> {
+                return opponentCardThree
+            }
+            3 -> {
+                return opponentCardFour
+            }
+            4 -> {
+                return opponentCardFive
+            }
+        }
+
+        return opponentCardOne
     }
 
     fun cordToSpace(row: Int, col: Int): ImageView? {
@@ -386,18 +437,35 @@ class PlayActivity : AppCompatActivity() {
     // return true if board is full
     fun checkBoardFull() : Boolean{
         var playerPoints = 0
-        var AIPoints = 0
+        var AIPoints = 1
+        var playerScore = 5
+        var AIScore = 5
+        var isFull = false
         for(r in 0..2){
             for(c in 0..2){
                 var color = board[r][c].color
-                if(color == -1)
-                    // found a space that has been used yet
-                    return false
-                else if(color == 0)
+                if(color == -1) {
+                    // found a space that hasn't been used yet
+                    isFull = true
+                }
+                else if(color == 0){
+                    playerScore++
+                    AIScore--
+
                     playerPoints++
-                else
+                }
+                else{
+                    playerScore--
+                    AIScore++
+
                     AIPoints++
+                }
             }
+        }
+
+        Log.d("Score", "player:" + playerScore + " ai:" + AIScore)
+        if(isFull){
+            return false
         }
 
         Log.d("D", "Board is filled, game is over")
@@ -511,9 +579,15 @@ class PlayActivity : AppCompatActivity() {
     }
 
     fun AIRandom(): IntArray{
+        var row = (0..2).random()
+        var col = (0..2).random()
+        while(!spotIsEmpty(row, col)){
+            row = (0..2).random()
+            col = (0..2).random()
+        }
 
-
-        return intArrayOf(-1, -1)
+        Log.d("D", "AI Found row:" + row + " col:"+ col +" to be empty.")
+        return intArrayOf(row, col)
     }
 
     fun AIOptimal(): IntArray{
