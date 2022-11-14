@@ -112,9 +112,13 @@ class PlayActivity : AppCompatActivity() {
 
             // restore previous player hand
             IntArraySettingCardArray(savedPlayer, myList)
+            Log.d("PlayerHand", ""+cardIsEmpty(myList[0])+""+cardIsEmpty(myList[1])
+                    +""+cardIsEmpty(myList[2])+""+cardIsEmpty(myList[3])+""+cardIsEmpty(myList[4]))
 
             // restore previous enemy hand
             IntArraySettingCardArray(savedEnemy, enemyList)
+            Log.d("EnemyHand", ""+cardIsEmpty(enemyList[0])+""+cardIsEmpty(enemyList[1])
+                    +""+cardIsEmpty(enemyList[2])+""+cardIsEmpty(enemyList[3])+""+cardIsEmpty(enemyList[4]))
 
             //restore board
             IntArraySettingBoardArray(savedBoard)
@@ -244,7 +248,6 @@ class PlayActivity : AppCompatActivity() {
                 if(checkBoardFull()){
                     false
                 }
-                // TODO: ListCard can't retrace its id in myList, so use clipData like an intent
                 val item = event.clipData.getItemAt(0)
                 val dragData = item.text
                 val draggedNumbers = dragData.toString().split(",").map { it.toInt() }.toIntArray()
@@ -279,6 +282,7 @@ class PlayActivity : AppCompatActivity() {
                     //v.visibility = View.INVISIBLE
                     v.setImageResource(R.drawable.emptyslot)
                     v.setEnabled(false)
+                    removeFromPlayerHand(v)
                     playAI()
                 }
                 true
@@ -712,12 +716,18 @@ class PlayActivity : AppCompatActivity() {
         for(row in 0..2){
             for(col in 0..2){
                 var card = board[row][col]
-                result[resultIndex++] = card.imageId
-                result[resultIndex++] = card.color
-                result[resultIndex++] = card.northVal
-                result[resultIndex++] = card.eastVal
-                result[resultIndex++] = card.southVal
-                result[resultIndex++] = card.westVal
+                result[resultIndex] = card.imageId
+                resultIndex++
+                result[resultIndex] = card.color
+                resultIndex++
+                result[resultIndex] = card.northVal
+                resultIndex++
+                result[resultIndex] = card.eastVal
+                resultIndex++
+                result[resultIndex] = card.southVal
+                resultIndex++
+                result[resultIndex] = card.westVal
+                resultIndex++
             }
         }
 
@@ -728,12 +738,18 @@ class PlayActivity : AppCompatActivity() {
     fun IntArraySettingCardArray(data: IntArray, target: Array<Card>){
         var dataIndex = 0
         for(i in 0..4){
-            target[i].imageId = data[dataIndex++]
-            target[i].color = data[dataIndex++]
-            target[i].northVal = data[dataIndex++]
-            target[i].eastVal = data[dataIndex++]
-            target[i].southVal = data[dataIndex++]
-            target[i].westVal = data[dataIndex++]
+            target[i].imageId = data[dataIndex]
+            dataIndex++
+            target[i].color = data[dataIndex]
+            dataIndex++
+            target[i].northVal = data[dataIndex]
+            dataIndex++
+            target[i].eastVal = data[dataIndex]
+            dataIndex++
+            target[i].southVal = data[dataIndex]
+            dataIndex++
+            target[i].westVal = data[dataIndex]
+            dataIndex++
         }
     }
 
@@ -741,12 +757,18 @@ class PlayActivity : AppCompatActivity() {
         var dataIndex = 0
         for(row in 0..2){
             for(col in 0..2){
-                board[row][col].imageId = data[dataIndex++]
-                board[row][col].color = data[dataIndex++]
-                board[row][col].northVal = data[dataIndex++]
-                board[row][col].eastVal = data[dataIndex++]
-                board[row][col].southVal = data[dataIndex++]
-                board[row][col].westVal = data[dataIndex++]
+                board[row][col].imageId = data[dataIndex]
+                dataIndex++
+                board[row][col].color = data[dataIndex]
+                dataIndex++
+                board[row][col].northVal = data[dataIndex]
+                dataIndex++
+                board[row][col].eastVal = data[dataIndex]
+                dataIndex++
+                board[row][col].southVal = data[dataIndex]
+                dataIndex++
+                board[row][col].westVal = data[dataIndex]
+                dataIndex++
             }
         }
     }
@@ -761,7 +783,7 @@ class PlayActivity : AppCompatActivity() {
     }
 
     fun cardIsEmpty(card: Card): Boolean{
-        return card.color == -1
+        return card.imageId == R.drawable.emptyslot
     }
 
     fun removeFromPlayerHand(card: ImageView){
