@@ -354,7 +354,6 @@ class PlayActivity : AppCompatActivity() {
         }
         var cardIndex = randomHand()
         val card = enemyList[cardIndex]
-        setCardToEmpty(enemyList[cardIndex])
         val cardView = indexToCardViewAI(cardIndex)
 
         card.color = 1
@@ -384,7 +383,7 @@ class PlayActivity : AppCompatActivity() {
         view?.setImageResource(card.imageId)
         view?.setBackgroundColor(resources.getColor(currentColor))
         board[row][col].color = 1
-
+        setCardToEmpty(enemyList[cardIndex])
     }
 
     fun linearHand(): Int{
