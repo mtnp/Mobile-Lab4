@@ -13,7 +13,7 @@ android {
     }
 
     defaultConfig {
-        applicationId "com.example.tripletriad"
+        applicationId "com.nhatsilas.tripletriad"
         minSdk 24
         targetSdk 32
         versionCode 1

@@ -105,6 +105,9 @@ class PlayActivity : AppCompatActivity() {
 
         if(savedInstanceState != null){
             // there was data from the board, restore it
+            savedPlayer = savedInstanceState.getIntArray("SavedPlayer")!!
+            savedEnemy = savedInstanceState.getIntArray("SavedEnemy")!!
+            savedBoard = savedInstanceState.getIntArray("SavedBoard")!!
 
 
             // restore previous player hand
@@ -750,11 +753,11 @@ class PlayActivity : AppCompatActivity() {
 
     fun setCardToEmpty(card: Card){
         card.imageId = R.drawable.emptyslot
-        card.color = -1
-        card.northVal = -1
-        card.eastVal = -1
-        card.southVal = -1
-        card.westVal = -1
+        //card.color = -1
+        //card.northVal = -1
+        //card.eastVal = -1
+        //card.southVal = -1
+        //card.westVal = -1
     }
 
     fun cardIsEmpty(card: Card): Boolean{
