@@ -36,9 +36,9 @@ class PlayActivity : AppCompatActivity() {
     private var cardsPlaced: Int = 0
 
     lateinit var viewModel: PlayActivityViewModel
-    private lateinit var savedEnemy: IntArray
-    private lateinit var savedPlayer: IntArray
-    private lateinit var savedBoard: IntArray
+    private var savedEnemy: IntArray = IntArray(30)
+    private var savedPlayer: IntArray = IntArray(30)
+    private var savedBoard: IntArray = IntArray(54)
 
 //    private var playerCardOne: ListCard?= null
 //    private var playerCardTwo: ListCard?= null
@@ -81,110 +81,136 @@ class PlayActivity : AppCompatActivity() {
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_play)
 
-        if(savedInstanceState == null) {
-            // for screen rotation data persistence
-            viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
+        // for screen rotation data persistence
+        viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
 
-            // play music
-            MusicPlayer.playSound(this)
+        // play music
+        MusicPlayer.playSound(this)
 
-            // set up music toggle
-            var muteBtn: ImageView = findViewById(R.id.muteBtn)
-            muteBtn.setImageResource(R.drawable.volume)
-            muteBtn.setOnClickListener {
-                if (MusicPlayer.isPlaying()) {
-                    MusicPlayer.mpStop()
-                    musicPlaying = false
-                    muteBtn.setImageResource(R.drawable.volumemute)
+        // set up music toggle
+        var muteBtn: ImageView = findViewById(R.id.muteBtn)
+        muteBtn.setImageResource(R.drawable.volume)
+        muteBtn.setOnClickListener {
+            if (MusicPlayer.isPlaying()) {
+                MusicPlayer.mpStop()
+                musicPlaying = false
+                muteBtn.setImageResource(R.drawable.volumemute)
 
-                    Log.d("Music", "Is muted")
-                } else if (!MusicPlayer.isPlaying()) {
-                    MusicPlayer.playSound(this)
-                    musicPlaying = true
-                    muteBtn.setImageResource(R.drawable.volume)
-                    Log.d("Music", "Is playing")
-                }
+                Log.d("Music", "Is muted")
+            } else if (!MusicPlayer.isPlaying()) {
+                MusicPlayer.playSound(this)
+                musicPlaying = true
+                muteBtn.setImageResource(R.drawable.volume)
+                Log.d("Music", "Is playing")
             }
+        }
 
+
+        if(savedInstanceState != null){
+            // there was data from the board, restore it
+
+
+            // restore previous player hand
+            IntArraySettingCardArray(savedPlayer, myList)
+
+            // restore previous enemy hand
+            IntArraySettingCardArray(savedEnemy, enemyList)
+
+            //restore board
+            IntArraySettingBoardArray(savedBoard)
+        }
+        else {
+            // randomly give cards if no saved data
             fillList(myList)
-            var playerListCardOne = myList[0]
-            var playerListCardTwo = myList[1]
-            var playerListCardThree = myList[2]
-            var playerListCardFour = myList[3]
-            var playerListCardFive = myList[4]
-
-            // link cards to xml imageViews
-            playerCardOne = findViewById(R.id.player_card_one)
-            playerCardTwo = findViewById(R.id.player_card_two)
-            playerCardThree = findViewById(R.id.player_card_three)
-            playerCardFour = findViewById(R.id.player_card_four)
-            playerCardFive = findViewById(R.id.player_card_five)
-
-            // xml cards are set to the corresponding images
-            playerCardOne?.setImageResource(playerListCardOne.imageId)
-            playerCardTwo?.setImageResource(playerListCardTwo.imageId)
-            playerCardThree?.setImageResource(playerListCardThree.imageId)
-            playerCardFour?.setImageResource(playerListCardFour.imageId)
-            playerCardFive?.setImageResource(playerListCardFive.imageId)
-
-            makeDragger(playerCardOne, playerListCardOne)
-            makeDragger(playerCardTwo, playerListCardTwo)
-            makeDragger(playerCardThree, playerListCardThree)
-            makeDragger(playerCardFour, playerListCardFour)
-            makeDragger(playerCardFive, playerListCardFive)
-
-            opponentCardOne = findViewById(R.id.opponent_card_one)
-            opponentCardTwo = findViewById(R.id.opponent_card_two)
-            opponentCardThree = findViewById(R.id.opponent_card_three)
-            opponentCardFour = findViewById(R.id.opponent_card_four)
-            opponentCardFive = findViewById(R.id.opponent_card_five)
-
             fillList(enemyList)
-            var opponentListCardOne = enemyList[0]
-            var opponentListCardTwo = enemyList[1]
-            var opponentListCardThree = enemyList[2]
-            var opponentListCardFour = enemyList[3]
-            var opponentListCardFive = enemyList[4]
-
-
-            // enable if all-open rule is true, keep true for testing
-            opponentCardOne?.setImageResource(opponentListCardOne.imageId)
-            opponentCardTwo?.setImageResource(opponentListCardTwo.imageId)
-            opponentCardThree?.setImageResource(opponentListCardThree.imageId)
-            opponentCardFour?.setImageResource(opponentListCardFour.imageId)
-            opponentCardFive?.setImageResource(opponentListCardFive.imageId)
-
-
-            topLeftSpace = findViewById(R.id.top_left_space)
-            leftSpace = findViewById(R.id.left_space)
-            botLeftSpace = findViewById(R.id.bot_left_space)
-
-            topLeftSpace?.setOnDragListener(dragListener)
-            leftSpace?.setOnDragListener(dragListener)
-            botLeftSpace?.setOnDragListener(dragListener)
-
-
-            topMidSpace = findViewById(R.id.top_mid_space)
-            midSpace = findViewById(R.id.mid_space)
-            botMidSpace = findViewById(R.id.bot_mid_space)
-
-            topMidSpace?.setOnDragListener(dragListener)
-            midSpace?.setOnDragListener(dragListener)
-            botMidSpace?.setOnDragListener(dragListener)
-
-
-            topRightSpace = findViewById(R.id.top_right_space)
-            rightSpace = findViewById(R.id.right_space)
-            botRightSpace = findViewById(R.id.bot_right_space)
-
-            topRightSpace?.setOnDragListener(dragListener)
-            rightSpace?.setOnDragListener(dragListener)
-            botRightSpace?.setOnDragListener(dragListener)
-        }
-        else{
-
         }
 
+        // fills both hands with cards
+        var playerListCardOne = myList[0]
+        var playerListCardTwo = myList[1]
+        var playerListCardThree = myList[2]
+        var playerListCardFour = myList[3]
+        var playerListCardFive = myList[4]
+
+        var opponentListCardOne = enemyList[0]
+        var opponentListCardTwo = enemyList[1]
+        var opponentListCardThree = enemyList[2]
+        var opponentListCardFour = enemyList[3]
+        var opponentListCardFive = enemyList[4]
+
+
+        // link cards to xml imageViews
+        playerCardOne = findViewById(R.id.player_card_one)
+        playerCardTwo = findViewById(R.id.player_card_two)
+        playerCardThree = findViewById(R.id.player_card_three)
+        playerCardFour = findViewById(R.id.player_card_four)
+        playerCardFive = findViewById(R.id.player_card_five)
+
+        opponentCardOne = findViewById(R.id.opponent_card_one)
+        opponentCardTwo = findViewById(R.id.opponent_card_two)
+        opponentCardThree = findViewById(R.id.opponent_card_three)
+        opponentCardFour = findViewById(R.id.opponent_card_four)
+        opponentCardFive = findViewById(R.id.opponent_card_five)
+
+
+        // cards in both hands are set to the corresponding images
+        playerCardOne?.setImageResource(playerListCardOne.imageId)
+        playerCardTwo?.setImageResource(playerListCardTwo.imageId)
+        playerCardThree?.setImageResource(playerListCardThree.imageId)
+        playerCardFour?.setImageResource(playerListCardFour.imageId)
+        playerCardFive?.setImageResource(playerListCardFive.imageId)
+
+        opponentCardOne?.setImageResource(opponentListCardOne.imageId)
+        opponentCardTwo?.setImageResource(opponentListCardTwo.imageId)
+        opponentCardThree?.setImageResource(opponentListCardThree.imageId)
+        opponentCardFour?.setImageResource(opponentListCardFour.imageId)
+        opponentCardFive?.setImageResource(opponentListCardFive.imageId)
+
+
+        // make player cards draggable
+        makeDragger(playerCardOne, playerListCardOne)
+        makeDragger(playerCardTwo, playerListCardTwo)
+        makeDragger(playerCardThree, playerListCardThree)
+        makeDragger(playerCardFour, playerListCardFour)
+        makeDragger(playerCardFive, playerListCardFive)
+
+
+        // links board spaces and makes them into droppable locations
+        topLeftSpace = findViewById(R.id.top_left_space)
+        leftSpace = findViewById(R.id.left_space)
+        botLeftSpace = findViewById(R.id.bot_left_space)
+
+        topLeftSpace?.setOnDragListener(dragListener)
+        leftSpace?.setOnDragListener(dragListener)
+        botLeftSpace?.setOnDragListener(dragListener)
+
+        topMidSpace = findViewById(R.id.top_mid_space)
+        midSpace = findViewById(R.id.mid_space)
+        botMidSpace = findViewById(R.id.bot_mid_space)
+
+        topMidSpace?.setOnDragListener(dragListener)
+        midSpace?.setOnDragListener(dragListener)
+        botMidSpace?.setOnDragListener(dragListener)
+
+        topRightSpace = findViewById(R.id.top_right_space)
+        rightSpace = findViewById(R.id.right_space)
+        botRightSpace = findViewById(R.id.bot_right_space)
+
+        topRightSpace?.setOnDragListener(dragListener)
+        rightSpace?.setOnDragListener(dragListener)
+        botRightSpace?.setOnDragListener(dragListener)
+
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        savedEnemy = cardArrayToIntArray(enemyList)
+        savedPlayer = cardArrayToIntArray(myList)
+        savedBoard = boardStateToIntArray()
+
+        outState.putIntArray("SavedEnemy", savedEnemy)
+        outState.putIntArray("SavedPlayer", savedPlayer)
+        outState.putIntArray("SavedBoard", savedBoard)
+        super.onSaveInstanceState(outState)
     }
 
     // pause music when leaving the activity
@@ -270,7 +296,6 @@ class PlayActivity : AppCompatActivity() {
     // returns an array with 2 ints for row and col based on which
     // square the card was placed
     fun spaceToCord(view: ImageView?= null): IntArray {
-        var thing = ""
         when(view){
             topLeftSpace ->{
                 return intArrayOf(0, 0)
@@ -332,6 +357,7 @@ class PlayActivity : AppCompatActivity() {
         }
         var cardIndex = randomHand()
         val card = enemyList[cardIndex]
+        setCardToEmpty(enemyList[cardIndex])
         val cardView = indexToCardViewAI(cardIndex)
 
         card.color = 1
@@ -660,8 +686,107 @@ class PlayActivity : AppCompatActivity() {
         return intArrayOf(-1, -1)
     }
 
-
     fun spotIsEmpty(row: Int, col: Int): Boolean{
         return board[row][col].color == -1
+    }
+
+    fun cardArrayToIntArray(thisList: Array<Card>): IntArray{
+        var result = IntArray(30)
+        var resultIndex = 0
+
+        for(i in 0..4){
+            result[resultIndex++] = thisList[i].imageId
+            result[resultIndex++] = thisList[i].color
+            result[resultIndex++] = thisList[i].northVal
+            result[resultIndex++] = thisList[i].eastVal
+            result[resultIndex++] = thisList[i].southVal
+            result[resultIndex++] = thisList[i].westVal
+        }
+
+        return result
+    }
+
+    // saves the data of the cards on the board to an array
+    fun boardStateToIntArray(): IntArray{
+        var result = IntArray(54)
+        var resultIndex = 0
+        for(row in 0..2){
+            for(col in 0..2){
+                var card = board[row][col]
+                result[resultIndex++] = card.imageId
+                result[resultIndex++] = card.color
+                result[resultIndex++] = card.northVal
+                result[resultIndex++] = card.eastVal
+                result[resultIndex++] = card.southVal
+                result[resultIndex++] = card.westVal
+            }
+        }
+
+
+        return result
+    }
+
+    fun IntArraySettingCardArray(data: IntArray, target: Array<Card>){
+        var dataIndex = 0
+        for(i in 0..4){
+            target[i].imageId = data[dataIndex++]
+            target[i].color = data[dataIndex++]
+            target[i].northVal = data[dataIndex++]
+            target[i].eastVal = data[dataIndex++]
+            target[i].southVal = data[dataIndex++]
+            target[i].westVal = data[dataIndex++]
+        }
+    }
+
+    fun IntArraySettingBoardArray(data: IntArray){
+        var dataIndex = 0
+        for(row in 0..2){
+            for(col in 0..2){
+                board[row][col].imageId = data[dataIndex++]
+                board[row][col].color = data[dataIndex++]
+                board[row][col].northVal = data[dataIndex++]
+                board[row][col].eastVal = data[dataIndex++]
+                board[row][col].southVal = data[dataIndex++]
+                board[row][col].westVal = data[dataIndex++]
+            }
+        }
+    }
+
+    fun setCardToEmpty(card: Card){
+        card.imageId = R.drawable.emptyslot
+        card.color = -1
+        card.northVal = -1
+        card.eastVal = -1
+        card.southVal = -1
+        card.westVal = -1
+    }
+
+    fun cardIsEmpty(card: Card): Boolean{
+        return card.color == -1
+    }
+
+    fun removeFromPlayerHand(card: ImageView){
+        val thing = card?.drawable?.constantState
+        when(thing){
+            playerCardOne?.drawable?.constantState!! ->{
+                setCardToEmpty(myList[0])
+            }
+
+            playerCardTwo?.drawable?.constantState!! ->{
+                setCardToEmpty(myList[1])
+            }
+
+            playerCardThree?.drawable?.constantState!! ->{
+                setCardToEmpty(myList[2])
+            }
+
+            playerCardFour?.drawable?.constantState!! ->{
+                setCardToEmpty(myList[3])
+            }
+
+            playerCardFive?.drawable?.constantState!! ->{
+                setCardToEmpty(myList[4])
+            }
+        }
     }
 }
