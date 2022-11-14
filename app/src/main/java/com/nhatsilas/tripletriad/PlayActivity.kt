@@ -82,25 +82,69 @@ class PlayActivity : AppCompatActivity() {
         viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
 
         // play music
-        MusicPlayer.playSound(this)
+        if(savedInstanceState == null)
+            MusicPlayer.playSound(this)
 
         // set up music toggle
         var muteBtn: ImageView = findViewById(R.id.muteBtn)
-        muteBtn.setImageResource(R.drawable.volume)
+
+        if(savedInstanceState != null){
+            // get last saved music state
+            musicPlaying = savedInstanceState.getBoolean("SavedMusic")
+            if (!musicPlaying) {
+                // music was not playing
+                MusicPlayer.mpStop()
+                muteBtn.setImageResource(R.drawable.volumemute)
+                Log.d("Restoring Music", "to be off")
+
+            } else if (musicPlaying) {
+                // music was playing
+                MusicPlayer.playSound(this)
+                muteBtn.setImageResource(R.drawable.volume)
+                Log.d("Restoring Music", "to be on")
+            }
+        }
+
         muteBtn.setOnClickListener {
-            if (MusicPlayer.isPlaying()) {
+            if (musicPlaying) {
+                // clicked when music was playing, so mute it
                 MusicPlayer.mpStop()
                 musicPlaying = false
                 muteBtn.setImageResource(R.drawable.volumemute)
-
-                Log.d("Music", "Is muted")
-            } else if (!MusicPlayer.isPlaying()) {
+                Log.d("Turning music", "Off")
+            } else if (!musicPlaying) {
+                // clicked when music was off, so play it
                 MusicPlayer.playSound(this)
                 musicPlaying = true
                 muteBtn.setImageResource(R.drawable.volume)
-                Log.d("Music", "Is playing")
+                Log.d("Turning music", "On")
             }
         }
+
+        // links board spaces and makes them into droppable locations
+        topLeftSpace = findViewById(R.id.top_left_space)
+        leftSpace = findViewById(R.id.left_space)
+        botLeftSpace = findViewById(R.id.bot_left_space)
+
+        topLeftSpace?.setOnDragListener(dragListener)
+        leftSpace?.setOnDragListener(dragListener)
+        botLeftSpace?.setOnDragListener(dragListener)
+
+        topMidSpace = findViewById(R.id.top_mid_space)
+        midSpace = findViewById(R.id.mid_space)
+        botMidSpace = findViewById(R.id.bot_mid_space)
+
+        topMidSpace?.setOnDragListener(dragListener)
+        midSpace?.setOnDragListener(dragListener)
+        botMidSpace?.setOnDragListener(dragListener)
+
+        topRightSpace = findViewById(R.id.top_right_space)
+        rightSpace = findViewById(R.id.right_space)
+        botRightSpace = findViewById(R.id.bot_right_space)
+
+        topRightSpace?.setOnDragListener(dragListener)
+        rightSpace?.setOnDragListener(dragListener)
+        botRightSpace?.setOnDragListener(dragListener)
 
 
         if(savedInstanceState != null){
@@ -122,6 +166,9 @@ class PlayActivity : AppCompatActivity() {
 
             //restore board
             IntArraySettingBoardArray(savedBoard)
+            Log.d("Board Row 1", " "+spotIsEmpty(0,0) + " "+spotIsEmpty(0,1) + " "+spotIsEmpty(0,2))
+            Log.d("Board Row 2", " "+spotIsEmpty(1,0) + " "+spotIsEmpty(1,1) + " "+spotIsEmpty(1,2))
+            Log.d("Board Row 3", " "+spotIsEmpty(2,0) + " "+spotIsEmpty(2,1) + " "+spotIsEmpty(2,2))
         }
         else {
             // randomly give cards if no saved data
@@ -177,33 +224,6 @@ class PlayActivity : AppCompatActivity() {
         makeDragger(playerCardThree, playerListCardThree)
         makeDragger(playerCardFour, playerListCardFour)
         makeDragger(playerCardFive, playerListCardFive)
-
-
-        // links board spaces and makes them into droppable locations
-        topLeftSpace = findViewById(R.id.top_left_space)
-        leftSpace = findViewById(R.id.left_space)
-        botLeftSpace = findViewById(R.id.bot_left_space)
-
-        topLeftSpace?.setOnDragListener(dragListener)
-        leftSpace?.setOnDragListener(dragListener)
-        botLeftSpace?.setOnDragListener(dragListener)
-
-        topMidSpace = findViewById(R.id.top_mid_space)
-        midSpace = findViewById(R.id.mid_space)
-        botMidSpace = findViewById(R.id.bot_mid_space)
-
-        topMidSpace?.setOnDragListener(dragListener)
-        midSpace?.setOnDragListener(dragListener)
-        botMidSpace?.setOnDragListener(dragListener)
-
-        topRightSpace = findViewById(R.id.top_right_space)
-        rightSpace = findViewById(R.id.right_space)
-        botRightSpace = findViewById(R.id.bot_right_space)
-
-        topRightSpace?.setOnDragListener(dragListener)
-        rightSpace?.setOnDragListener(dragListener)
-        botRightSpace?.setOnDragListener(dragListener)
-
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
@@ -211,6 +231,7 @@ class PlayActivity : AppCompatActivity() {
         savedPlayer = cardArrayToIntArray(myList)
         savedBoard = boardStateToIntArray()
 
+        outState.putBoolean("SavedMusic", musicPlaying)
         outState.putIntArray("SavedEnemy", savedEnemy)
         outState.putIntArray("SavedPlayer", savedPlayer)
         outState.putIntArray("SavedBoard", savedBoard)
@@ -281,8 +302,8 @@ class PlayActivity : AppCompatActivity() {
                     destination.setBackgroundColor(resources.getColor(currentColor))
                     //v.visibility = View.INVISIBLE
                     v.setImageResource(R.drawable.emptyslot)
-                    v.setEnabled(false)
                     removeFromPlayerHand(v)
+                    v.setEnabled(false)
                     playAI()
                 }
                 true
@@ -753,6 +774,8 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
+
+    // uses the int array to restore the board state
     fun IntArraySettingBoardArray(data: IntArray){
         var dataIndex = 0
         for(row in 0..2){
@@ -769,6 +792,14 @@ class PlayActivity : AppCompatActivity() {
                 dataIndex++
                 board[row][col].westVal = data[dataIndex]
                 dataIndex++
+
+
+                var view = cordToSpace(row, col)
+                view?.setImageResource(board[row][col].imageId)
+                if(board[row][col].color == 1)
+                    view?.setBackgroundColor(resources.getColor(R.color.red))
+                else if(board[row][col].color == 0)
+                    view?.setBackgroundColor(resources.getColor(R.color.blue))
             }
         }
     }
