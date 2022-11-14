@@ -111,7 +111,7 @@ class PlayActivity : AppCompatActivity() {
             var playerListCardTwo = myList[1]
             var playerListCardThree = myList[2]
             var playerListCardFour = myList[3]
-            var playerListCardFive = myList[10]
+            var playerListCardFive = myList[4]
 
             // link cards to xml imageViews
             playerCardOne = findViewById(R.id.player_card_one)
@@ -574,7 +574,7 @@ class PlayActivity : AppCompatActivity() {
             val randomListCard = allCardsList[alreadyUsed.elementAt(i)]
             val randomCard = Card(randomListCard.imageResourceId, randomListCard.name, randomListCard.north, randomListCard.east,
                 randomListCard.south, randomListCard.west)
-            myList[i] =  randomCard
+            thisList[i] =  randomCard
         }
     }
 
