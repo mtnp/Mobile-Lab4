@@ -22,8 +22,9 @@ import com.example.tripletriad.model.PlayActivityViewModel
 import java.util.*
 
 class PlayActivity : AppCompatActivity() {
-    private val myList = DataSource.cards //ListCard
+    private val allCardsList = DataSource.cards //ListCard
     private val enemyList: Array<Card> = Array(5){Card()} //Card
+    private val myList: Array<Card> = Array(5){Card()} //Card
     // creates a 3x3 board filled with blank, grey cards
     var board: Array<Array<Card>> = Array(3){ Array(3){ Card() } }
     private lateinit var binding: ActivityPlayBinding
@@ -105,6 +106,7 @@ class PlayActivity : AppCompatActivity() {
                 }
             }
 
+            fillList(myList)
             var playerListCardOne = myList[0]
             var playerListCardTwo = myList[1]
             var playerListCardThree = myList[2]
@@ -119,11 +121,11 @@ class PlayActivity : AppCompatActivity() {
             playerCardFive = findViewById(R.id.player_card_five)
 
             // xml cards are set to the corresponding images
-            playerCardOne?.setImageResource(playerListCardOne.imageResourceId)
-            playerCardTwo?.setImageResource(playerListCardTwo.imageResourceId)
-            playerCardThree?.setImageResource(playerListCardThree.imageResourceId)
-            playerCardFour?.setImageResource(playerListCardFour.imageResourceId)
-            playerCardFive?.setImageResource(playerListCardFive.imageResourceId)
+            playerCardOne?.setImageResource(playerListCardOne.imageId)
+            playerCardTwo?.setImageResource(playerListCardTwo.imageId)
+            playerCardThree?.setImageResource(playerListCardThree.imageId)
+            playerCardFour?.setImageResource(playerListCardFour.imageId)
+            playerCardFive?.setImageResource(playerListCardFive.imageId)
 
             makeDragger(playerCardOne, playerListCardOne)
             makeDragger(playerCardTwo, playerListCardTwo)
@@ -137,7 +139,7 @@ class PlayActivity : AppCompatActivity() {
             opponentCardFour = findViewById(R.id.opponent_card_four)
             opponentCardFive = findViewById(R.id.opponent_card_five)
 
-            fillEnemyList()
+            fillList(enemyList)
             var opponentListCardOne = enemyList[0]
             var opponentListCardTwo = enemyList[1]
             var opponentListCardThree = enemyList[2]
@@ -184,7 +186,6 @@ class PlayActivity : AppCompatActivity() {
         }
 
     }
-
 
     // pause music when leaving the activity
     override fun onPause() {
@@ -307,14 +308,13 @@ class PlayActivity : AppCompatActivity() {
     }
 
     // make player cards draggable
-    fun makeDragger(view: ImageView?= null, listCard: ListCard){
+    fun makeDragger(view: ImageView?= null, card: Card){
         view?.setOnLongClickListener{
             // move code to drag listener
             // TODO: figure out how to send multiple clipText thru clipData
             draggingCard = view.drawable
-            drawInt = listCard.imageResourceId
-            Toast.makeText(this, "Picked Up " + listCard.name + "", Toast.LENGTH_SHORT).show()
-            val clipText = "" + listCard.north + "," + listCard.east + "," + listCard.south + "," + listCard.west
+            drawInt = card.imageId
+            val clipText = "" + card.northVal + "," + card.eastVal + "," + card.southVal + "," + card.westVal
             val item = ClipData.Item(clipText)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(clipText, mimeTypes, item)
@@ -564,17 +564,17 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
-    fun fillEnemyList(){
+    fun fillList(thisList : Array<Card>){
         var alreadyUsed = mutableSetOf<Int>()
         while(alreadyUsed.size < 5){
-            val randomListCardIndex = (0..myList.size - 1).random()
+            val randomListCardIndex = (0..allCardsList.size - 1).random()
             alreadyUsed.add(randomListCardIndex)
         }
         for(i in 0..4){
-            val randomListCard = myList[alreadyUsed.elementAt(i)]
+            val randomListCard = allCardsList[alreadyUsed.elementAt(i)]
             val randomCard = Card(randomListCard.imageResourceId, randomListCard.name, randomListCard.north, randomListCard.east,
                 randomListCard.south, randomListCard.west)
-            enemyList[i] =  randomCard
+            myList[i] =  randomCard
         }
     }
 
