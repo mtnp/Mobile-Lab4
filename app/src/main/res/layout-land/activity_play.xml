@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".PlayActivity">
+
+    <!-- BOARD SECTION START -->
+    <!-- left column -->
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="15dp"
+        android:text="Horizontal"
+        android:textSize="30sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bot_right_space" />
+
+    <ImageView
+        android:id="@+id/muteBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/textView"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/bot_mid_space"
+        app:srcCompat="@drawable/volume" />
+
+    <ImageView
+        android:id="@+id/top_left_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@id/left_space"
+        app:layout_constraintEnd_toStartOf="@id/top_mid_space"
+        app:srcCompat="@drawable/emptycard" />
+
+    <ImageView
+        android:id="@+id/left_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@id/mid_space"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/emptycard" />
+
+
+    <ImageView
+        android:id="@+id/bot_left_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintEnd_toStartOf="@id/bot_mid_space"
+        app:layout_constraintTop_toBottomOf="@id/left_space"
+        app:srcCompat="@drawable/emptycard" />
+
+    <!-- middle column -->
+    <ImageView
+        android:id="@+id/mid_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/emptycard" />
+
+    <ImageView
+        android:id="@+id/top_mid_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@id/mid_space"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:srcCompat="@drawable/emptycard" />
+
+    <ImageView
+        android:id="@+id/bot_mid_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mid_space"
+        app:srcCompat="@drawable/emptycard" />
+
+    <!-- right column -->
+    <ImageView
+        android:id="@+id/top_right_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toTopOf="@id/right_space"
+        app:layout_constraintStart_toEndOf="@id/top_mid_space"
+        app:srcCompat="@drawable/emptycard" />
+
+    <ImageView
+        android:id="@+id/right_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/mid_space"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/emptycard" />
+
+    <ImageView
+        android:id="@+id/bot_right_space"
+        android:layout_width="80dp"
+        android:layout_height="90dp"
+        app:layout_constraintStart_toEndOf="@id/bot_mid_space"
+        app:layout_constraintTop_toBottomOf="@id/right_space"
+        app:srcCompat="@drawable/emptycard" />
+    <!-- BOARD SECTION END -->
+
+    <!-- player hand -->
+
+
+    <!-- opponent hand -->
+
+    <ImageView
+        android:id="@+id/player_card_one"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@id/player_card_two"
+
+        app:layout_constraintEnd_toEndOf="@+id/player_card_three"
+        app:layout_constraintStart_toStartOf="@+id/player_card_two"
+        app:srcCompat="@drawable/emptyslot" />
+
+    <ImageView
+        android:id="@+id/player_card_two"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/emptyslot" />
+
+    <ImageView
+        android:id="@+id/player_card_three"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/player_card_two"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/emptyslot" />
+
+    <ImageView
+        android:id="@+id/player_card_four"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/player_card_two"
+        app:srcCompat="@drawable/emptyslot" />
+
+    <ImageView
+        android:id="@+id/player_card_five"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintStart_toEndOf="@+id/player_card_four"
+        app:layout_constraintTop_toBottomOf="@+id/player_card_three"
+        app:srcCompat="@drawable/emptyslot" />
+
+    <ImageView
+        android:id="@+id/opponent_card_two"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toStartOf="@+id/opponent_card_three"
+        app:layout_constraintTop_toTopOf="@+id/opponent_card_three"
+        app:srcCompat="@drawable/cardback" />
+
+    <ImageView
+        android:id="@+id/opponent_card_five"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/opponent_card_three"
+        app:srcCompat="@drawable/cardback" />
+
+    <ImageView
+        android:id="@+id/opponent_card_three"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/cardback" />
+
+    <ImageView
+        android:id="@+id/opponent_card_one"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintBottom_toTopOf="@+id/opponent_card_three"
+        app:layout_constraintEnd_toEndOf="@+id/opponent_card_three"
+        app:layout_constraintStart_toStartOf="@+id/opponent_card_two"
+        app:srcCompat="@drawable/cardback" />
+
+    <ImageView
+        android:id="@+id/opponent_card_four"
+        android:layout_width="65dp"
+        android:layout_height="80dp"
+        app:layout_constraintEnd_toStartOf="@+id/opponent_card_five"
+        app:layout_constraintTop_toBottomOf="@+id/opponent_card_two"
+        app:srcCompat="@drawable/cardback" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -35,6 +35,10 @@ object MusicPlayer {
             playing = false
         }
     }
+
+    fun isPlaying(): Boolean{
+        return playing
+    }
 }
 
 //class MusicPlayer: Service() {

@@ -34,6 +34,8 @@ class PlayActivity : AppCompatActivity() {
     private var currentColor: Int = R.color.black
     private var cardsPlaced: Int = 0
 
+    lateinit var viewModel: PlayActivityViewModel
+
 
 //    private var playerCardOne: ListCard?= null
 //    private var playerCardTwo: ListCard?= null
@@ -75,10 +77,10 @@ class PlayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_play)
+        setContentView(R.layout.activity_play)
 
         // for screen rotation data persistence
-        var viewModel: PlayActivityViewModel =
-            ViewModelProvider(this).get(PlayActivityViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
 
         // play music
         MusicPlayer.playSound(this)
@@ -87,15 +89,18 @@ class PlayActivity : AppCompatActivity() {
         var muteBtn : ImageView = findViewById(R.id.muteBtn)
         muteBtn.setImageResource(R.drawable.volume)
         muteBtn.setOnClickListener {
-            if (musicPlaying) {
+            if (MusicPlayer.isPlaying()) {
                 MusicPlayer.mpStop()
                 musicPlaying = false
                 muteBtn.setImageResource(R.drawable.volumemute)
+
+                Log.d("Music", "Is muted")
             }
-            else {
+            else if(!MusicPlayer.isPlaying()){
                 MusicPlayer.playSound(this)
                 musicPlaying = true
                 muteBtn.setImageResource(R.drawable.volume)
+                Log.d("Music", "Is playing")
             }
         }
 
@@ -219,7 +224,7 @@ class PlayActivity : AppCompatActivity() {
                 val owner = v.parent as ViewGroup
                 //owner.removeView(v)
                 val destination = view as ImageView
-                if(Objects.equals(view.drawable.constantState, this.resources.getDrawable(R.drawable.blank_square).constantState)){
+                if(Objects.equals(view.drawable.constantState, this.resources.getDrawable(R.drawable.emptycard).constantState)){
                     // this space is available, can place card here
                     var cordArray = spaceToCord(destination)
                     var row = cordArray[0]
@@ -227,10 +232,10 @@ class PlayActivity : AppCompatActivity() {
 
                     // game starts at 0 cards placed and is player's turn
                     if(cardsPlaced % 2 == 0){
-                        currentColor = R.color.teal_200
+                        currentColor = R.color.blue
                     }
                     else{
-                        currentColor = R.color.purple_200
+                        currentColor = R.color.red
                     }
 
                     placeCard(draggedCard, row, col)
@@ -334,10 +339,10 @@ class PlayActivity : AppCompatActivity() {
         Log.d("D", "AI Turn...Cards Placed:" + cardsPlaced)
 
         if(cardsPlaced % 2 == 0){
-            currentColor = R.color.teal_200
+            currentColor = R.color.blue
         }
         else{
-            currentColor = R.color.purple_200
+            currentColor = R.color.red
         }
 
         placeCard(card, row, col)
