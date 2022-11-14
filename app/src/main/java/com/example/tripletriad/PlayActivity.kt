@@ -180,17 +180,17 @@ class PlayActivity : AppCompatActivity() {
 
     }
 
+    // pause music when leaving the activity
     override fun onPause() {
         MusicPlayer.mpStop()
         super.onPause()
     }
 
+    // play music when returning to activity
     override fun onRestart() {
         MusicPlayer.playSound(this)
         super.onRestart()
     }
-
-
 
     // board spaces are drop spaces
     val dragListener = View.OnDragListener{ view, event ->
@@ -329,9 +329,14 @@ class PlayActivity : AppCompatActivity() {
         val cardView = indexToCardViewAI(cardIndex)
 
         card.color = 1
-        val cords = AIRandom()
-        val row = cords[0]
-        val col = cords[1]
+        var cords = AIOptimal(card)
+        var row = cords[0]
+        var col = cords[1]
+        if (row == -1 && col == -1) {
+            cords = AIRandom()
+            row = cords[0]
+            col = cords[1]
+        }
         Log.d("D", "AI Row:" + row + " AI Col:" + col)
 
         val view = cordToSpace(row, col)
@@ -601,9 +606,43 @@ class PlayActivity : AppCompatActivity() {
         return intArrayOf(row, col)
     }
 
-    fun AIOptimal(): IntArray{
+    fun AIOptimal(card : Card): IntArray{
+        for (row in 0..2) {
+            for (col in 0..2) {
+                if (spotIsEmpty(row, col)) {
+                    if(isWithinBounds(row - 1, col) && !spotIsEmpty(row - 1, col)){
+                        Log.d("D", "North Interaction")
+                        if(card.northVal > board[row - 1][col].southVal){
+                            return intArrayOf(row, col)
+                        }
+                    }
 
+                    // check east side
+                    if(isWithinBounds(row, col + 1) && !spotIsEmpty(row, col + 1)){
+                        Log.d("D", "east Interaction")
+                        if(card.eastVal > board[row][col + 1].westVal){
+                            return intArrayOf(row, col)
+                        }
+                    }
 
+                    // check south side
+                    if(isWithinBounds(row + 1, col) && !spotIsEmpty(row + 1, col)){
+                        Log.d("D", "south Interaction")
+                        if(card.southVal > board[row + 1][col].northVal){
+                            return intArrayOf(row, col)
+                        }
+                    }
+
+                    // check west side
+                    if(isWithinBounds(row, col - 1)  && !spotIsEmpty(row, col - 1)){
+                        Log.d("D", "west Interaction")
+                        if(card.westVal > board[row][col - 1].eastVal){
+                            return intArrayOf(row, col)
+                        }
+                    }
+                }
+            }
+        }
         return intArrayOf(-1, -1)
     }
 
