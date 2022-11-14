@@ -35,7 +35,9 @@ class PlayActivity : AppCompatActivity() {
     private var cardsPlaced: Int = 0
 
     lateinit var viewModel: PlayActivityViewModel
-
+    private lateinit var savedEnemy: IntArray
+    private lateinit var savedPlayer: IntArray
+    private lateinit var savedBoard: IntArray
 
 //    private var playerCardOne: ListCard?= null
 //    private var playerCardTwo: ListCard?= null
@@ -77,108 +79,112 @@ class PlayActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_play)
-        setContentView(R.layout.activity_play)
 
-        // for screen rotation data persistence
-        viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
+        if(savedInstanceState == null) {
+            // for screen rotation data persistence
+            viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
 
-        // play music
-        MusicPlayer.playSound(this)
+            // play music
+            MusicPlayer.playSound(this)
 
-        // set up music toggle
-        var muteBtn : ImageView = findViewById(R.id.muteBtn)
-        muteBtn.setImageResource(R.drawable.volume)
-        muteBtn.setOnClickListener {
-            if (MusicPlayer.isPlaying()) {
-                MusicPlayer.mpStop()
-                musicPlaying = false
-                muteBtn.setImageResource(R.drawable.volumemute)
+            // set up music toggle
+            var muteBtn: ImageView = findViewById(R.id.muteBtn)
+            muteBtn.setImageResource(R.drawable.volume)
+            muteBtn.setOnClickListener {
+                if (MusicPlayer.isPlaying()) {
+                    MusicPlayer.mpStop()
+                    musicPlaying = false
+                    muteBtn.setImageResource(R.drawable.volumemute)
 
-                Log.d("Music", "Is muted")
+                    Log.d("Music", "Is muted")
+                } else if (!MusicPlayer.isPlaying()) {
+                    MusicPlayer.playSound(this)
+                    musicPlaying = true
+                    muteBtn.setImageResource(R.drawable.volume)
+                    Log.d("Music", "Is playing")
+                }
             }
-            else if(!MusicPlayer.isPlaying()){
-                MusicPlayer.playSound(this)
-                musicPlaying = true
-                muteBtn.setImageResource(R.drawable.volume)
-                Log.d("Music", "Is playing")
-            }
+
+            var playerListCardOne = myList[0]
+            var playerListCardTwo = myList[1]
+            var playerListCardThree = myList[2]
+            var playerListCardFour = myList[3]
+            var playerListCardFive = myList[10]
+
+            // link cards to xml imageViews
+            playerCardOne = findViewById(R.id.player_card_one)
+            playerCardTwo = findViewById(R.id.player_card_two)
+            playerCardThree = findViewById(R.id.player_card_three)
+            playerCardFour = findViewById(R.id.player_card_four)
+            playerCardFive = findViewById(R.id.player_card_five)
+
+            // xml cards are set to the corresponding images
+            playerCardOne?.setImageResource(playerListCardOne.imageResourceId)
+            playerCardTwo?.setImageResource(playerListCardTwo.imageResourceId)
+            playerCardThree?.setImageResource(playerListCardThree.imageResourceId)
+            playerCardFour?.setImageResource(playerListCardFour.imageResourceId)
+            playerCardFive?.setImageResource(playerListCardFive.imageResourceId)
+
+            makeDragger(playerCardOne, playerListCardOne)
+            makeDragger(playerCardTwo, playerListCardTwo)
+            makeDragger(playerCardThree, playerListCardThree)
+            makeDragger(playerCardFour, playerListCardFour)
+            makeDragger(playerCardFive, playerListCardFive)
+
+            opponentCardOne = findViewById(R.id.opponent_card_one)
+            opponentCardTwo = findViewById(R.id.opponent_card_two)
+            opponentCardThree = findViewById(R.id.opponent_card_three)
+            opponentCardFour = findViewById(R.id.opponent_card_four)
+            opponentCardFive = findViewById(R.id.opponent_card_five)
+
+            fillEnemyList()
+            var opponentListCardOne = enemyList[0]
+            var opponentListCardTwo = enemyList[1]
+            var opponentListCardThree = enemyList[2]
+            var opponentListCardFour = enemyList[3]
+            var opponentListCardFive = enemyList[4]
+
+
+            // enable if all-open rule is true, keep true for testing
+            opponentCardOne?.setImageResource(opponentListCardOne.imageId)
+            opponentCardTwo?.setImageResource(opponentListCardTwo.imageId)
+            opponentCardThree?.setImageResource(opponentListCardThree.imageId)
+            opponentCardFour?.setImageResource(opponentListCardFour.imageId)
+            opponentCardFive?.setImageResource(opponentListCardFive.imageId)
+
+
+            topLeftSpace = findViewById(R.id.top_left_space)
+            leftSpace = findViewById(R.id.left_space)
+            botLeftSpace = findViewById(R.id.bot_left_space)
+
+            topLeftSpace?.setOnDragListener(dragListener)
+            leftSpace?.setOnDragListener(dragListener)
+            botLeftSpace?.setOnDragListener(dragListener)
+
+
+            topMidSpace = findViewById(R.id.top_mid_space)
+            midSpace = findViewById(R.id.mid_space)
+            botMidSpace = findViewById(R.id.bot_mid_space)
+
+            topMidSpace?.setOnDragListener(dragListener)
+            midSpace?.setOnDragListener(dragListener)
+            botMidSpace?.setOnDragListener(dragListener)
+
+
+            topRightSpace = findViewById(R.id.top_right_space)
+            rightSpace = findViewById(R.id.right_space)
+            botRightSpace = findViewById(R.id.bot_right_space)
+
+            topRightSpace?.setOnDragListener(dragListener)
+            rightSpace?.setOnDragListener(dragListener)
+            botRightSpace?.setOnDragListener(dragListener)
+        }
+        else{
+
         }
 
-        var playerListCardOne = myList[0]
-        var playerListCardTwo = myList[1]
-        var playerListCardThree = myList[2]
-        var playerListCardFour = myList[3]
-        var playerListCardFive = myList[10]
-
-        // link cards to xml imageViews
-        playerCardOne = findViewById(R.id.player_card_one)
-        playerCardTwo = findViewById(R.id.player_card_two)
-        playerCardThree = findViewById(R.id.player_card_three)
-        playerCardFour = findViewById(R.id.player_card_four)
-        playerCardFive = findViewById(R.id.player_card_five)
-
-        // xml cards are set to the corresponding images
-        playerCardOne?.setImageResource(playerListCardOne.imageResourceId)
-        playerCardTwo?.setImageResource(playerListCardTwo.imageResourceId)
-        playerCardThree?.setImageResource(playerListCardThree.imageResourceId)
-        playerCardFour?.setImageResource(playerListCardFour.imageResourceId)
-        playerCardFive?.setImageResource(playerListCardFive.imageResourceId)
-
-        makeDragger(playerCardOne, playerListCardOne)
-        makeDragger(playerCardTwo, playerListCardTwo)
-        makeDragger(playerCardThree, playerListCardThree)
-        makeDragger(playerCardFour, playerListCardFour)
-        makeDragger(playerCardFive, playerListCardFive)
-
-        opponentCardOne = findViewById(R.id.opponent_card_one)
-        opponentCardTwo = findViewById(R.id.opponent_card_two)
-        opponentCardThree = findViewById(R.id.opponent_card_three)
-        opponentCardFour = findViewById(R.id.opponent_card_four)
-        opponentCardFive = findViewById(R.id.opponent_card_five)
-
-        fillEnemyList()
-        var opponentListCardOne = enemyList[0]
-        var opponentListCardTwo = enemyList[1]
-        var opponentListCardThree = enemyList[2]
-        var opponentListCardFour = enemyList[3]
-        var opponentListCardFive = enemyList[4]
-
-
-        // enable if all-open rule is true, keep true for testing
-        opponentCardOne?.setImageResource(opponentListCardOne.imageId)
-        opponentCardTwo?.setImageResource(opponentListCardTwo.imageId)
-        opponentCardThree?.setImageResource(opponentListCardThree.imageId)
-        opponentCardFour?.setImageResource(opponentListCardFour.imageId)
-        opponentCardFive?.setImageResource(opponentListCardFive.imageId)
-
-
-        topLeftSpace = findViewById(R.id.top_left_space)
-        leftSpace = findViewById(R.id.left_space)
-        botLeftSpace = findViewById(R.id.bot_left_space)
-
-        topLeftSpace?.setOnDragListener(dragListener)
-        leftSpace?.setOnDragListener(dragListener)
-        botLeftSpace?.setOnDragListener(dragListener)
-
-
-        topMidSpace = findViewById(R.id.top_mid_space)
-        midSpace = findViewById(R.id.mid_space)
-        botMidSpace = findViewById(R.id.bot_mid_space)
-
-        topMidSpace?.setOnDragListener(dragListener)
-        midSpace?.setOnDragListener(dragListener)
-        botMidSpace?.setOnDragListener(dragListener)
-
-
-        topRightSpace = findViewById(R.id.top_right_space)
-        rightSpace = findViewById(R.id.right_space)
-        botRightSpace = findViewById(R.id.bot_right_space)
-
-        topRightSpace?.setOnDragListener(dragListener)
-        rightSpace?.setOnDragListener(dragListener)
-        botRightSpace?.setOnDragListener(dragListener)
-
     }
+
 
     // pause music when leaving the activity
     override fun onPause() {
@@ -606,37 +612,45 @@ class PlayActivity : AppCompatActivity() {
         return intArrayOf(row, col)
     }
 
+    fun isEnemy(myCard: Card, otherCard: Card): Boolean{
+        return myCard.color != otherCard.color && otherCard.color != -1
+    }
+
     fun AIOptimal(card : Card): IntArray{
         for (row in 0..2) {
             for (col in 0..2) {
                 if (spotIsEmpty(row, col)) {
                     if(isWithinBounds(row - 1, col) && !spotIsEmpty(row - 1, col)){
+                        var otherCard = board[row - 1][col]
                         Log.d("D", "North Interaction")
-                        if(card.northVal > board[row - 1][col].southVal){
+                        if(card.northVal > otherCard.southVal && isEnemy(card, otherCard)){
                             return intArrayOf(row, col)
                         }
                     }
 
                     // check east side
                     if(isWithinBounds(row, col + 1) && !spotIsEmpty(row, col + 1)){
+                        var otherCard = board[row][col + 1]
                         Log.d("D", "east Interaction")
-                        if(card.eastVal > board[row][col + 1].westVal){
+                        if(card.eastVal > otherCard.westVal && isEnemy(card, otherCard)){
                             return intArrayOf(row, col)
                         }
                     }
 
                     // check south side
                     if(isWithinBounds(row + 1, col) && !spotIsEmpty(row + 1, col)){
+                        var otherCard = board[row + 1][col]
                         Log.d("D", "south Interaction")
-                        if(card.southVal > board[row + 1][col].northVal){
+                        if(card.southVal > otherCard.northVal && isEnemy(card, otherCard)){
                             return intArrayOf(row, col)
                         }
                     }
 
                     // check west side
                     if(isWithinBounds(row, col - 1)  && !spotIsEmpty(row, col - 1)){
+                        var otherCard = board[row][col - 1]
                         Log.d("D", "west Interaction")
-                        if(card.westVal > board[row][col - 1].eastVal){
+                        if(card.westVal > otherCard.eastVal && isEnemy(card, otherCard)){
                             return intArrayOf(row, col)
                         }
                     }
