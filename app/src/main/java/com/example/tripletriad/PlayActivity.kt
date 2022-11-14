@@ -446,7 +446,7 @@ class PlayActivity : AppCompatActivity() {
     // updates the backend board
     fun placeCard(card: Card, row: Int, col: Int){
         if(!spotIsEmpty(row, col)){
-        // spot is already taken
+            // spot is already taken
 
         }
         else{ // flip other cards if they exist and are opponent's cards
@@ -573,7 +573,7 @@ class PlayActivity : AppCompatActivity() {
         for(i in 0..4){
             val randomListCard = myList[alreadyUsed.elementAt(i)]
             val randomCard = Card(randomListCard.imageResourceId, randomListCard.name, randomListCard.north, randomListCard.east,
-                                randomListCard.south, randomListCard.west)
+                randomListCard.south, randomListCard.west)
             enemyList[i] =  randomCard
         }
     }
