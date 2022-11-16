@@ -294,11 +294,12 @@ class PlayActivity : AppCompatActivity() {
                     else{
                         currentColor = R.color.red
                     }
-
+                    if(draggedCard.imageId == R.drawable.cardback)
+                        Log.d("dragListener", "dragged card's image is its back")
                     placeCard(draggedCard, row, col)
                     Log.d("D", "North:" + draggedNumbers[0] + " East:" + draggedNumbers[1] + " South:" + draggedNumbers[2] + " West:" + draggedNumbers[3])
                     Log.d("D", "Player placed card at square: " + row +", " + col)
-                    destination.setImageResource(drawInt)
+                    destination.setImageResource(draggedCard.imageId)
                     destination.setBackgroundColor(resources.getColor(currentColor))
                     //v.visibility = View.INVISIBLE
                     v.setImageResource(R.drawable.emptyslot)
@@ -364,7 +365,7 @@ class PlayActivity : AppCompatActivity() {
             // TODO: figure out how to send multiple clipText thru clipData
             draggingCard = view.drawable
             drawInt = card.imageId
-            val clipText = "" + card.northVal + "," + card.eastVal + "," + card.southVal + "," + card.westVal
+            val clipText = "" + card.imageId + "," + card.northVal + "," + card.eastVal + "," + card.southVal + "," + card.westVal
             val item = ClipData.Item(clipText)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
             val data = ClipData(clipText, mimeTypes, item)
@@ -497,9 +498,10 @@ class PlayActivity : AppCompatActivity() {
     fun placeCard(card: Card, row: Int, col: Int){
         if(!spotIsEmpty(row, col)){
             // spot is already taken
-
+            Log.d("placeCard", "space is taken")
         }
         else{ // flip other cards if they exist and are opponent's cards
+
             board[row][col] = card
             interactOtherCards(row, col, card)
             cardsPlaced++
@@ -634,7 +636,7 @@ class PlayActivity : AppCompatActivity() {
     }
 
     fun arrayToCard(numbers: IntArray): Card{
-        return Card(R.drawable.cardback, "DEFAULT", numbers[0], numbers[1], numbers[2], numbers[3])
+        return Card(numbers[0], "DEFAULT", numbers[1], numbers[2], numbers[3], numbers[4])
     }
 
     fun AILinear(): IntArray{
@@ -822,22 +824,27 @@ class PlayActivity : AppCompatActivity() {
         when(thing){
             playerCardOne?.drawable?.constantState!! ->{
                 setCardToEmpty(myList[0])
+                playerCardOne?.setEnabled(false)
             }
 
             playerCardTwo?.drawable?.constantState!! ->{
                 setCardToEmpty(myList[1])
+                playerCardTwo?.setEnabled(false)
             }
 
             playerCardThree?.drawable?.constantState!! ->{
                 setCardToEmpty(myList[2])
+                playerCardThree?.setEnabled(false)
             }
 
             playerCardFour?.drawable?.constantState!! ->{
                 setCardToEmpty(myList[3])
+                playerCardFour?.setEnabled(false)
             }
 
             playerCardFive?.drawable?.constantState!! ->{
                 setCardToEmpty(myList[4])
+                playerCardFive?.setEnabled(false)
             }
         }
     }

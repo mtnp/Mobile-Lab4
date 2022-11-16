@@ -1,6 +1,6 @@
 package com.nhatsilas.tripletriad
 
-class Card (imageId: Int = R.drawable.cardback, name: String = "DEFAULT", northVal: Int = -1,
+class Card (imageId: Int = R.drawable.emptycard, name: String = "DEFAULT", northVal: Int = -1,
             eastVal: Int = -1, southVal: Int = -1, westVal: Int = -1){
 
 

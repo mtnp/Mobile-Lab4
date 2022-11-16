@@ -3,10 +3,11 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/unguy/AndroidStudioProjects/tripletriad2/app/src/main/res/layout-land/activity_play.xml" value="0.18645833333333334" />
         <entry key="..\:/Users/unguy/AndroidStudioProjects/tripletriad2/app/src/main/res/layout/activity_album.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/unguy/AndroidStudioProjects/tripletriad2/app/src/main/res/layout/activity_card_list_item.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/unguy/AndroidStudioProjects/tripletriad2/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
-        <entry key="..\:/Users/unguy/AndroidStudioProjects/tripletriad2/app/src/main/res/layout/activity_play.xml" value="0.1" />
+        <entry key="..\:/Users/unguy/AndroidStudioProjects/tripletriad2/app/src/main/res/layout/activity_play.xml" value="0.16" />
         <entry key="..\:/Users/unguy/AndroidStudioProjects/tripletriad2/app/src/main/res/layout/activity_rulebook.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/unguy/AndroidStudioProjects/tripletriad2/app/src/main/res/layout/activity_settings.xml" value="0.25416666666666665" />
       </map>
