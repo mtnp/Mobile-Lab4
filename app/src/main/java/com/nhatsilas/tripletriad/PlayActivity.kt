@@ -21,7 +21,7 @@ import java.util.*
 class PlayActivity : AppCompatActivity() {
     private val allCardsList = DataSource.cards //ListCard
     private val enemyList: Array<Card> = Array(5){Card()} //Card
-    private val myList: Array<Card> = Array(5){Card()} //Card
+    private val playerList: Array<Card> = Array(5){Card()} //Card
     // creates a 3x3 board filled with blank, grey cards
     var board: Array<Array<Card>> = Array(3){ Array(3){ Card() } }
     private lateinit var binding: ActivityPlayBinding
@@ -37,29 +37,17 @@ class PlayActivity : AppCompatActivity() {
     private var savedPlayer: IntArray = IntArray(30)
     private var savedBoard: IntArray = IntArray(54)
 
-//    private var playerCardOne: ListCard?= null
-//    private var playerCardTwo: ListCard?= null
-//    private var playerCardThree: ListCard?= null
-//    private var playerCardFour: ListCard?= null
-//    private var playerCardFive: ListCard?= null
-//
-//    private var opponentCardOne: ListCard?= null
-//    private var opponentCardTwo: ListCard?= null
-//    private var opponentCardThree: ListCard?= null
-//    private var opponentCardFour: ListCard?= null
-//    private var opponentCardFive: ListCard?= null
+    private var playerHandOne: ImageView?= null
+    private var playerHandTwo: ImageView?= null
+    private var playerHandThree: ImageView?= null
+    private var playerHandFour: ImageView?= null
+    private var playerHandFive: ImageView?= null
 
-    private var playerCardOne: ImageView?= null
-    private var playerCardTwo: ImageView?= null
-    private var playerCardThree: ImageView?= null
-    private var playerCardFour: ImageView?= null
-    private var playerCardFive: ImageView?= null
-
-    private var opponentCardOne: ImageView?= null
-    private var opponentCardTwo: ImageView?= null
-    private var opponentCardThree: ImageView?= null
-    private var opponentCardFour: ImageView?= null
-    private var opponentCardFive: ImageView?= null
+    private var enemyHandOne: ImageView?= null
+    private var enemyHandTwo: ImageView?= null
+    private var enemyHandThree: ImageView?= null
+    private var enemyHandFour: ImageView?= null
+    private var enemyHandFive: ImageView?= null
 
     private var topLeftSpace: ImageView?= null
     private var leftSpace: ImageView?= null
@@ -95,13 +83,13 @@ class PlayActivity : AppCompatActivity() {
                 // music was not playing
                 MusicPlayer.mpStop()
                 muteBtn.setImageResource(R.drawable.volumemute)
-                Log.d("Restoring Music", "to be off")
+//                Log.d("Restoring Music", "to be off")
 
             } else if (musicPlaying) {
                 // music was playing
                 MusicPlayer.playSound(this)
                 muteBtn.setImageResource(R.drawable.volume)
-                Log.d("Restoring Music", "to be on")
+//                Log.d("Restoring Music", "to be on")
             }
         }
 
@@ -111,13 +99,13 @@ class PlayActivity : AppCompatActivity() {
                 MusicPlayer.mpStop()
                 musicPlaying = false
                 muteBtn.setImageResource(R.drawable.volumemute)
-                Log.d("Turning music", "Off")
+//                Log.d("Turning music", "Off")
             } else if (!musicPlaying) {
                 // clicked when music was off, so play it
                 MusicPlayer.playSound(this)
                 musicPlaying = true
                 muteBtn.setImageResource(R.drawable.volume)
-                Log.d("Turning music", "On")
+//                Log.d("Turning music", "On")
             }
         }
 
@@ -155,80 +143,85 @@ class PlayActivity : AppCompatActivity() {
 
 
             // restore previous player hand
-            IntArraySettingCardArray(savedPlayer, myList)
-            Log.d("PlayerHand", ""+cardIsEmpty(myList[0])+""+cardIsEmpty(myList[1])
-                    +""+cardIsEmpty(myList[2])+""+cardIsEmpty(myList[3])+""+cardIsEmpty(myList[4]))
+            IntArraySettingCardArray(savedPlayer, playerList)
+//            Log.d("PlayerHand", ""+cardIsEmpty(myList[0])+""+cardIsEmpty(myList[1])
+//                    +""+cardIsEmpty(myList[2])+""+cardIsEmpty(myList[3])+""+cardIsEmpty(myList[4]))
 
             // restore previous enemy hand
             IntArraySettingCardArray(savedEnemy, enemyList)
-            Log.d("EnemyHand", ""+cardIsEmpty(enemyList[0])+""+cardIsEmpty(enemyList[1])
-                    +""+cardIsEmpty(enemyList[2])+""+cardIsEmpty(enemyList[3])+""+cardIsEmpty(enemyList[4]))
+//            Log.d("EnemyHand", ""+cardIsEmpty(enemyList[0])+""+cardIsEmpty(enemyList[1])
+//                    +""+cardIsEmpty(enemyList[2])+""+cardIsEmpty(enemyList[3])+""+cardIsEmpty(enemyList[4]))
 
             //restore board
             IntArraySettingBoardArray(savedBoard)
-            Log.d("Board Row 1", " "+spotIsEmpty(0,0) + " "+spotIsEmpty(0,1) + " "+spotIsEmpty(0,2))
-            Log.d("Board Row 2", " "+spotIsEmpty(1,0) + " "+spotIsEmpty(1,1) + " "+spotIsEmpty(1,2))
-            Log.d("Board Row 3", " "+spotIsEmpty(2,0) + " "+spotIsEmpty(2,1) + " "+spotIsEmpty(2,2))
+//            Log.d("Board Row 1", " "+spotIsEmpty(0,0) + " "+spotIsEmpty(0,1) + " "+spotIsEmpty(0,2))
+//            Log.d("Board Row 2", " "+spotIsEmpty(1,0) + " "+spotIsEmpty(1,1) + " "+spotIsEmpty(1,2))
+//            Log.d("Board Row 3", " "+spotIsEmpty(2,0) + " "+spotIsEmpty(2,1) + " "+spotIsEmpty(2,2))
         }
         else {
             // randomly give cards if no saved data
-            fillList(myList)
+            fillList(playerList)
             fillList(enemyList)
         }
 
         // fills both hands with cards
-        var playerListCardOne = myList[0]
-        var playerListCardTwo = myList[1]
-        var playerListCardThree = myList[2]
-        var playerListCardFour = myList[3]
-        var playerListCardFive = myList[4]
+        var playerCardOne = playerList[0]
+        var playerCardTwo = playerList[1]
+        var playerCardThree = playerList[2]
+        var playerCardFour = playerList[3]
+        var playerCardFive = playerList[4]
 
-        var opponentListCardOne = enemyList[0]
-        var opponentListCardTwo = enemyList[1]
-        var opponentListCardThree = enemyList[2]
-        var opponentListCardFour = enemyList[3]
-        var opponentListCardFive = enemyList[4]
+        var enemyCardOne = enemyList[0]
+        var enemyCardTwo = enemyList[1]
+        var enemyCardThree = enemyList[2]
+        var enemyCardFour = enemyList[3]
+        var enemyCardFive = enemyList[4]
 
 
         // link cards to xml imageViews
-        playerCardOne = findViewById(R.id.player_card_one)
-        playerCardTwo = findViewById(R.id.player_card_two)
-        playerCardThree = findViewById(R.id.player_card_three)
-        playerCardFour = findViewById(R.id.player_card_four)
-        playerCardFive = findViewById(R.id.player_card_five)
+        playerHandOne = findViewById(R.id.player_card_one)
+        playerHandTwo = findViewById(R.id.player_card_two)
+        playerHandThree = findViewById(R.id.player_card_three)
+        playerHandFour = findViewById(R.id.player_card_four)
+        playerHandFive = findViewById(R.id.player_card_five)
 
-        opponentCardOne = findViewById(R.id.opponent_card_one)
-        opponentCardTwo = findViewById(R.id.opponent_card_two)
-        opponentCardThree = findViewById(R.id.opponent_card_three)
-        opponentCardFour = findViewById(R.id.opponent_card_four)
-        opponentCardFive = findViewById(R.id.opponent_card_five)
+        enemyHandOne = findViewById(R.id.opponent_card_one)
+        enemyHandTwo = findViewById(R.id.opponent_card_two)
+        enemyHandThree = findViewById(R.id.opponent_card_three)
+        enemyHandFour = findViewById(R.id.opponent_card_four)
+        enemyHandFive = findViewById(R.id.opponent_card_five)
 
 
         // cards in both hands are set to the corresponding images
-        playerCardOne?.setImageResource(playerListCardOne.imageId)
-        playerCardTwo?.setImageResource(playerListCardTwo.imageId)
-        playerCardThree?.setImageResource(playerListCardThree.imageId)
-        playerCardFour?.setImageResource(playerListCardFour.imageId)
-        playerCardFive?.setImageResource(playerListCardFive.imageId)
+        playerHandOne?.setImageResource(playerCardOne.imageId)
+        playerHandTwo?.setImageResource(playerCardTwo.imageId)
+        playerHandThree?.setImageResource(playerCardThree.imageId)
+        playerHandFour?.setImageResource(playerCardFour.imageId)
+        playerHandFive?.setImageResource(playerCardFive.imageId)
 
-        opponentCardOne?.setImageResource(opponentListCardOne.imageId)
-        opponentCardTwo?.setImageResource(opponentListCardTwo.imageId)
-        opponentCardThree?.setImageResource(opponentListCardThree.imageId)
-        opponentCardFour?.setImageResource(opponentListCardFour.imageId)
-        opponentCardFive?.setImageResource(opponentListCardFive.imageId)
+        enemyHandOne?.setImageResource(enemyCardOne.imageId)
+        enemyHandTwo?.setImageResource(enemyCardTwo.imageId)
+        enemyHandThree?.setImageResource(enemyCardThree.imageId)
+        enemyHandFour?.setImageResource(enemyCardFour.imageId)
+        enemyHandFive?.setImageResource(enemyCardFive.imageId)
 
 
         // make player cards draggable
-        makeDragger(playerCardOne, playerListCardOne)
-        makeDragger(playerCardTwo, playerListCardTwo)
-        makeDragger(playerCardThree, playerListCardThree)
-        makeDragger(playerCardFour, playerListCardFour)
-        makeDragger(playerCardFive, playerListCardFive)
+        if(playerCardOne.imageId != R.drawable.emptyslot)
+            makeDragger(playerHandOne, playerCardOne)
+        if(playerCardTwo.imageId != R.drawable.emptyslot)
+            makeDragger(playerHandTwo, playerCardTwo)
+        if(playerCardThree.imageId != R.drawable.emptyslot)
+            makeDragger(playerHandThree, playerCardThree)
+        if(playerCardFour.imageId != R.drawable.emptyslot)
+            makeDragger(playerHandFour, playerCardFour)
+        if(playerCardFive.imageId != R.drawable.emptyslot)
+            makeDragger(playerHandFive, playerCardFive)
     }
 
     override fun onSaveInstanceState(outState: Bundle) {
         savedEnemy = cardArrayToIntArray(enemyList)
-        savedPlayer = cardArrayToIntArray(myList)
+        savedPlayer = cardArrayToIntArray(playerList)
         savedBoard = boardStateToIntArray()
 
         outState.putBoolean("SavedMusic", musicPlaying)
@@ -294,11 +287,11 @@ class PlayActivity : AppCompatActivity() {
                     else{
                         currentColor = R.color.red
                     }
-                    if(draggedCard.imageId == R.drawable.cardback)
-                        Log.d("dragListener", "dragged card's image is its back")
+//                    if(draggedCard.imageId == R.drawable.cardback)
+//                        Log.d("dragListener", "dragged card's image is its back")
                     placeCard(draggedCard, row, col)
-                    Log.d("D", "North:" + draggedNumbers[0] + " East:" + draggedNumbers[1] + " South:" + draggedNumbers[2] + " West:" + draggedNumbers[3])
-                    Log.d("D", "Player placed card at square: " + row +", " + col)
+//                    Log.d("D", "North:" + draggedNumbers[1] + " East:" + draggedNumbers[2] + " South:" + draggedNumbers[3] + " West:" + draggedNumbers[4])
+//                    Log.d("D", "Player placed card at square: " + row +", " + col)
                     destination.setImageResource(draggedCard.imageId)
                     destination.setBackgroundColor(resources.getColor(currentColor))
                     //v.visibility = View.INVISIBLE
@@ -382,7 +375,7 @@ class PlayActivity : AppCompatActivity() {
             return
         }
         var cardIndex = randomHand()
-        val card = enemyList[cardIndex]
+        var card = enemyList[cardIndex]
         val cardView = indexToCardViewAI(cardIndex)
 
         card.color = 1
@@ -394,11 +387,12 @@ class PlayActivity : AppCompatActivity() {
             row = cords[0]
             col = cords[1]
         }
-        Log.d("D", "AI Row:" + row + " AI Col:" + col)
+
+//        Log.d("D", "AI Row:" + row + " AI Col:" + col)
 
         val view = cordToSpace(row, col)
-        Log.d("D", "AI Space:" + view?.id)
-        Log.d("D", "AI Turn...Cards Placed:" + cardsPlaced)
+//        Log.d("D", "AI Space:" + view?.id)
+//        Log.d("D", "AI Turn...Cards Placed:" + cardsPlaced)
 
         if(cardsPlaced % 2 == 0){
             currentColor = R.color.blue
@@ -412,7 +406,9 @@ class PlayActivity : AppCompatActivity() {
         view?.setImageResource(card.imageId)
         view?.setBackgroundColor(resources.getColor(currentColor))
         board[row][col].color = 1
+        Log.d("playAI", "Before placement card image is empty slot: " + (card.imageId == R.drawable.emptyslot))
         setCardToEmpty(enemyList[cardIndex])
+        Log.d("playAI", "After placement card image is empty slot: " + (card.imageId == R.drawable.emptyslot))
     }
 
     fun linearHand(): Int{
@@ -433,6 +429,7 @@ class PlayActivity : AppCompatActivity() {
         return result
     }
 
+    // TODO
     fun optimalHand(): Int{
         return -1
     }
@@ -440,23 +437,23 @@ class PlayActivity : AppCompatActivity() {
     fun indexToCardViewAI(index: Int): ImageView? {
         when(index){
             0 -> {
-                return opponentCardOne
+                return enemyHandOne
             }
             1 -> {
-                return opponentCardTwo
+                return enemyHandTwo
             }
             2 -> {
-                return opponentCardThree
+                return enemyHandThree
             }
             3 -> {
-                return opponentCardFour
+                return enemyHandFour
             }
             4 -> {
-                return opponentCardFive
+                return enemyHandFive
             }
         }
 
-        return opponentCardOne
+        return enemyHandOne
     }
 
     fun cordToSpace(row: Int, col: Int): ImageView? {
@@ -498,7 +495,7 @@ class PlayActivity : AppCompatActivity() {
     fun placeCard(card: Card, row: Int, col: Int){
         if(!spotIsEmpty(row, col)){
             // spot is already taken
-            Log.d("placeCard", "space is taken")
+//            Log.d("placeCard", "space is taken")
         }
         else{ // flip other cards if they exist and are opponent's cards
 
@@ -537,22 +534,22 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
-        Log.d("Score", "player:" + playerScore + " ai:" + AIScore)
+//        Log.d("Score", "player:" + playerScore + " ai:" + AIScore)
         if(isFull){
             return false
         }
 
-        Log.d("D", "Board is filled, game is over")
+//        Log.d("D", "Board is filled, game is over")
         if(playerPoints > AIPoints) {
-            Log.d("D", "Player WIN")
+//            Log.d("D", "Player WIN")
             Toast.makeText(this, "Player WIN", Toast.LENGTH_LONG).show()
         }
         else if(playerPoints == AIPoints) {
-            Log.d("D", "TIE")
+//            Log.d("D", "TIE")
             Toast.makeText(this, "Player TIE", Toast.LENGTH_LONG).show()
         }
         else {
-            Log.d("D", "Player LOSE")
+//            Log.d("D", "Player LOSE")
             Toast.makeText(this, "Player LOSE", Toast.LENGTH_LONG).show()
         }
         return true
@@ -570,45 +567,41 @@ class PlayActivity : AppCompatActivity() {
     fun interactOtherCards(row: Int, col: Int, card: Card){
         board[row][col] = card
         val thisColor = card.color
-
         // check north side
         if(isWithinBounds(row - 1, col)){
-            Log.d("D", "North Interaction")
+//            Log.d("D", "North Interaction")
             if(card.northVal > board[row - 1][col].southVal && isOpponentCard(row - 1, col, thisColor)){
-                Log.d("D", "North flip")
+//                Log.d("D", "North flip")
                 board[row - 1][col].color = thisColor
                 val northView = cordToSpace(row - 1, col)
                 northView?.setBackgroundColor(resources.getColor(currentColor))
             }
         }
-
         // check east side
         if(isWithinBounds(row, col + 1)){
-            Log.d("D", "east Interaction")
+//            Log.d("D", "east Interaction")
             if(card.eastVal > board[row][col + 1].westVal && isOpponentCard(row, col + 1, thisColor)){
-                Log.d("D", "east flip")
+//                Log.d("D", "east flip")
                 board[row][col + 1].color = thisColor
                 val eastView = cordToSpace(row, col + 1)
                 eastView?.setBackgroundColor(resources.getColor(currentColor))
             }
         }
-
         // check south side
         if(isWithinBounds(row + 1, col)){
-            Log.d("D", "south Interaction")
+//            Log.d("D", "south Interaction")
             if(card.southVal > board[row + 1][col].northVal  && isOpponentCard(row + 1, col, thisColor)){
-                Log.d("D", "south flip")
+//                Log.d("D", "south flip")
                 board[row + 1][col].color = thisColor
                 val southView = cordToSpace(row + 1, col)
                 southView?.setBackgroundColor(resources.getColor(currentColor))
             }
         }
-
         // check west side
         if(isWithinBounds(row, col - 1)){
-            Log.d("D", "west Interaction")
+//            Log.d("D", "west Interaction")
             if(card.westVal > board[row][col - 1].eastVal && isOpponentCard(row, col - 1, thisColor)){
-                Log.d("D", "west flip")
+//                Log.d("D", "west flip")
                 board[row][col - 1].color = thisColor
                 val westView = cordToSpace(row, col - 1)
                 westView?.setBackgroundColor(resources.getColor(currentColor))
@@ -643,7 +636,7 @@ class PlayActivity : AppCompatActivity() {
         for(row in 0..2){
             for(col in 0..2){
                 if(spotIsEmpty(row, col)){
-                    Log.d("D", "AI Found row:" + row + " col:"+ col +" to be empty.")
+//                    Log.d("D", "AI Found row:" + row + " col:"+ col +" to be empty.")
                     return intArrayOf(row, col)
                 }
             }
@@ -660,7 +653,7 @@ class PlayActivity : AppCompatActivity() {
             col = (0..2).random()
         }
 
-        Log.d("D", "AI Found row:" + row + " col:"+ col +" to be empty.")
+//        Log.d("D", "AI Found row:" + row + " col:"+ col +" to be empty.")
         return intArrayOf(row, col)
     }
 
@@ -674,7 +667,7 @@ class PlayActivity : AppCompatActivity() {
                 if (spotIsEmpty(row, col)) {
                     if(isWithinBounds(row - 1, col) && !spotIsEmpty(row - 1, col)){
                         var otherCard = board[row - 1][col]
-                        Log.d("D", "North Interaction")
+//                        Log.d("D", "North Interaction")
                         if(card.northVal > otherCard.southVal && isEnemy(card, otherCard)){
                             return intArrayOf(row, col)
                         }
@@ -683,7 +676,7 @@ class PlayActivity : AppCompatActivity() {
                     // check east side
                     if(isWithinBounds(row, col + 1) && !spotIsEmpty(row, col + 1)){
                         var otherCard = board[row][col + 1]
-                        Log.d("D", "east Interaction")
+//                        Log.d("D", "east Interaction")
                         if(card.eastVal > otherCard.westVal && isEnemy(card, otherCard)){
                             return intArrayOf(row, col)
                         }
@@ -692,7 +685,7 @@ class PlayActivity : AppCompatActivity() {
                     // check south side
                     if(isWithinBounds(row + 1, col) && !spotIsEmpty(row + 1, col)){
                         var otherCard = board[row + 1][col]
-                        Log.d("D", "south Interaction")
+//                        Log.d("D", "south Interaction")
                         if(card.southVal > otherCard.northVal && isEnemy(card, otherCard)){
                             return intArrayOf(row, col)
                         }
@@ -701,7 +694,7 @@ class PlayActivity : AppCompatActivity() {
                     // check west side
                     if(isWithinBounds(row, col - 1)  && !spotIsEmpty(row, col - 1)){
                         var otherCard = board[row][col - 1]
-                        Log.d("D", "west Interaction")
+//                        Log.d("D", "west Interaction")
                         if(card.westVal > otherCard.eastVal && isEnemy(card, otherCard)){
                             return intArrayOf(row, col)
                         }
@@ -721,12 +714,18 @@ class PlayActivity : AppCompatActivity() {
         var resultIndex = 0
 
         for(i in 0..4){
-            result[resultIndex++] = thisList[i].imageId
-            result[resultIndex++] = thisList[i].color
-            result[resultIndex++] = thisList[i].northVal
-            result[resultIndex++] = thisList[i].eastVal
-            result[resultIndex++] = thisList[i].southVal
-            result[resultIndex++] = thisList[i].westVal
+            result[resultIndex] = thisList[i].imageId
+            resultIndex++
+            result[resultIndex] = thisList[i].color
+            resultIndex++
+            result[resultIndex] = thisList[i].northVal
+            resultIndex++
+            result[resultIndex] = thisList[i].eastVal
+            resultIndex++
+            result[resultIndex] = thisList[i].southVal
+            resultIndex++
+            result[resultIndex] = thisList[i].westVal
+            resultIndex++
         }
 
         return result
@@ -820,32 +819,41 @@ class PlayActivity : AppCompatActivity() {
     }
 
     fun removeFromPlayerHand(card: ImageView){
-        val thing = card?.drawable?.constantState
-        when(thing){
-            playerCardOne?.drawable?.constantState!! ->{
-                setCardToEmpty(myList[0])
-                playerCardOne?.setEnabled(false)
+        val cardImage = card?.drawable?.constantState
+        when(card){
+            playerHandOne ->{
+                setCardToEmpty(playerList[0])
+                playerHandOne?.setEnabled(false)
+//                playerCardOne?.setImageResource(R.drawable.emptyslot)
             }
 
-            playerCardTwo?.drawable?.constantState!! ->{
-                setCardToEmpty(myList[1])
-                playerCardTwo?.setEnabled(false)
+            playerHandTwo ->{
+                setCardToEmpty(playerList[1])
+                playerHandTwo?.setEnabled(false)
+//                playerCardTwo?.setImageResource(R.drawable.emptyslot)
             }
 
-            playerCardThree?.drawable?.constantState!! ->{
-                setCardToEmpty(myList[2])
-                playerCardThree?.setEnabled(false)
+            playerHandThree ->{
+                setCardToEmpty(playerList[2])
+                playerHandThree?.setEnabled(false)
+//                playerCardThree?.setImageResource(R.drawable.emptyslot)
             }
 
-            playerCardFour?.drawable?.constantState!! ->{
-                setCardToEmpty(myList[3])
-                playerCardFour?.setEnabled(false)
+            playerHandFour ->{
+                setCardToEmpty(playerList[3])
+                playerHandFour?.setEnabled(false)
+//                playerCardFour?.setImageResource(R.drawable.emptyslot)
             }
 
-            playerCardFive?.drawable?.constantState!! ->{
-                setCardToEmpty(myList[4])
-                playerCardFive?.setEnabled(false)
+            playerHandFive ->{
+                setCardToEmpty(playerList[4])
+                playerHandFive?.setEnabled(false)
+//                playerCardFive?.setImageResource(R.drawable.emptyslot)
             }
         }
+    }
+
+    fun disableViewIfEmptySlot(){
+
     }
 }
