@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.DragEvent
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
@@ -368,6 +369,20 @@ class PlayActivity : AppCompatActivity() {
             //view.visibility = View.INVISIBLE
             true
         }
+        view?.setOnClickListener{
+            Toast.makeText(this, "LONG PRESS A CARD TO MOVE IT", Toast.LENGTH_SHORT).show()
+        }
+        //TODO: get motion gesture to work(counts as one of the optional features)
+        // turning touch listener back on will invalidate both onclick listeners
+//        view?.setOnTouchListener{ v, event ->
+//            val action = event.action
+//            when(action){
+//                MotionEvent.ACTION_DOWN -> {
+//
+//                }
+//            }
+//            true
+//        }
     }
 
     fun playAI(){
@@ -854,9 +869,6 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
-    fun disableViewIfEmptySlot(){
-
-    }
 
     fun newCardCopy(card: Card): Card{
         return Card(card.imageId, "DEFAULT", card.northVal,
