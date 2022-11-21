@@ -385,6 +385,7 @@ class PlayActivity : AppCompatActivity() {
 //        }
     }
 
+    // AI Logic handling
     fun playAI(){
         if(checkBoardFull()){
             return
@@ -426,10 +427,12 @@ class PlayActivity : AppCompatActivity() {
         setCardToEmpty(enemyList[cardIndex])
     }
 
+    // AI will play its hand sequentially
     fun linearHand(): Int{
         return cardsPlaced / 2
     }
 
+    // AI will play its hand randomly
     fun randomHand(): Int{
         var result = (0..4).random()
         var card = indexToCardViewAI(result)
@@ -445,11 +448,12 @@ class PlayActivity : AppCompatActivity() {
         return result
     }
 
-    // TODO
+    // TODO: AI will play its hand optimally
     fun optimalHand(): Int{
         return -1
     }
 
+    // returns the enemy hand corresponding to the index
     fun indexToCardViewAI(index: Int): ImageView? {
         when(index){
             0 -> {
@@ -472,6 +476,7 @@ class PlayActivity : AppCompatActivity() {
         return enemyHandOne
     }
 
+    // returns the board space corresponding to the row and column
     fun cordToSpace(row: Int, col: Int): ImageView? {
         when {
             row == 0 && col == 0 -> {
@@ -571,15 +576,17 @@ class PlayActivity : AppCompatActivity() {
         return true
     }
 
-
+    // check if coordinates are within the board space
     fun isWithinBounds(row: Int, col: Int): Boolean {
         return row != 3 && row != -1 && col != 3 && col != -1
     }
 
+    // check if the neighboring cards are of opposite colors
     fun isOpponentCard(row: Int, col: Int, playerColor: Int): Boolean {
         return board[row][col].color != playerColor && board[row][col].color != -1
     }
 
+    // flips other cards if the placed card is able to
     fun interactOtherCards(row: Int, col: Int, card: Card){
         board[row][col] = card
         val thisColor = card.color
@@ -625,6 +632,7 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
+    // deals out random cards for the respective hand
     fun fillList(thisList : Array<Card>){
         var alreadyUsed = mutableSetOf<Int>()
         while(alreadyUsed.size < 5){
@@ -639,15 +647,18 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
+    // translates listCard data to make a new card object
     fun listCardToCard(listCard: ListCard) : Card{
         return Card(listCard.imageResourceId, listCard.name,
             listCard.north, listCard.east, listCard.south, listCard.west)
     }
 
+    // translates int array data to make a new card object
     fun arrayToCard(numbers: IntArray): Card{
         return Card(numbers[0], "DEFAULT", numbers[1], numbers[2], numbers[3], numbers[4])
     }
 
+    // AI places its card sequentially from top left to bottom right
     fun AILinear(): IntArray{
         for(row in 0..2){
             for(col in 0..2){
@@ -661,6 +672,7 @@ class PlayActivity : AppCompatActivity() {
         return intArrayOf(-1, -1)
     }
 
+    // AI places its card randomly
     fun AIRandom(): IntArray{
         var row = (0..2).random()
         var col = (0..2).random()
@@ -673,10 +685,12 @@ class PlayActivity : AppCompatActivity() {
         return intArrayOf(row, col)
     }
 
+    // duplicate of isOpponentCard, TODO: REFACTOR
     fun isEnemy(myCard: Card, otherCard: Card): Boolean{
         return myCard.color != otherCard.color && otherCard.color != -1
     }
 
+    // AI tries to find and place its card where it finds the first +1 capture
     fun AIOptimal(card : Card): IntArray{
         for (row in 0..2) {
             for (col in 0..2) {
@@ -721,10 +735,12 @@ class PlayActivity : AppCompatActivity() {
         return intArrayOf(-1, -1)
     }
 
+    // returns true if a card can be placed at this spot in the board
     fun spotIsEmpty(row: Int, col: Int): Boolean{
         return board[row][col].color == -1
     }
 
+    // packages the player's hand to an int array
     fun cardArrayToIntArray(thisList: Array<Card>): IntArray{
         var result = IntArray(30)
         var resultIndex = 0
@@ -747,7 +763,7 @@ class PlayActivity : AppCompatActivity() {
         return result
     }
 
-    // saves the data of the cards on the board to an array
+    // packages the board to an int array
     fun boardStateToIntArray(): IntArray{
         var result = IntArray(54)
         var resultIndex = 0
@@ -773,6 +789,7 @@ class PlayActivity : AppCompatActivity() {
         return result
     }
 
+    // unpackages an int array and puts it into the target's hand
     fun IntArraySettingCardArray(data: IntArray, target: Array<Card>){
         var dataIndex = 0
         for(i in 0..4){
@@ -792,7 +809,7 @@ class PlayActivity : AppCompatActivity() {
     }
 
 
-    // uses the int array to restore the board state
+    // unpackages an int array and puts it into the board
     fun IntArraySettingBoardArray(data: IntArray){
         var dataIndex = 0
         for(row in 0..2){
@@ -821,6 +838,7 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
+    // set the card's image to be empty
     fun setCardToEmpty(card: Card){
         card.imageId = R.drawable.emptyslot
         //card.color = -1
@@ -830,10 +848,12 @@ class PlayActivity : AppCompatActivity() {
         //card.westVal = -1
     }
 
+    // returns true if the card's image is empty
     fun cardIsEmpty(card: Card): Boolean{
         return card.imageId == R.drawable.emptyslot
     }
 
+    // removes the card from player hand once it's placed on the board
     fun removeFromPlayerHand(card: ImageView){
         val cardImage = card?.drawable?.constantState
         when(card){
@@ -869,7 +889,7 @@ class PlayActivity : AppCompatActivity() {
         }
     }
 
-
+    // makes a deep copy of a card
     fun newCardCopy(card: Card): Card{
         return Card(card.imageId, "DEFAULT", card.northVal,
                         card.eastVal, card.southVal, card.westVal)
