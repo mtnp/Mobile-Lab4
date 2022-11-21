@@ -388,11 +388,7 @@ class PlayActivity : AppCompatActivity() {
             col = cords[1]
         }
 
-//        Log.d("D", "AI Row:" + row + " AI Col:" + col)
-
         val view = cordToSpace(row, col)
-//        Log.d("D", "AI Space:" + view?.id)
-//        Log.d("D", "AI Turn...Cards Placed:" + cardsPlaced)
 
         if(cardsPlaced % 2 == 0){
             currentColor = R.color.blue
@@ -401,14 +397,18 @@ class PlayActivity : AppCompatActivity() {
             currentColor = R.color.red
         }
 
-        placeCard(card, row, col)
+        val cardCopy = newCardCopy(card)
+        cardCopy.color = 1
+
+
+
+        placeCard(cardCopy, row, col)
         cardView?.setImageResource(R.drawable.emptyslot)
         view?.setImageResource(card.imageId)
         view?.setBackgroundColor(resources.getColor(currentColor))
+        // changes to card in board are reflected in card in enemyList
         board[row][col].color = 1
-        Log.d("playAI", "Before placement card image is empty slot: " + (card.imageId == R.drawable.emptyslot))
         setCardToEmpty(enemyList[cardIndex])
-        Log.d("playAI", "After placement card image is empty slot: " + (card.imageId == R.drawable.emptyslot))
     }
 
     fun linearHand(): Int{
@@ -419,6 +419,7 @@ class PlayActivity : AppCompatActivity() {
         var result = (0..4).random()
         var card = indexToCardViewAI(result)
 
+        // AI only checks the imageView's current image resource
         while(card?.drawable?.constantState?.equals
                 (resources.getDrawable(R.drawable.emptyslot).constantState)!!){
             result = (0..4).random()
@@ -855,5 +856,10 @@ class PlayActivity : AppCompatActivity() {
 
     fun disableViewIfEmptySlot(){
 
+    }
+
+    fun newCardCopy(card: Card): Card{
+        return Card(card.imageId, "DEFAULT", card.northVal,
+                        card.eastVal, card.southVal, card.westVal)
     }
 }
