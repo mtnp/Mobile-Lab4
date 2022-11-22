@@ -2,6 +2,7 @@ package com.nhatsilas.tripletriad
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import com.nhatsilas.tripletriad.adapter.CardAdapter
 import com.nhatsilas.tripletriad.databinding.ActivityAlbumBinding
 
@@ -21,6 +22,11 @@ class AlbumActivity : AppCompatActivity() {
 
         // Enable up button for backward navigation
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
+        var backBtn : ImageView = findViewById(R.id.backBtn)
+        backBtn.setOnClickListener{
+            startActivity(parentActivityIntent)
+        }
 
     }
 }

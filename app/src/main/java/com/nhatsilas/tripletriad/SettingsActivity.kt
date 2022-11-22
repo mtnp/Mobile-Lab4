@@ -2,6 +2,7 @@ package com.nhatsilas.tripletriad
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import android.widget.RadioButton
 
 class SettingsActivity : AppCompatActivity() {
@@ -14,6 +15,12 @@ class SettingsActivity : AppCompatActivity() {
         musicOn.setOnClickListener {
             MusicPlayer.mpStop()
         }
+
+        var backBtn : ImageView = findViewById(R.id.backBtn)
+        backBtn.setOnClickListener{
+            startActivity(parentActivityIntent)
+        }
+
 //        musicOff.setOnClickListener {
 //            MusicPlayer.playSound()
 //        }

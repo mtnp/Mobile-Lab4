@@ -110,6 +110,12 @@ class PlayActivity : AppCompatActivity() {
             }
         }
 
+        // set up back button
+        var backBtn : ImageView = findViewById(R.id.backBtn)
+        backBtn!!.setOnClickListener{
+            startActivity(parentActivityIntent)
+        }
+
         // links board spaces and makes them into droppable locations
         topLeftSpace = findViewById(R.id.top_left_space)
         leftSpace = findViewById(R.id.left_space)

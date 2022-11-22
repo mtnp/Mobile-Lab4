@@ -6,6 +6,16 @@
     android:layout_height="match_parent"
     tools:context=".SettingsActivity">
 
+    <ImageView
+        android:id="@+id/backBtn"
+        android:layout_height="30dp"
+        android:layout_width="30dp"
+        android:paddingStart="4dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/back"
+        />
+
     <TextView
         android:id="@+id/SFX"
         android:layout_width="wrap_content"
