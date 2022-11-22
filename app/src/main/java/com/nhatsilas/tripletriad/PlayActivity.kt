@@ -83,13 +83,13 @@ class PlayActivity : AppCompatActivity() {
             if (!musicPlaying) {
                 // music was not playing
                 MusicPlayer.mpStop()
-                muteBtn.setImageResource(R.drawable.volumemute)
+                muteBtn.setImageResource(R.drawable.volumemutegray)
 //                Log.d("Restoring Music", "to be off")
 
             } else if (musicPlaying) {
                 // music was playing
                 MusicPlayer.playSound(this)
-                muteBtn.setImageResource(R.drawable.volume)
+                muteBtn.setImageResource(R.drawable.volumegray)
 //                Log.d("Restoring Music", "to be on")
             }
         }
@@ -99,13 +99,13 @@ class PlayActivity : AppCompatActivity() {
                 // clicked when music was playing, so mute it
                 MusicPlayer.mpStop()
                 musicPlaying = false
-                muteBtn.setImageResource(R.drawable.volumemute)
+                muteBtn.setImageResource(R.drawable.volumemutegray)
 //                Log.d("Turning music", "Off")
             } else if (!musicPlaying) {
                 // clicked when music was off, so play it
                 MusicPlayer.playSound(this)
                 musicPlaying = true
-                muteBtn.setImageResource(R.drawable.volume)
+                muteBtn.setImageResource(R.drawable.volumegray)
 //                Log.d("Turning music", "On")
             }
         }

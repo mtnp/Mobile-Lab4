@@ -30,7 +30,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/bot_mid_space"
-        app:srcCompat="@drawable/volume" />
+        app:srcCompat="@drawable/volumegray" />
 
     <ImageView
         android:id="@+id/top_left_space"
