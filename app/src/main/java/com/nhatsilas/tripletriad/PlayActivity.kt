@@ -26,11 +26,11 @@ class PlayActivity : AppCompatActivity() {
     // creates a 3x3 board filled with blank, grey cards
     var board: Array<Array<Card>> = Array(3){ Array(3){ Card() } }
     private lateinit var binding: ActivityPlayBinding
-    private var draggingCard: Drawable?= null
-    private var drawInt: Int = -1
 
     // black is error color; turn colors are blue/red; for now teal/purple
     private var currentColor: Int = R.color.black
+    private var playerColor: Int = R.color.blue
+    private var enemyColor: Int = R.color.red
     private var cardsPlaced: Int = 0
 
     lateinit var viewModel: PlayActivityViewModel
@@ -357,8 +357,6 @@ class PlayActivity : AppCompatActivity() {
         view?.setOnLongClickListener{
             // move code to drag listener
             // TODO: figure out how to send multiple clipText thru clipData
-            draggingCard = view.drawable
-            drawInt = card.imageId
             val clipText = "" + card.imageId + "," + card.northVal + "," + card.eastVal + "," + card.southVal + "," + card.westVal
             val item = ClipData.Item(clipText)
             val mimeTypes = arrayOf(ClipDescription.MIMETYPE_TEXT_PLAIN)
@@ -563,15 +561,15 @@ class PlayActivity : AppCompatActivity() {
 //        Log.d("D", "Board is filled, game is over")
         if(playerPoints > AIPoints) {
 //            Log.d("D", "Player WIN")
-            Toast.makeText(this, "Player WIN", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.you_win), Toast.LENGTH_LONG).show()
         }
         else if(playerPoints == AIPoints) {
 //            Log.d("D", "TIE")
-            Toast.makeText(this, "Player TIE", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.you_tied), Toast.LENGTH_LONG).show()
         }
         else {
 //            Log.d("D", "Player LOSE")
-            Toast.makeText(this, "Player LOSE", Toast.LENGTH_LONG).show()
+            Toast.makeText(this, getString(R.string.you_lose), Toast.LENGTH_LONG).show()
         }
         return true
     }
