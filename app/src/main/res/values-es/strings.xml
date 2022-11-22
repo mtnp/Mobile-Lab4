@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Triple Tríada</string>
+    <string name="music">Musica</string>
+    <string name="sfx">Efectos de Sonido</string>
+    <string name="english">Inglés</string>
+    <string name="spanish">Español</string>
+    <string name="default_text">DEFAULT TEXT SPANISH</string>
+    <string name="on">Encendido</string>
+    <string name="off">Apagado</string>
+    <string name="language">Idioma</string>
+    <string name="rule_book">Libro de Reglas</string>
+    <string name="card_album">Álbum de Cartas</string>
+    <string name="play">Jugar el Juego</string>
+    <string name="settings">Configuraciones</string>
+    <string name="you">Tú</string>
+    <string name="you_lose">Tú PIERDES</string>
+    <string name="you_tied">Te ATASTE</string>
+    <string name="you_win">Tú GANAS</string>
+</resources>
