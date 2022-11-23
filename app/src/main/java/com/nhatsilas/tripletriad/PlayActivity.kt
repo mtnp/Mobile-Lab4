@@ -2,6 +2,7 @@ package com.nhatsilas.tripletriad
 
 import android.content.ClipData
 import android.content.ClipDescription
+import android.content.Intent
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -113,7 +114,8 @@ class PlayActivity : AppCompatActivity() {
         // set up back button
         var backBtn : ImageView = findViewById(R.id.backBtn)
         backBtn!!.setOnClickListener{
-            startActivity(parentActivityIntent)
+            val parentIntent = Intent(this, MainActivity::class.java)
+            startActivity(parentIntent)
         }
 
         // links board spaces and makes them into droppable locations

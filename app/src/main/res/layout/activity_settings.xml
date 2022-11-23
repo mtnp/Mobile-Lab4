@@ -77,19 +77,19 @@
     <RadioGroup
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:checkedButton="@id/English"
+        android:checkedButton="@id/englishBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/Language">
 
         <RadioButton
-            android:id="@+id/English"
+            android:id="@+id/englishBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/english"
             />
         <RadioButton
-            android:id="@+id/Spanish"
+            android:id="@+id/spanishBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spanish"
