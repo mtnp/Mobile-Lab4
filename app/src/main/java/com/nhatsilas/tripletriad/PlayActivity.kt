@@ -114,8 +114,7 @@ class PlayActivity : AppCompatActivity() {
         // set up back button
         var backBtn : ImageView = findViewById(R.id.backBtn)
         backBtn!!.setOnClickListener{
-            val parentIntent = Intent(this, MainActivity::class.java)
-            startActivity(parentIntent)
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
         // links board spaces and makes them into droppable locations

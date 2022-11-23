@@ -1,5 +1,6 @@
 package com.nhatsilas.tripletriad
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebView
@@ -16,7 +17,7 @@ class RulebookActivity : AppCompatActivity() {
 
         var backBtn : ImageView = findViewById(R.id.backBtn)
         backBtn.setOnClickListener{
-            startActivity(parentActivityIntent)
+            startActivity(Intent(this, MainActivity::class.java))
         }
 
     }
