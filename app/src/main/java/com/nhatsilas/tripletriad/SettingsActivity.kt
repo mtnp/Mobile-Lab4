@@ -11,6 +11,7 @@ import androidx.core.os.LocaleListCompat
 import java.util.*
 
 class SettingsActivity : AppCompatActivity() {
+    var superLocale: Locale ?= null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
@@ -37,16 +38,17 @@ class SettingsActivity : AppCompatActivity() {
 
         engBtn.setOnClickListener{
             val locale = Locale("en")
+            superLocale = Locale("en")
             Locale.setDefault(locale)
 
             resources.configuration.locale = locale
             resources.configuration.setLayoutDirection(locale)
             resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-
 
         }
         spaBtn.setOnClickListener{
             val locale = Locale("es")
+            superLocale = Locale("es")
             Locale.setDefault(locale)
 
             resources.configuration.locale = locale
@@ -54,5 +56,12 @@ class SettingsActivity : AppCompatActivity() {
             resources.updateConfiguration(resources.configuration, resources.displayMetrics)
 
         }
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+//        resources.configuration.locale = superLocale
+//        resources.configuration.setLayoutDirection(superLocale)
+//        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
     }
 }

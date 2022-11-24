@@ -1,10 +1,12 @@
 package com.nhatsilas.tripletriad
 
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.webkit.WebView
+import android.webkit.WebViewClient
 import android.widget.ImageView
+import androidx.appcompat.app.AppCompatActivity
+
 
 class RulebookActivity : AppCompatActivity() {
     private lateinit var webView: WebView
@@ -12,8 +14,10 @@ class RulebookActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_rulebook)
 
-        webView = findViewById(R.id.webview);
-        webView.loadUrl("https://finalfantasy.fandom.com/wiki/Triple_Triad_(Final_Fantasy_VIII)")
+        webView = findViewById(R.id.webview)
+        webView.setWebViewClient(WebViewClient())
+//        webView.loadUrl("https://finalfantasy.fandom.com/wiki/Triple_Triad_(Final_Fantasy_VIII)")
+        webView.loadUrl("https://docs.google.com/document/d/1evBetTbgbMSYmcre9X2xZccqTP-K27DkiXOlpMAEh28/edit")
 
         var backBtn : ImageView = findViewById(R.id.backBtn)
         backBtn.setOnClickListener{
