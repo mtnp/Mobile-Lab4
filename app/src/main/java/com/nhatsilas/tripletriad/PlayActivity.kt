@@ -18,6 +18,8 @@ import com.nhatsilas.tripletriad.databinding.ActivityPlayBinding
 import com.nhatsilas.tripletriad.data.DataSource
 import com.nhatsilas.tripletriad.model.ListCard
 import com.nhatsilas.tripletriad.model.PlayActivityViewModel
+import android.os.Handler
+import android.os.Looper
 import java.util.*
 
 class PlayActivity : AppCompatActivity() {
@@ -306,7 +308,12 @@ class PlayActivity : AppCompatActivity() {
                     v.setImageResource(R.drawable.emptyslot)
                     removeFromPlayerHand(v)
                     v.setEnabled(false)
-                    playAI()
+
+                    // delay the AI by 600 - 1000 milliseconds
+                    val delay: Int = (600..1000).random()
+                    Handler(Looper.getMainLooper()).postDelayed({
+                        playAI()
+                    }, delay.toLong())
                 }
                 true
             }
