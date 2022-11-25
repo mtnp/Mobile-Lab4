@@ -18,16 +18,16 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Launch the PlayActivity on playlBtn click
-        binding.playBtn.setOnClickListener { launchPlay() }
+        binding.play.setOnClickListener { launchPlay() }
 
         // Launch the AlbumActivity on albumBtn click
-        binding.albumBtn.setOnClickListener { launchAlbum() }
+        binding.album.setOnClickListener { launchAlbum() }
 
         // Launch the SettingsActivity on settingsBtn click
-        binding.settingsBtn.setOnClickListener { launchSettings() }
+        binding.settings.setOnClickListener { launchSettings() }
 
         // Launch the RulebookActivity on settingsBtn click
-        binding.rulebookBtn.setOnClickListener { launchRulebook() }
+        binding.rulebook.setOnClickListener { launchRulebook() }
 //        playMusic()
 
         //startService(Intent(this, MusicPlayer::class.java))

@@ -7,49 +7,113 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
-    <Button
-        android:id="@+id/rulebook_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:minWidth="250dp"
-        android:text="@string/rule_book"
-        app:layout_constraintBottom_toTopOf="@+id/play_btn"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.503"
-        app:layout_constraintStart_toStartOf="parent" />
 
-    <Button
-        android:id="@+id/album_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:minWidth="250dp"
-        android:text="@string/card_album"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.496"
-        app:layout_constraintStart_toStartOf="parent"
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:text="Welcome to Triple Triad"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.499" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:gravity="center"
+        android:paddingTop="20dp"
+        android:textAppearance="@style/TextAppearance.MaterialComponents.Headline6"
+        android:textColor="#808080"
+        android:textSize="40dp"
+        />
 
-    <Button
-        android:id="@+id/play_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="20dp"
-        android:minWidth="250dp"
-        android:text="@string/play"
-        app:layout_constraintBottom_toTopOf="@id/album_btn"
-        app:layout_constraintStart_toStartOf="@id/album_btn" />
+    <ImageView
+        android:id="@+id/rulebook"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@+id/album"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/play"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:src="@drawable/emptycard" />
 
-    <Button
-        android:id="@+id/settings_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:minWidth="250dp"
-        android:text="@string/settings"
-        app:layout_constraintStart_toStartOf="@+id/album_btn"
-        app:layout_constraintTop_toBottomOf="@id/album_btn" />
+    <ImageView
+        android:id="@+id/rulebookImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/rulebook"
+        app:layout_constraintBottom_toBottomOf="@id/rulebook"
+        app:layout_constraintStart_toStartOf="@id/rulebook"
+        app:layout_constraintEnd_toEndOf="@id/rulebook"
+        android:padding="18dp"
+        android:src="@drawable/rulebook" />
+
+    <ImageView
+        android:id="@+id/play"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/title"
+        app:layout_constraintBottom_toTopOf="@+id/settings"
+        app:layout_constraintStart_toEndOf="@id/rulebook"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:src="@drawable/emptycard" />
+
+    <ImageView
+        android:id="@+id/playImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/play"
+        app:layout_constraintBottom_toBottomOf="@id/play"
+        app:layout_constraintStart_toStartOf="@id/play"
+        app:layout_constraintEnd_toEndOf="@id/play"
+        android:padding="65dp"
+        android:src="@drawable/play" />
+
+    <ImageView
+        android:id="@+id/album"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/rulebook"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/settings"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:src="@drawable/emptycard" />
+
+    <ImageView
+        android:id="@+id/albumImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/album"
+        app:layout_constraintBottom_toBottomOf="@id/album"
+        app:layout_constraintStart_toStartOf="@id/album"
+        app:layout_constraintEnd_toEndOf="@id/album"
+        android:padding="65dp"
+        android:src="@drawable/cards" />
+
+    <ImageView
+        android:id="@+id/settings"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toBottomOf="@id/play"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/album"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        android:src="@drawable/emptycard" />
+
+    <ImageView
+        android:id="@+id/settingsImage"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        app:layout_constraintTop_toTopOf="@id/settings"
+        app:layout_constraintBottom_toBottomOf="@id/settings"
+        app:layout_constraintStart_toStartOf="@id/settings"
+        app:layout_constraintEnd_toEndOf="@id/settings"
+        android:padding="65dp"
+        android:src="@drawable/settings" />
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>

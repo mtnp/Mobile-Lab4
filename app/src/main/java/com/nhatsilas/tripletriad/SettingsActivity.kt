@@ -25,7 +25,7 @@ class SettingsActivity : AppCompatActivity() {
         }
 
         var backBtn : ImageView = findViewById(R.id.backBtn)
-        backBtn.setOnClickListener{
+        backBtn!!.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
         }
 
