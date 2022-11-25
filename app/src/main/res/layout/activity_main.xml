@@ -37,13 +37,12 @@
 
     <ImageView
         android:id="@+id/rulebookImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="150dp"
+        android:layout_height="150dp"
         app:layout_constraintTop_toTopOf="@id/rulebook"
         app:layout_constraintBottom_toBottomOf="@id/rulebook"
         app:layout_constraintStart_toStartOf="@id/rulebook"
         app:layout_constraintEnd_toEndOf="@id/rulebook"
-        android:padding="18dp"
         android:src="@drawable/rulebook" />
 
     <ImageView
@@ -60,13 +59,12 @@
 
     <ImageView
         android:id="@+id/playImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         app:layout_constraintTop_toTopOf="@id/play"
         app:layout_constraintBottom_toBottomOf="@id/play"
         app:layout_constraintStart_toStartOf="@id/play"
         app:layout_constraintEnd_toEndOf="@id/play"
-        android:padding="65dp"
         android:src="@drawable/play" />
 
     <ImageView
@@ -83,13 +81,12 @@
 
     <ImageView
         android:id="@+id/albumImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         app:layout_constraintTop_toTopOf="@id/album"
         app:layout_constraintBottom_toBottomOf="@id/album"
         app:layout_constraintStart_toStartOf="@id/album"
         app:layout_constraintEnd_toEndOf="@id/album"
-        android:padding="65dp"
         android:src="@drawable/cards" />
 
     <ImageView
@@ -106,13 +103,12 @@
 
     <ImageView
         android:id="@+id/settingsImage"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="75dp"
+        android:layout_height="75dp"
         app:layout_constraintTop_toTopOf="@id/settings"
         app:layout_constraintBottom_toBottomOf="@id/settings"
         app:layout_constraintStart_toStartOf="@id/settings"
         app:layout_constraintEnd_toEndOf="@id/settings"
-        android:padding="65dp"
         android:src="@drawable/settings" />
 
 

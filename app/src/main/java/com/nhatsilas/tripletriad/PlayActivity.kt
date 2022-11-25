@@ -323,9 +323,7 @@ class PlayActivity : AppCompatActivity() {
             }
             else -> false
         }
-
     }
-
 
     // returns an array with 2 ints for row and col based on which
     // square the card was placed
