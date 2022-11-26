@@ -21,13 +21,15 @@
         android:src="@drawable/back" />
 
     <ImageView
-        android:id="@+id/invisPadding"
+        android:id="@+id/resetBtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
+        android:paddingEnd="6dp"
         app:layout_constraintBottom_toTopOf="@id/player_card_five"
         app:layout_constraintTop_toBottomOf="@id/opponent_card_five"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@id/right_space" />
+        app:layout_constraintStart_toEndOf="@id/right_space"
+        app:srcCompat="@drawable/reset"/>
 
     <TextView
         android:id="@+id/textView"
@@ -125,7 +127,7 @@
         app:layout_constraintTop_toBottomOf="@id/opponent_card_five"
         app:layout_constraintBottom_toTopOf="@id/right_space"
         app:layout_constraintStart_toEndOf="@id/top_mid_space"
-        app:layout_constraintEnd_toStartOf="@id/invisPadding"
+        app:layout_constraintEnd_toStartOf="@id/resetBtn"
         app:srcCompat="@drawable/emptycard" />
 
     <ImageView
@@ -133,7 +135,7 @@
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bot_right_space"
-        app:layout_constraintEnd_toStartOf="@id/invisPadding"
+        app:layout_constraintEnd_toStartOf="@id/resetBtn"
         app:layout_constraintStart_toEndOf="@id/mid_space"
         app:layout_constraintTop_toBottomOf="@id/top_right_space"
         app:srcCompat="@drawable/emptycard" />
@@ -145,7 +147,7 @@
         app:layout_constraintTop_toBottomOf="@id/right_space"
         app:layout_constraintBottom_toTopOf="@id/player_card_five"
         app:layout_constraintStart_toEndOf="@id/bot_mid_space"
-        app:layout_constraintEnd_toStartOf="@id/invisPadding"
+        app:layout_constraintEnd_toStartOf="@id/resetBtn"
         app:srcCompat="@drawable/emptycard" />
     <!-- BOARD SECTION END -->
 

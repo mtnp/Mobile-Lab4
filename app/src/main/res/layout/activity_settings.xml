@@ -13,26 +13,33 @@
         android:paddingStart="4dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintBottom_toTopOf="@id/BGM"
         android:src="@drawable/back"
         />
 
     <TextView
         android:id="@+id/BGM"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="40dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:text="@string/music"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeStepGranularity="2sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/backBtn" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/backBtn"
+        app:layout_constraintBottom_toTopOf="@id/musicRadioGroup"
+        android:gravity="center_horizontal" />
 
     <RadioGroup
         android:id="@+id/musicRadioGroup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:checkedButton="@id/onBtn"
+        app:layout_constraintBottom_toTopOf="@id/Language"
         app:layout_constraintEnd_toEndOf="parent"
+
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/BGM">
 
@@ -40,48 +47,56 @@
             android:id="@+id/onBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/on" />
+            android:text="@string/on"
+            android:textSize="24sp"/>
 
         <RadioButton
             android:id="@+id/offBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/off" />
-
-
+            android:text="@string/off"
+            android:textSize="24sp"/>
     </RadioGroup>
 
     <TextView
         android:id="@+id/Language"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:paddingTop="40dp"
+        android:layout_width="0dp"
+        android:layout_height="50dp"
         android:text="@string/language"
-        android:textSize="30sp"
+        android:textAlignment="center"
+        android:autoSizeTextType="uniform"
+        android:autoSizeMinTextSize="12sp"
+        android:autoSizeMaxTextSize="40sp"
+        android:autoSizeStepGranularity="2sp"
+        app:layout_constraintBottom_toTopOf="@id/languageRadioGroup"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/musicRadioGroup" />
 
     <RadioGroup
         android:id="@+id/languageRadioGroup"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:checkedButton="@id/englishBtn"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Language">
+        app:layout_constraintTop_toBottomOf="@+id/Language"
+        app:layout_constraintBottom_toBottomOf="parent">
 
         <RadioButton
             android:id="@+id/englishBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/english"
+            android:textSize="24sp"
             />
         <RadioButton
             android:id="@+id/spanishBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spanish"
+            android:textSize="24sp"
             />
 
 
