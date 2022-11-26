@@ -119,6 +119,11 @@ class PlayActivity : AppCompatActivity() {
             startActivity(Intent(this, MainActivity::class.java))
         }
 
+        var resetBtn : ImageView = findViewById(R.id.resetBtn)
+        resetBtn.setOnClickListener {
+            startActivity(Intent(this, PlayActivity::class.java))
+        }
+
         // links board spaces and makes them into droppable locations
         topLeftSpace = findViewById(R.id.top_left_space)
         leftSpace = findViewById(R.id.left_space)
@@ -239,6 +244,11 @@ class PlayActivity : AppCompatActivity() {
         outState.putIntArray("SavedPlayer", savedPlayer)
         outState.putIntArray("SavedBoard", savedBoard)
         super.onSaveInstanceState(outState)
+    }
+
+    override fun onBackPressed() {
+        startActivity(Intent(this, MainActivity::class.java))
+        super.onBackPressed()
     }
 
     // pause music when leaving the activity
