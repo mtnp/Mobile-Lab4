@@ -17,4 +17,6 @@
     <string name="you_win">You WIN</string>
     <string name="welcome_main">Welcome to Flipping Card Game</string>
     <string name="spanish" translatable="false">Español</string>
+    <string name="longpress">LONG PRESS A CARD TO MOVE IT</string>
+
 </resources>

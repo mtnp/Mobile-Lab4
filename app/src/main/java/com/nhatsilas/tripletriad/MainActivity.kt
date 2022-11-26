@@ -37,9 +37,9 @@ class MainActivity : AppCompatActivity() {
         resources.updateConfiguration(resources.configuration, resources.displayMetrics)
 
         if(sharedPreferences.getString("language", "en").equals("es")) {
-            Toast.makeText(this, "Previously saved Spanish: Restoring...", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Previously saved Spanish: Restoring...", Toast.LENGTH_SHORT).show()
             if(!title.text.toString().equals(resources.getString(R.string.welcome_main))){
-                Toast.makeText(this, "Title Translation MISMATCH: Changing...", Toast.LENGTH_SHORT).show()
+//                Toast.makeText(this, "Title Translation MISMATCH: Changing...", Toast.LENGTH_SHORT).show()
                 title.text = resources.getString(R.string.welcome_main)
             }
         }

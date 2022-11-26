@@ -4,6 +4,7 @@ import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Intent
 import android.content.SharedPreferences
+import android.content.pm.ActivityInfo
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -79,6 +80,7 @@ class PlayActivity : AppCompatActivity() {
         sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
         shEditor = sharedPreferences.edit()
         randomGenerator = Random(System.currentTimeMillis())
+
 
         // for screen rotation data persistence
         viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
@@ -165,7 +167,7 @@ class PlayActivity : AppCompatActivity() {
 
         // set up back button
         var backBtn : ImageView = findViewById(R.id.backBtn)
-        backBtn!!.setOnClickListener{
+        backBtn.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
@@ -348,10 +350,10 @@ class PlayActivity : AppCompatActivity() {
                     //v.visibility = View.INVISIBLE
                     v.setImageResource(R.drawable.emptyslot)
                     removeFromPlayerHand(v)
-                    v.setEnabled(false)
+                    v.isEnabled = false
 
                     // delay the AI by 1 - 3 seconds
-                    val delay: Int = (100..200).random()
+                    val delay: Int = (10000..20000).random()
                     unmakeDragger()
                     Handler(Looper.getMainLooper()).postDelayed({
                         playAI()
@@ -428,7 +430,7 @@ class PlayActivity : AppCompatActivity() {
             false
         }
         view?.setOnClickListener{
-            Toast.makeText(this, "LONG PRESS A CARD TO MOVE IT", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, getString(R.string.longpress), Toast.LENGTH_SHORT).show()
         }
         //TODO: get motion gesture to work(counts as one of the optional features)
         // turning touch listener back on will invalidate both onclick listeners
@@ -916,35 +918,35 @@ class PlayActivity : AppCompatActivity() {
 
     // removes the card from player hand once it's placed on the board
     fun removeFromPlayerHand(card: ImageView){
-        val cardImage = card?.drawable?.constantState
+        val cardImage = card.drawable?.constantState
         when(card){
             playerHandOne ->{
                 setCardToEmpty(playerList[0])
-                playerHandOne?.setEnabled(false)
+                playerHandOne?.isEnabled = false
 //                playerCardOne?.setImageResource(R.drawable.emptyslot)
             }
 
             playerHandTwo ->{
                 setCardToEmpty(playerList[1])
-                playerHandTwo?.setEnabled(false)
+                playerHandTwo?.isEnabled = false
 //                playerCardTwo?.setImageResource(R.drawable.emptyslot)
             }
 
             playerHandThree ->{
                 setCardToEmpty(playerList[2])
-                playerHandThree?.setEnabled(false)
+                playerHandThree?.isEnabled = false
 //                playerCardThree?.setImageResource(R.drawable.emptyslot)
             }
 
             playerHandFour ->{
                 setCardToEmpty(playerList[3])
-                playerHandFour?.setEnabled(false)
+                playerHandFour?.isEnabled = false
 //                playerCardFour?.setImageResource(R.drawable.emptyslot)
             }
 
             playerHandFive ->{
                 setCardToEmpty(playerList[4])
-                playerHandFive?.setEnabled(false)
+                playerHandFive?.isEnabled = false
 //                playerCardFive?.setImageResource(R.drawable.emptyslot)
             }
 
