@@ -2,8 +2,7 @@
     <string name="app_name">TripleTriad</string>
     <string name="music">Music</string>
     <string name="sfx">SFX</string>
-    <string name="english">English</string>
-    <string name="spanish">Espanol</string>
+    <string name="english" translatable="false">English</string>
     <string name="default_text">DEFAULT TEXT</string>
     <string name="on">On</string>
     <string name="off">Off</string>
@@ -16,4 +15,6 @@
     <string name="you_lose">You LOSE</string>
     <string name="you_tied">You TIED</string>
     <string name="you_win">You WIN</string>
+    <string name="welcome_main">Welcome to Triple Triad</string>
+    <string name="spanish" translatable="false">Español</string>
 </resources>

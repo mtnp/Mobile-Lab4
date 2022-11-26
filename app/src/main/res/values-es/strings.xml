@@ -3,8 +3,6 @@
     <string name="app_name">Triple Tríada</string>
     <string name="music">Musica</string>
     <string name="sfx">Efectos de Sonido</string>
-    <string name="english">Inglés</string>
-    <string name="spanish">Español</string>
     <string name="default_text">DEFAULT TEXT SPANISH</string>
     <string name="on">Encendido</string>
     <string name="off">Apagado</string>
@@ -17,4 +15,5 @@
     <string name="you_lose">Tú PIERDES</string>
     <string name="you_tied">Te ATASTE</string>
     <string name="you_win">Tú GANAS</string>
+    <string name="welcome_main">Bienvenido a la Tríada Triple</string>
 </resources>

@@ -17,28 +17,18 @@
         />
 
     <TextView
-        android:id="@+id/SFX"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/sfx"
-        android:paddingTop="100dp"
-        android:textSize="30sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <TextView
         android:id="@+id/BGM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="40dp"
         android:text="@string/music"
-        android:paddingTop="100dp"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/SFX" />
+        app:layout_constraintTop_toBottomOf="@+id/backBtn" />
 
     <RadioGroup
+        android:id="@+id/musicRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checkedButton="@id/onBtn"
@@ -50,15 +40,13 @@
             android:id="@+id/onBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/on"
-            />
+            android:text="@string/on" />
+
         <RadioButton
             android:id="@+id/offBtn"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/off"
-            />
-
+            android:text="@string/off" />
 
 
     </RadioGroup>
@@ -67,14 +55,15 @@
         android:id="@+id/Language"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:paddingTop="40dp"
         android:text="@string/language"
-        android:paddingTop="100dp"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/BGM" />
+        app:layout_constraintTop_toBottomOf="@+id/musicRadioGroup" />
 
     <RadioGroup
+        android:id="@+id/languageRadioGroup"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:checkedButton="@id/englishBtn"
