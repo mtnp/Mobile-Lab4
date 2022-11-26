@@ -47,6 +47,17 @@
         app:srcCompat="@drawable/volumegray" />
 
     <ImageView
+        android:id="@+id/resetBtn"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
+        android:paddingEnd="6dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toEndOf="@id/muteBtn"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginEnd="200dp"
+        app:srcCompat="@drawable/reset"/>
+
+    <ImageView
         android:id="@+id/top_left_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
