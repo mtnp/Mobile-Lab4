@@ -312,6 +312,7 @@ class PlayActivity : AppCompatActivity() {
                     // delay the AI by 600 - 1000 milliseconds
                     val delay: Int = (600..1000).random()
                     Handler(Looper.getMainLooper()).postDelayed({
+
                         playAI()
                     }, delay.toLong())
                 }
