@@ -309,11 +309,12 @@ class PlayActivity : AppCompatActivity() {
                     removeFromPlayerHand(v)
                     v.setEnabled(false)
 
-                    // delay the AI by 600 - 1000 milliseconds
-                    val delay: Int = (600..1000).random()
+                    // delay the AI by 1 - 3 seconds
+                    val delay: Int = (1000..3000).random()
+                    unmakeDragger()
                     Handler(Looper.getMainLooper()).postDelayed({
-
                         playAI()
+                        remakeDraggers()
                     }, delay.toLong())
                 }
                 true
@@ -378,7 +379,7 @@ class PlayActivity : AppCompatActivity() {
             val dragShadowBuilder = View.DragShadowBuilder(view)
             view.startDragAndDrop(data, dragShadowBuilder, view, 0)
             //view.visibility = View.INVISIBLE
-            true
+            false
         }
         view?.setOnClickListener{
             Toast.makeText(this, "LONG PRESS A CARD TO MOVE IT", Toast.LENGTH_SHORT).show()
@@ -897,6 +898,10 @@ class PlayActivity : AppCompatActivity() {
                 playerHandFive?.setEnabled(false)
 //                playerCardFive?.setImageResource(R.drawable.emptyslot)
             }
+
+            else ->{
+                Log.d("removeFromPlayerHand", "defaulted to else statement")
+            }
         }
     }
 
@@ -905,4 +910,32 @@ class PlayActivity : AppCompatActivity() {
         return Card(card.imageId, "DEFAULT", card.northVal,
                         card.eastVal, card.southVal, card.westVal)
     }
+
+    // enables and disables the player hand's interactability
+    fun unmakeDragger(){
+        playerHandOne?.setOnLongClickListener{
+            true
+        }
+        playerHandTwo?.setOnLongClickListener{
+            true
+        }
+        playerHandThree?.setOnLongClickListener{
+            true
+        }
+        playerHandFour?.setOnLongClickListener{
+            true
+        }
+        playerHandFive?.setOnLongClickListener{
+            true
+        }
+    }
+
+    fun remakeDraggers(){
+        makeDragger(playerHandOne, playerList[0])
+        makeDragger(playerHandTwo, playerList[1])
+        makeDragger(playerHandThree, playerList[2])
+        makeDragger(playerHandFour, playerList[3])
+        makeDragger(playerHandFive, playerList[4])
+    }
+
 }
