@@ -30,6 +30,7 @@ class AlbumActivity : AppCompatActivity() {
         var backBtn : ImageView = findViewById(R.id.backBtn)
         backBtn!!.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
         // if landscape mode, change span to 3

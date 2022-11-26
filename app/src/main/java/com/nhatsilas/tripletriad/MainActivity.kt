@@ -44,7 +44,7 @@ class MainActivity : AppCompatActivity() {
             }
         }
         else{
-            Toast.makeText(this, "Previously saved English: Restoring...", Toast.LENGTH_SHORT).show()
+//            Toast.makeText(this, "Previously saved English: Restoring...", Toast.LENGTH_SHORT).show()
         }
 
 
@@ -77,21 +77,25 @@ class MainActivity : AppCompatActivity() {
     private fun launchPlay() {
         listIntent = Intent(this, PlayActivity::class.java)
         startActivity(listIntent)
+        finish()
     }
 
     private fun launchAlbum() {
         listIntent = Intent(this, AlbumActivity::class.java)
         startActivity(listIntent)
+        finish()
     }
 
     private fun launchSettings() {
         listIntent = Intent(this, SettingsActivity::class.java)
         startActivity(listIntent)
+        finish()
     }
 
     private fun launchRulebook() {
         listIntent = Intent(this, RulebookActivity::class.java)
         startActivity(listIntent)
+        finish()
     }
 
 //    override fun attachBaseContext(base: Context?) {

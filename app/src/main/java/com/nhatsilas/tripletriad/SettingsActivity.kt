@@ -1,6 +1,5 @@
 package com.nhatsilas.tripletriad
 
-import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.res.Configuration
@@ -20,47 +19,59 @@ class SettingsActivity : AppCompatActivity() {
     lateinit var languageGroup: RadioGroup
     lateinit var engBtn: RadioButton
     lateinit var spaBtn: RadioButton
+    lateinit var musicGroup: RadioGroup
+    lateinit var musicOn: RadioButton
+    lateinit var musicOff: RadioButton
     lateinit var shEditor: SharedPreferences.Editor
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_settings)
 
-        val musicOn: RadioButton = findViewById(R.id.onBtn)
-        val musicOff: RadioButton = findViewById(R.id.offBtn)
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        shEditor = sharedPreferences.edit()
+
+        musicGroup = findViewById(R.id.musicRadioGroup)
+        musicOn = findViewById(R.id.onBtn)
+        musicOff = findViewById(R.id.offBtn)
         musicOn.setOnClickListener {
-            MusicPlayer.mpStop()
+            changeMusic(true)
         }
+        musicOff.setOnClickListener {
+            changeMusic(false)
+        }
+
+        if(sharedPreferences.getBoolean("musicPersist", true)) {
+            Log.d("Settings", "Previously saved music ON")
+            musicGroup.check(R.id.onBtn)
+        }
+        else{
+            Log.d("Settings", "Previously saved music OFF")
+            musicGroup.check(R.id.offBtn)
+        }
+
 
         var backBtn : ImageView = findViewById(R.id.backBtn)
         backBtn!!.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
-
-//        musicOff.setOnClickListener {
-//            MusicPlayer.playSound()
-//        }
 
         languageGroup = findViewById(R.id.languageRadioGroup)
         engBtn = findViewById(R.id.englishBtn)
         spaBtn = findViewById(R.id.spanishBtn)
-        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
-        shEditor = sharedPreferences.edit()
 
         savedLanguage = Locale(sharedPreferences.getString("language", "en")!!)
         Locale.setDefault(savedLanguage!!)
         resources.configuration.locale = savedLanguage
         resources.configuration.setLayoutDirection(savedLanguage)
         resources.updateConfiguration(resources.configuration, resources.displayMetrics)
-//        Toast.makeText(this, "Hello There", Toast.LENGTH_SHORT).show()
+
         if(sharedPreferences.getString("language", "en").equals("es")) {
-            Toast.makeText(this, "Previously saved Spanish: Restoring...", Toast.LENGTH_SHORT).show()
             languageGroup.check(R.id.spanishBtn)
         }
         else{
-            Toast.makeText(this, "Previously saved English: Restoring...", Toast.LENGTH_SHORT).show()
+            languageGroup.check(R.id.englishBtn)
         }
-
-
 
         engBtn.setOnClickListener{
             changeLanguageTo("en")
@@ -75,9 +86,7 @@ class SettingsActivity : AppCompatActivity() {
 
     override fun onBackPressed() {
         startActivity(Intent(this, MainActivity::class.java))
-//        resources.configuration.locale = superLocale
-//        resources.configuration.setLayoutDirection(superLocale)
-//        resources.updateConfiguration(resources.configuration, resources.displayMetrics)
+//        finish()
     }
 
     fun changeLanguageTo(language: String){
@@ -86,13 +95,9 @@ class SettingsActivity : AppCompatActivity() {
         when(language){
             "en" ->{
                 shEditor.putString("language", language)
-//                findViewById<TextView>(R.id.Language).setText("Language")
-//                findViewById<TextView>(R.id.BGM).setText("Music")
             }
             "es" ->{
                 shEditor.putString("language", language)
-//                findViewById<TextView>(R.id.Language).setText("Idioma")
-//                findViewById<TextView>(R.id.BGM).setText("Musica")
             }
             else ->{
                 Log.d("changeLanguageTo", "Something bad happened")
@@ -118,15 +123,9 @@ class SettingsActivity : AppCompatActivity() {
 
     }
 
-    fun setLocale(lang: String?) {
-        val myLocale = Locale(lang)
-        val res: Resources = resources
-        val dm: DisplayMetrics = res.getDisplayMetrics()
-        val conf: Configuration = res.getConfiguration()
-        conf.locale = myLocale
-        res.updateConfiguration(conf, dm)
-        baseContext.resources.updateConfiguration(conf, baseContext.resources.displayMetrics)
-//        recreate()
+    fun changeMusic(bool: Boolean){
+        shEditor.putBoolean("musicPersist", bool)
+        shEditor.apply()
     }
 
 }

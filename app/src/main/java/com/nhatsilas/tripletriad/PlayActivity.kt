@@ -3,6 +3,7 @@ package com.nhatsilas.tripletriad
 import android.content.ClipData
 import android.content.ClipDescription
 import android.content.Intent
+import android.content.SharedPreferences
 import android.graphics.drawable.Drawable
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -20,6 +21,7 @@ import com.nhatsilas.tripletriad.model.ListCard
 import com.nhatsilas.tripletriad.model.PlayActivityViewModel
 import android.os.Handler
 import android.os.Looper
+import android.preference.PreferenceManager
 import java.util.*
 
 class PlayActivity : AppCompatActivity() {
@@ -65,21 +67,40 @@ class PlayActivity : AppCompatActivity() {
 
     private var musicPlaying: Boolean = true
 
+    lateinit var sharedPreferences: SharedPreferences
+    lateinit var shEditor: SharedPreferences.Editor
+
+    lateinit var randomGenerator: Random
+
     override fun onCreate(savedInstanceState: Bundle?){
         super.onCreate(savedInstanceState)
         binding = ActivityPlayBinding.inflate(layoutInflater)
         setContentView(R.layout.activity_play)
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this)
+        shEditor = sharedPreferences.edit()
+        randomGenerator = Random(System.currentTimeMillis())
 
         // for screen rotation data persistence
         viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
 
-        // play music
-        if(savedInstanceState == null)
-            MusicPlayer.playSound(this)
-
         // set up music toggle
         var muteBtn: ImageView = findViewById(R.id.muteBtn)
 
+        // play music, this is the first time we open the game
+        if(savedInstanceState == null) {
+            musicPlaying = sharedPreferences.getBoolean("musicPersist", musicPlaying)
+            Log.d("PlayActivity", "No Saved instance state, getting persist music: " + musicPlaying)
+            if(musicPlaying){
+                muteBtn.setImageResource(R.drawable.volumegray)
+                MusicPlayer.playSound(this)
+            }
+            else{
+                muteBtn.setImageResource(R.drawable.volumemutegray)
+                MusicPlayer.mpStop()
+            }
+        }
+
+        // play music, this is a rotated screen
         if(savedInstanceState != null){
             // get last saved music state
             musicPlaying = savedInstanceState.getBoolean("SavedMusic")
@@ -100,12 +121,16 @@ class PlayActivity : AppCompatActivity() {
         muteBtn.setOnClickListener {
             if (musicPlaying) {
                 // clicked when music was playing, so mute it
+                shEditor.putBoolean("musicPersist", false)
+                shEditor.apply()
                 MusicPlayer.mpStop()
                 musicPlaying = false
                 muteBtn.setImageResource(R.drawable.volumemutegray)
 //                Log.d("Turning music", "Off")
             } else if (!musicPlaying) {
                 // clicked when music was off, so play it
+                shEditor.putBoolean("musicPersist", true)
+                shEditor.apply()
                 MusicPlayer.playSound(this)
                 musicPlaying = true
                 muteBtn.setImageResource(R.drawable.volumegray)
@@ -117,11 +142,13 @@ class PlayActivity : AppCompatActivity() {
         var backBtn : ImageView = findViewById(R.id.backBtn)
         backBtn!!.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
+            finish()
         }
 
         var resetBtn : ImageView = findViewById(R.id.resetBtn)
         resetBtn.setOnClickListener {
             startActivity(Intent(this, PlayActivity::class.java))
+            finish()
         }
 
         // links board spaces and makes them into droppable locations
@@ -658,7 +685,10 @@ class PlayActivity : AppCompatActivity() {
     fun fillList(thisList : Array<Card>){
         var alreadyUsed = mutableSetOf<Int>()
         while(alreadyUsed.size < 5){
-            val randomListCardIndex = (0..allCardsList.size - 1).random()
+            // same seed random
+//            val randomListCardIndex = (0..allCardsList.size - 1).random()
+            // time-based seed random
+            val randomListCardIndex = randomGenerator.nextInt(allCardsList.size - 1)
             alreadyUsed.add(randomListCardIndex)
         }
         for(i in 0..4){
