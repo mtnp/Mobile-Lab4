@@ -83,6 +83,31 @@ class PlayActivity : AppCompatActivity() {
         // for screen rotation data persistence
         viewModel = ViewModelProvider(this).get(PlayActivityViewModel::class.java)
 
+        // links board spaces and makes them into droppable locations
+        topLeftSpace = findViewById(R.id.top_left_space)
+        leftSpace = findViewById(R.id.left_space)
+        botLeftSpace = findViewById(R.id.bot_left_space)
+
+        topLeftSpace?.setOnDragListener(dragListener)
+        leftSpace?.setOnDragListener(dragListener)
+        botLeftSpace?.setOnDragListener(dragListener)
+
+        topMidSpace = findViewById(R.id.top_mid_space)
+        midSpace = findViewById(R.id.mid_space)
+        botMidSpace = findViewById(R.id.bot_mid_space)
+
+        topMidSpace?.setOnDragListener(dragListener)
+        midSpace?.setOnDragListener(dragListener)
+        botMidSpace?.setOnDragListener(dragListener)
+
+        topRightSpace = findViewById(R.id.top_right_space)
+        rightSpace = findViewById(R.id.right_space)
+        botRightSpace = findViewById(R.id.bot_right_space)
+
+        topRightSpace?.setOnDragListener(dragListener)
+        rightSpace?.setOnDragListener(dragListener)
+        botRightSpace?.setOnDragListener(dragListener)
+
         // set up music toggle
         var muteBtn: ImageView = findViewById(R.id.muteBtn)
 
@@ -151,30 +176,6 @@ class PlayActivity : AppCompatActivity() {
             finish()
         }
 
-        // links board spaces and makes them into droppable locations
-        topLeftSpace = findViewById(R.id.top_left_space)
-        leftSpace = findViewById(R.id.left_space)
-        botLeftSpace = findViewById(R.id.bot_left_space)
-
-        topLeftSpace?.setOnDragListener(dragListener)
-        leftSpace?.setOnDragListener(dragListener)
-        botLeftSpace?.setOnDragListener(dragListener)
-
-        topMidSpace = findViewById(R.id.top_mid_space)
-        midSpace = findViewById(R.id.mid_space)
-        botMidSpace = findViewById(R.id.bot_mid_space)
-
-        topMidSpace?.setOnDragListener(dragListener)
-        midSpace?.setOnDragListener(dragListener)
-        botMidSpace?.setOnDragListener(dragListener)
-
-        topRightSpace = findViewById(R.id.top_right_space)
-        rightSpace = findViewById(R.id.right_space)
-        botRightSpace = findViewById(R.id.bot_right_space)
-
-        topRightSpace?.setOnDragListener(dragListener)
-        rightSpace?.setOnDragListener(dragListener)
-        botRightSpace?.setOnDragListener(dragListener)
 
 
         if(savedInstanceState != null){
@@ -294,15 +295,18 @@ class PlayActivity : AppCompatActivity() {
     val dragListener = View.OnDragListener{ view, event ->
         when(event.action){
             DragEvent.ACTION_DRAG_STARTED -> {
+                Log.d("DragEvent", "Drag Started")
                 event.clipDescription.hasMimeType(ClipDescription.MIMETYPE_TEXT_PLAIN)
             }
             DragEvent.ACTION_DRAG_ENTERED -> {
                 view.invalidate()
+                Log.d("DragEvent", "Drag Entered")
                 true
             }
             DragEvent.ACTION_DRAG_LOCATION -> true
             DragEvent.ACTION_DRAG_EXITED -> {
                 view.invalidate()
+                Log.d("DragEvent", "Drag Exited")
                 true
             }
             DragEvent.ACTION_DROP -> {
@@ -347,17 +351,22 @@ class PlayActivity : AppCompatActivity() {
                     v.setEnabled(false)
 
                     // delay the AI by 1 - 3 seconds
-                    val delay: Int = (1000..3000).random()
+                    val delay: Int = (100..200).random()
                     unmakeDragger()
                     Handler(Looper.getMainLooper()).postDelayed({
                         playAI()
                         remakeDraggers()
                     }, delay.toLong())
                 }
+                Log.d("DragEvent", "Drag Dropped")
+                Log.d("Board", spotIsEmpty(0,0).toString() + " " + spotIsEmpty(0,1).toString() + " " + spotIsEmpty(0,2).toString())
+                Log.d("Board", spotIsEmpty(1,0).toString() + " " + spotIsEmpty(1,1).toString() + " " + spotIsEmpty(1,2).toString())
+                Log.d("Board", spotIsEmpty(2,0).toString() + " " + spotIsEmpty(2,1).toString() + " " + spotIsEmpty(2,2).toString())
                 true
             }
             DragEvent.ACTION_DRAG_ENDED -> {
                 view.invalidate()
+                Log.d("DragEvent", "Drag Ended")
                 true
             }
             else -> false
