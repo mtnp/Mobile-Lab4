@@ -352,8 +352,8 @@ class PlayActivity : AppCompatActivity() {
                     removeFromPlayerHand(v)
                     v.isEnabled = false
 
-                    // delay the AI by 1 - 3 seconds
-                    val delay: Int = (10000..20000).random()
+                    // delay the AI by 600 - 1200 ms
+                    val delay: Int = (600..1200).random()
                     unmakeDragger()
                     Handler(Looper.getMainLooper()).postDelayed({
                         playAI()
