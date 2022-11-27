@@ -19,7 +19,8 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/opponent_card_one"
-        android:src="@drawable/back" />
+        android:src="@drawable/back"
+        android:contentDescription="@string/back_button" />
 
     <ImageView
         android:id="@+id/resetBtn"
@@ -31,7 +32,8 @@
         app:layout_constraintTop_toBottomOf="@id/opponent_card_five"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/right_space"
-        app:srcCompat="@drawable/reset"/>
+        app:srcCompat="@drawable/reset"
+        android:contentDescription="@string/refresh_refresh_game_button" />
 
     <TextView
         android:id="@+id/textView"
@@ -58,7 +60,8 @@
         app:layout_constraintEnd_toStartOf="@id/left_space"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/opponent_card_one"
-        app:srcCompat="@drawable/volumegray" />
+        app:srcCompat="@drawable/volumegray"
+        android:contentDescription="@string/mute_music_button" />
 
     <ImageView
         android:id="@+id/top_left_space"

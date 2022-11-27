@@ -16,7 +16,6 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var listIntent: Intent
-//    private lateinit var mp: MediaPlayer
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,7 +47,7 @@ class MainActivity : AppCompatActivity() {
         }
 
 
-        // Launch the PlayActivity on playlBtn click
+        // Launch the PlayActivity on playBtn click
         binding.play.setOnClickListener { launchPlay() }
 
         // Launch the AlbumActivity on albumBtn click
@@ -59,20 +58,9 @@ class MainActivity : AppCompatActivity() {
 
         // Launch the RulebookActivity on settingsBtn click
         binding.rulebook.setOnClickListener { launchRulebook() }
-//        playMusic()
-
-        //startService(Intent(this, MusicPlayer::class.java))
     }
 
-//    override fun onPause() {
-//        stopService(Intent(this, MusicPlayer::class.java))
-//        super.onPause()
-//    }
-//
-//    override fun onRestart() {
-//        startService(Intent(this, MusicPlayer::class.java))
-//        super.onRestart()
-//    }
+
 
     private fun launchPlay() {
         listIntent = Intent(this, PlayActivity::class.java)
@@ -97,15 +85,4 @@ class MainActivity : AppCompatActivity() {
         startActivity(listIntent)
         finish()
     }
-
-//    override fun attachBaseContext(base: Context?) {
-//        super.attachBaseContext(LocaleHelper.onAttach(base))
-//    }
-
-//    private fun playMusic() {
-//        mediaPlayer.setDataSource(this, Uri.parse(
-//            "android.resource://" + this.packageName + "/" + R.raw.song))
-//        mediaPlayer.prepare()
-//        mediaPlayer.start()
-//    }
 }
