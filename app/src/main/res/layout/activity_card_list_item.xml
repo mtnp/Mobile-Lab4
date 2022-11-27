@@ -37,7 +37,8 @@
             android:src="@drawable/error"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"
+            android:contentDescription="@string/image_of_the_card" />
 
         <!-- XML for the cat names TextView for the vertical and horizontal layouts-->
         <TextView
