@@ -47,5 +47,14 @@
     <string name="your_fourth_card">Your Fourth Card</string>
     <string name="your_fifth_card">Your Fifth Card</string>
     <string name="image_of_the_card">Image of the card</string>
+    <string name="language_set_to_english">Language Set To English</string>
+    <string name="idioma_es_espanol">Idioma Es Espanol</string>
+    <string name="music_is_turned_on">Music is turned on</string>
+    <string name="music_is_turned_off">Music is turned off</string>
+    <string name="opponent_s_first_card">Opponent\'s First Card</string>
+    <string name="opponent_s_second_card">Opponent\'s Second Card</string>
+    <string name="opponent_s_third_card">Opponent\'s Third Card</string>
+    <string name="opponent_s_fourth_card">Opponent\'s Fourth Card</string>
+    <string name="opponent_s_fifth_card">Opponent\'s Fifth Card</string>
 
 </resources>

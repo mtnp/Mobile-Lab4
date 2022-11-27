@@ -14,7 +14,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/BGM"
-        android:contentDescription="Go Back"
+        android:contentDescription="@string/back_button"
         android:src="@drawable/back"
         />
 
@@ -49,7 +49,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/on"
-            android:contentDescription="Music Is Turned On"
+            android:contentDescription="@string/music_is_turned_on"
             android:textSize="24sp"/>
 
         <RadioButton
@@ -57,7 +57,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/off"
-            android:contentDescription="Music Is Turned Off"
+            android:contentDescription="@string/music_is_turned_off"
             android:textSize="24sp"/>
     </RadioGroup>
 
@@ -92,7 +92,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/english"
-            android:contentDescription="Language Set To English"
+            android:contentDescription="@string/language_set_to_english"
             android:textSize="24sp"
             />
         <RadioButton
@@ -100,7 +100,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/spanish"
-            android:contentDescription="Idioma Es Espanol"
+            android:contentDescription="@string/idioma_es_espanol"
             android:textSize="24sp"
             />
 

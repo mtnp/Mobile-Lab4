@@ -233,7 +233,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_one"
-        android:contentDescription="Opponent's First Card"
+        android:contentDescription="@string/opponent_s_first_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/backBtn"
@@ -244,7 +244,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_two"
-        android:contentDescription="Opponent's Second Card"
+        android:contentDescription="@string/opponent_s_second_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitEnd"
@@ -256,7 +256,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_three"
-        android:contentDescription="Opponent's Third Card"
+        android:contentDescription="@string/opponent_s_third_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitStart"
@@ -268,7 +268,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_four"
-        android:contentDescription="Opponent's Fourth Card"
+        android:contentDescription="@string/opponent_s_fourth_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitEnd"
@@ -280,7 +280,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_five"
-        android:contentDescription="Opponent's Fifth Card"
+        android:contentDescription="@string/opponent_s_fifth_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitStart"

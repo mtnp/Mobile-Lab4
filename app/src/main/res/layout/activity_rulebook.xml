@@ -8,7 +8,7 @@
 
     <ImageView
         android:id="@+id/backBtn"
-        android:contentDescription="Go Back"
+        android:contentDescription="@string/back_button"
         android:layout_height="30dp"
         android:layout_width="30dp"
         android:paddingStart="4dp"

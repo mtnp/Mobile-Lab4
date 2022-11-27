@@ -62,7 +62,7 @@
 
     <ImageView
         android:id="@+id/top_left_space"
-        android:contentDescription="Top Left Space"
+        android:contentDescription="@string/top_left_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/opponent_card_one"
@@ -73,7 +73,7 @@
 
     <ImageView
         android:id="@+id/left_space"
-        android:contentDescription="Center Left Space"
+        android:contentDescription="@string/center_left_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/top_left_space"
@@ -85,7 +85,7 @@
 
     <ImageView
         android:id="@+id/bot_left_space"
-        android:contentDescription="Bottom Left Space"
+        android:contentDescription="@string/bottom_left_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/left_space"
@@ -97,7 +97,7 @@
     <!-- middle column -->
     <ImageView
         android:id="@+id/mid_space"
-        android:contentDescription="Center Middle Space"
+        android:contentDescription="@string/center_middle_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/top_mid_space"
@@ -108,7 +108,7 @@
 
     <ImageView
         android:id="@+id/top_mid_space"
-        android:contentDescription="Top Middle Space"
+        android:contentDescription="@string/top_middle_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/mid_space"
@@ -119,7 +119,7 @@
 
     <ImageView
         android:id="@+id/bot_mid_space"
-        android:contentDescription="Bottom Middle Space"
+        android:contentDescription="@string/bottom_middle_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/mid_space"
@@ -131,7 +131,7 @@
     <!-- right column -->
     <ImageView
         android:id="@+id/top_right_space"
-        android:contentDescription="Top Right Space"
+        android:contentDescription="@string/top_right_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/opponent_card_five"
@@ -142,7 +142,7 @@
 
     <ImageView
         android:id="@+id/right_space"
-        android:contentDescription="Center Right Space"
+        android:contentDescription="@string/center_right_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bot_right_space"
@@ -153,7 +153,7 @@
 
     <ImageView
         android:id="@+id/bot_right_space"
-        android:contentDescription="Bottom Right Space"
+        android:contentDescription="@string/bottom_right_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/right_space"
@@ -166,7 +166,7 @@
     <!-- player hand -->
     <ImageView
         android:id="@+id/player_card_one"
-        android:contentDescription="Your First Card"
+        android:contentDescription="@string/your_first_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -177,7 +177,7 @@
 
     <ImageView
         android:id="@+id/player_card_two"
-        android:contentDescription="Your Second Card"
+        android:contentDescription="@string/your_second_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -188,7 +188,7 @@
 
     <ImageView
         android:id="@+id/player_card_three"
-        android:contentDescription="Your Third Card"
+        android:contentDescription="@string/your_third_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -199,7 +199,7 @@
 
     <ImageView
         android:id="@+id/player_card_four"
-        android:contentDescription="Your Fourth Card"
+        android:contentDescription="@string/your_fourth_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -210,7 +210,7 @@
 
     <ImageView
         android:id="@+id/player_card_five"
-        android:contentDescription="Your Fifth Card"
+        android:contentDescription="@string/your_fifth_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -223,7 +223,7 @@
     <!-- opponent hand -->
     <ImageView
         android:id="@+id/opponent_card_one"
-        android:contentDescription="Opponent's First Card"
+        android:contentDescription="@string/opponent_s_first_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toStartOf="@id/opponent_card_two"
@@ -234,7 +234,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_two"
-        android:contentDescription="Opponent's Second Card"
+        android:contentDescription="@string/opponent_s_second_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toStartOf="@id/opponent_card_three"
@@ -245,7 +245,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_three"
-        android:contentDescription="Opponent's Third Card"
+        android:contentDescription="@string/opponent_s_third_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toStartOf="@id/opponent_card_four"
@@ -256,7 +256,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_four"
-        android:contentDescription="Opponent's Fourth Card"
+        android:contentDescription="@string/opponent_s_fourth_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toStartOf="@id/opponent_card_five"
@@ -267,7 +267,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_five"
-        android:contentDescription="Opponent's Fifth Card"
+        android:contentDescription="@string/opponent_s_fifth_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"
