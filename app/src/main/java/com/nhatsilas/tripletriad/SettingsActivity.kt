@@ -81,6 +81,7 @@ class SettingsActivity : AppCompatActivity() {
             changeLanguageTo("es")
         }
 
+        restoreRadioOnRotate()
 
     }
 
@@ -126,6 +127,24 @@ class SettingsActivity : AppCompatActivity() {
     fun changeMusic(bool: Boolean){
         shEditor.putBoolean("musicPersist", bool)
         shEditor.apply()
+    }
+
+    fun restoreRadioOnRotate(){
+        when(languageGroup.checkedRadioButtonId){
+            R.id.englishBtn -> {
+                Log.d("Restore Radio", "english")
+            }
+            R.id.spanishBtn -> {
+                Log.d("Restore Radio", "spanish")
+            }
+            else ->{
+                Log.d("Restore Radio", "error")
+            }
+        }
+        findViewById<TextView>(R.id.Language).text = resources.getString(R.string.language)
+        findViewById<TextView>(R.id.BGM).text = resources.getString(R.string.music)
+        findViewById<RadioButton>(R.id.onBtn).text = resources.getString(R.string.on)
+        findViewById<RadioButton>(R.id.offBtn).text = resources.getString(R.string.off)
     }
 
 }
