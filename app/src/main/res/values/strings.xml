@@ -18,5 +18,16 @@
     <string name="welcome_main">Welcome to Flipping Card Game</string>
     <string name="spanish" translatable="false">Español</string>
     <string name="longpress">LONG PRESS A CARD TO MOVE IT</string>
+    <string name="back_button">back button</string>
+    <string name="refresh_refresh_game_button">refresh / refresh game button</string>
+    <string name="mute_music_button">mute music button</string>
+    <string name="rulebook_button">Rulebook button</string>
+    <string name="book_icon">Rulebook icon, it is an image of a book</string>
+    <string name="play_button">Play button</string>
+    <string name="play_icon">Play icon, it is an image of a play button</string>
+    <string name="album_button">Album button</string>
+    <string name="album_icon">Album icon, it is an image of 5 cards spread out</string>
+    <string name="settings_button">Settings button</string>
+    <string name="settings_icon">Settings icon, it is an image of a gear</string>
 
 </resources>
