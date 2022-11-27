@@ -29,7 +29,7 @@
     <string name="album_button">Album button</string>
     <string name="album_icon">Album icon, it is an image of 5 cards spread out</string>
     <string name="settings_button">Settings button</string>
-    <string name="settings_icon">Settings icon, it is an image of a gear</string>
+    <string name="settings_icon" translatable="false">Settings icon, it is an image of a gear</string>
     <string name="change_sound">Change Sound</string>
     <string name="start_new_game">Start New Game</string>
     <string name="top_left_space">Top Left Space</string>
@@ -51,10 +51,10 @@
     <string name="idioma_es_espanol">Idioma Es Espanol</string>
     <string name="music_is_turned_on">Music is turned on</string>
     <string name="music_is_turned_off">Music is turned off</string>
-    <string name="opponent_s_first_card">Opponent\'s First Card</string>
-    <string name="opponent_s_second_card">Opponent\'s Second Card</string>
-    <string name="opponent_s_third_card">Opponent\'s Third Card</string>
-    <string name="opponent_s_fourth_card">Opponent\'s Fourth Card</string>
-    <string name="opponent_s_fifth_card">Opponent\'s Fifth Card</string>
+    <string name="opponent_s_first_card">Opponent First Card</string>
+    <string name="opponent_s_second_card">Opponent Second Card</string>
+    <string name="opponent_s_third_card">Opponent Third Card</string>
+    <string name="opponent_s_fourth_card">Opponent Fourth Card</string>
+    <string name="opponent_s_fifth_card">Opponent Fifth Card</string>
 
 </resources>
