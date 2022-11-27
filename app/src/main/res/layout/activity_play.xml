@@ -15,6 +15,7 @@
         android:layout_width="30dp"
         android:paddingStart="6dp"
         android:paddingTop="6dp"
+        android:contentDescription="Go Back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/opponent_card_one"
@@ -25,6 +26,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:paddingEnd="6dp"
+        android:contentDescription="Start New Game"
         app:layout_constraintBottom_toTopOf="@id/player_card_five"
         app:layout_constraintTop_toBottomOf="@id/opponent_card_five"
         app:layout_constraintEnd_toEndOf="parent"
@@ -51,6 +53,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:paddingStart="6dp"
+        android:contentDescription="Change Sound"
         app:layout_constraintBottom_toTopOf="@id/player_card_one"
         app:layout_constraintEnd_toStartOf="@id/left_space"
         app:layout_constraintStart_toStartOf="parent"
@@ -59,6 +62,7 @@
 
     <ImageView
         android:id="@+id/top_left_space"
+        android:contentDescription="Top Left Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/opponent_card_one"
@@ -69,6 +73,7 @@
 
     <ImageView
         android:id="@+id/left_space"
+        android:contentDescription="Center Left Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/top_left_space"
@@ -80,6 +85,7 @@
 
     <ImageView
         android:id="@+id/bot_left_space"
+        android:contentDescription="Bottom Left Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/left_space"
@@ -91,6 +97,7 @@
     <!-- middle column -->
     <ImageView
         android:id="@+id/mid_space"
+        android:contentDescription="Center Middle Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/top_mid_space"
@@ -101,6 +108,7 @@
 
     <ImageView
         android:id="@+id/top_mid_space"
+        android:contentDescription="Top Middle Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/mid_space"
@@ -111,6 +119,7 @@
 
     <ImageView
         android:id="@+id/bot_mid_space"
+        android:contentDescription="Bottom Middle Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/mid_space"
@@ -122,6 +131,7 @@
     <!-- right column -->
     <ImageView
         android:id="@+id/top_right_space"
+        android:contentDescription="Top Right Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/opponent_card_five"
@@ -132,6 +142,7 @@
 
     <ImageView
         android:id="@+id/right_space"
+        android:contentDescription="Center Right Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bot_right_space"
@@ -142,6 +153,7 @@
 
     <ImageView
         android:id="@+id/bot_right_space"
+        android:contentDescription="Bottom Right Space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/right_space"
@@ -154,6 +166,7 @@
     <!-- player hand -->
     <ImageView
         android:id="@+id/player_card_one"
+        android:contentDescription="Your First Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -164,6 +177,7 @@
 
     <ImageView
         android:id="@+id/player_card_two"
+        android:contentDescription="Your Second Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -174,6 +188,7 @@
 
     <ImageView
         android:id="@+id/player_card_three"
+        android:contentDescription="Your Third Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -184,6 +199,7 @@
 
     <ImageView
         android:id="@+id/player_card_four"
+        android:contentDescription="Your Fourth Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -194,6 +210,7 @@
 
     <ImageView
         android:id="@+id/player_card_five"
+        android:contentDescription="Your Fifth Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/textView"
@@ -206,6 +223,7 @@
     <!-- opponent hand -->
     <ImageView
         android:id="@+id/opponent_card_one"
+        android:contentDescription="Opponent's First Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toStartOf="@id/opponent_card_two"
@@ -216,6 +234,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_two"
+        android:contentDescription="Opponent's Second Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toStartOf="@id/opponent_card_three"
@@ -226,6 +245,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_three"
+        android:contentDescription="Opponent's Third Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toStartOf="@id/opponent_card_four"
@@ -236,6 +256,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_four"
+        android:contentDescription="Opponent's Fourth Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toStartOf="@id/opponent_card_five"
@@ -246,6 +267,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_five"
+        android:contentDescription="Opponent's Fifth Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintEnd_toEndOf="parent"

@@ -18,5 +18,22 @@
     <string name="welcome_main">Welcome to Flipping Card Game</string>
     <string name="spanish" translatable="false">Español</string>
     <string name="longpress">LONG PRESS A CARD TO MOVE IT</string>
+    <string name="go_back">Go Back</string>
+    <string name="change_sound">Change Sound</string>
+    <string name="start_new_game">Start New Game</string>
+    <string name="top_left_space">Top Left Space</string>
+    <string name="center_left_space">Center Left Space</string>
+    <string name="bottom_left_space">Bottom Left Space</string>
+    <string name="center_middle_space">Center Middle Space</string>
+    <string name="top_middle_space">Top Middle Space</string>
+    <string name="bottom_middle_space">Bottom Middle Space</string>
+    <string name="top_right_space">Top Right Space</string>
+    <string name="center_right_space">Center Right Space</string>
+    <string name="bottom_right_space">Bottom Right Space</string>
+    <string name="your_first_card">Your First Card</string>
+    <string name="your_second_card">Your Second Card</string>
+    <string name="your_third_card">Your Third Card</string>
+    <string name="your_fourth_card">Your Fourth Card</string>
+    <string name="your_fifth_card">Your Fifth Card</string>
 
 </resources>

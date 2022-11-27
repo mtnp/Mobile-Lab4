@@ -111,7 +111,7 @@ class PlayActivity : AppCompatActivity() {
         botRightSpace?.setOnDragListener(dragListener)
 
         // set up music toggle
-        var muteBtn: ImageView = findViewById(R.id.muteBtn)
+        val muteBtn: ImageView = findViewById(R.id.muteBtn)
 
         // play music, this is the first time we open the game
         if(savedInstanceState == null) {
@@ -166,13 +166,13 @@ class PlayActivity : AppCompatActivity() {
         }
 
         // set up back button
-        var backBtn : ImageView = findViewById(R.id.backBtn)
+        val backBtn : ImageView = findViewById(R.id.backBtn)
         backBtn.setOnClickListener{
             startActivity(Intent(this, MainActivity::class.java))
             finish()
         }
 
-        var resetBtn : ImageView = findViewById(R.id.resetBtn)
+        val resetBtn : ImageView = findViewById(R.id.resetBtn)
         resetBtn.setOnClickListener {
             startActivity(Intent(this, PlayActivity::class.java))
             finish()
@@ -210,17 +210,17 @@ class PlayActivity : AppCompatActivity() {
         }
 
         // fills both hands with cards
-        var playerCardOne = playerList[0]
-        var playerCardTwo = playerList[1]
-        var playerCardThree = playerList[2]
-        var playerCardFour = playerList[3]
-        var playerCardFive = playerList[4]
+        val playerCardOne = playerList[0]
+        val playerCardTwo = playerList[1]
+        val playerCardThree = playerList[2]
+        val playerCardFour = playerList[3]
+        val playerCardFive = playerList[4]
 
-        var enemyCardOne = enemyList[0]
-        var enemyCardTwo = enemyList[1]
-        var enemyCardThree = enemyList[2]
-        var enemyCardFour = enemyList[3]
-        var enemyCardFive = enemyList[4]
+        val enemyCardOne = enemyList[0]
+        val enemyCardTwo = enemyList[1]
+        val enemyCardThree = enemyList[2]
+        val enemyCardFour = enemyList[3]
+        val enemyCardFive = enemyList[4]
 
 
         // link cards to xml imageViews

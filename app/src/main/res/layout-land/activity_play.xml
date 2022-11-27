@@ -14,6 +14,7 @@
         android:layout_height="30dp"
         android:layout_width="30dp"
         android:paddingStart="6dp"
+        android:contentDescription="@string/go_back"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintBottom_toTopOf="@id/opponent_card_one"
@@ -37,6 +38,7 @@
 
     <ImageView
         android:id="@+id/muteBtn"
+        android:contentDescription="@string/change_sound"
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:paddingTop="6dp"
@@ -51,6 +53,7 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:paddingEnd="6dp"
+        android:contentDescription="@string/start_new_game"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/muteBtn"
         app:layout_constraintEnd_toEndOf="parent"
@@ -59,6 +62,7 @@
 
     <ImageView
         android:id="@+id/top_left_space"
+        android:contentDescription="@string/top_left_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/left_space"
@@ -70,6 +74,7 @@
 
     <ImageView
         android:id="@+id/left_space"
+        android:contentDescription="@string/center_left_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerInside"
@@ -82,6 +87,7 @@
 
     <ImageView
         android:id="@+id/bot_left_space"
+        android:contentDescription="@string/bottom_left_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/muteBtn"
@@ -93,6 +99,7 @@
     <!-- middle column -->
     <ImageView
         android:id="@+id/mid_space"
+        android:contentDescription="@string/center_middle_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/top_mid_space"
@@ -103,6 +110,7 @@
 
     <ImageView
         android:id="@+id/top_mid_space"
+        android:contentDescription="@string/top_middle_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/backBtn"
@@ -113,6 +121,7 @@
 
     <ImageView
         android:id="@+id/bot_mid_space"
+        android:contentDescription="@string/bottom_middle_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/mid_space"
@@ -124,6 +133,7 @@
     <!-- right column -->
     <ImageView
         android:id="@+id/top_right_space"
+        android:contentDescription="@string/top_right_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/right_space"
@@ -135,6 +145,7 @@
 
     <ImageView
         android:id="@+id/right_space"
+        android:contentDescription="@string/center_right_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/bot_right_space"
@@ -145,6 +156,7 @@
 
     <ImageView
         android:id="@+id/bot_right_space"
+        android:contentDescription="@string/bottom_right_space"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintBottom_toTopOf="@id/muteBtn"
@@ -158,6 +170,7 @@
 
     <ImageView
         android:id="@+id/player_card_one"
+        android:contentDescription="@string/your_first_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="centerInside"
@@ -169,6 +182,7 @@
 
     <ImageView
         android:id="@+id/player_card_two"
+        android:contentDescription="@string/your_second_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitEnd"
@@ -180,6 +194,7 @@
 
     <ImageView
         android:id="@+id/player_card_three"
+        android:contentDescription="@string/your_third_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitStart"
@@ -191,6 +206,7 @@
 
     <ImageView
         android:id="@+id/player_card_four"
+        android:contentDescription="@string/your_fourth_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitEnd"
@@ -202,6 +218,7 @@
 
     <ImageView
         android:id="@+id/player_card_five"
+        android:contentDescription="@string/your_fifth_card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitStart"
@@ -216,6 +233,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_one"
+        android:contentDescription="Opponent's First Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         app:layout_constraintTop_toBottomOf="@id/backBtn"
@@ -226,6 +244,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_two"
+        android:contentDescription="Opponent's Second Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitEnd"
@@ -237,6 +256,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_three"
+        android:contentDescription="Opponent's Third Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitStart"
@@ -248,6 +268,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_four"
+        android:contentDescription="Opponent's Fourth Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitEnd"
@@ -259,6 +280,7 @@
 
     <ImageView
         android:id="@+id/opponent_card_five"
+        android:contentDescription="Opponent's Fifth Card"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:scaleType="fitStart"
