@@ -1,4 +1,4 @@
-package com.nhatsilas.tripletriad
+package com.silasnhat.tripletriad
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

@@ -1,12 +1,9 @@
-package com.nhatsilas.tripletriad
+package com.silasnhat.tripletriad
 
 import android.content.Intent
 import android.content.SharedPreferences
-import android.content.res.Configuration
-import android.content.res.Resources
 import android.os.Bundle
 import android.preference.PreferenceManager
-import android.util.DisplayMetrics
 import android.util.Log
 import android.widget.*
 import androidx.appcompat.app.AppCompatActivity

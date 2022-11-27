@@ -1,14 +1,14 @@
-package com.nhatsilas.tripletriad.adapter
+package com.silasnhat.tripletriad.adapter
 
 import android.content.Context
 import android.view.View
 import android.view.ViewGroup
 import android.view.LayoutInflater
 import android.widget.ImageView
-import com.nhatsilas.tripletriad.R
+import com.silasnhat.tripletriad.R
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.nhatsilas.tripletriad.data.DataSource
+import com.silasnhat.tripletriad.data.DataSource
 
 /**
  * Adapter to inflate the appropriate list item layout and populate the view with information

@@ -1,7 +1,7 @@
-package com.nhatsilas.tripletriad.data
+package com.silasnhat.tripletriad.data
 
-import com.nhatsilas.tripletriad.R
-import com.nhatsilas.tripletriad.model.ListCard
+import com.silasnhat.tripletriad.R
+import com.silasnhat.tripletriad.model.ListCard
 
 
 /**

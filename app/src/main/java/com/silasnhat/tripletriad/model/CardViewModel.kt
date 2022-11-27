@@ -1,4 +1,4 @@
-package com.nhatsilas.tripletriad.model
+package com.silasnhat.tripletriad.model
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

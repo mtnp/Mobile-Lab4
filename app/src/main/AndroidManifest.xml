@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="com.nhatsilas.tripletriad">
+    package="com.silasnhat.tripletriad">
 
     <uses-permission android:name="android.permission.INTERNET"/>
 
@@ -16,33 +16,33 @@
         android:theme="@style/Theme.TripleTriad"
         tools:targetApi="31">
 
-        <activity android:name=".RulebookActivity" >
+        <activity android:name="com.silasnhat.tripletriad.RulebookActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity"/>
+                android:value="com.silasnhat.tripletriad.MainActivity"/>
         </activity>
 
-        <activity android:name=".AlbumActivity" >
+        <activity android:name="com.silasnhat.tripletriad.AlbumActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.silasnhat.tripletriad.MainActivity" />
         </activity>
 
-        <activity android:name=".SettingsActivity" >
+        <activity android:name="com.silasnhat.tripletriad.SettingsActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
-        </activity>
-
-        <activity
-            android:name=".PlayActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".MainActivity" />
+                android:value="com.silasnhat.tripletriad.MainActivity" />
         </activity>
 
         <activity
-            android:name=".MainActivity"
+            android:name="com.silasnhat.tripletriad.PlayActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.silasnhat.tripletriad.MainActivity" />
+        </activity>
+
+        <activity
+            android:name="com.silasnhat.tripletriad.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -50,7 +50,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <service android:name=".MusicPlayer"/>
     </application>
 
 </manifest>

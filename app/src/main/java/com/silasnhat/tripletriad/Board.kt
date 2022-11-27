@@ -1,4 +1,4 @@
-package com.nhatsilas.tripletriad
+package com.silasnhat.tripletriad
 
 import android.content.ClipData
 import android.content.ClipDescription
@@ -10,7 +10,7 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.nhatsilas.tripletriad.databinding.ActivityPlayBinding
+import com.silasnhat.tripletriad.databinding.ActivityPlayBinding
 
 class Board : AppCompatActivity() {
 

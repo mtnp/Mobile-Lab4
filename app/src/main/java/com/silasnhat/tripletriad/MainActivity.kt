@@ -1,15 +1,12 @@
-package com.nhatsilas.tripletriad
+package com.silasnhat.tripletriad
 
-import android.content.Context
 import android.content.Intent
-import android.content.SharedPreferences
 import android.os.Bundle
 import android.preference.PreferenceManager
 import android.util.Log
 import android.widget.TextView
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
-import com.nhatsilas.tripletriad.databinding.ActivityMainBinding
+import com.silasnhat.tripletriad.databinding.ActivityMainBinding
 import java.util.*
 
 class MainActivity : AppCompatActivity() {

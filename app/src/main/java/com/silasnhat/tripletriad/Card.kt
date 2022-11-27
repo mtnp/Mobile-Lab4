@@ -1,4 +1,4 @@
-package com.nhatsilas.tripletriad
+package com.silasnhat.tripletriad
 
 class Card (imageId: Int = R.drawable.emptycard, name: String = "DEFAULT", northVal: Int = -1,
             eastVal: Int = -1, southVal: Int = -1, westVal: Int = -1){

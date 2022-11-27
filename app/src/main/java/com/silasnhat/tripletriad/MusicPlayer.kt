@@ -1,4 +1,4 @@
-package com.nhatsilas.tripletriad
+package com.silasnhat.tripletriad
 
 import android.content.Context
 import android.media.MediaPlayer

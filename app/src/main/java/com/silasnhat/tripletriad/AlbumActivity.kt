@@ -1,4 +1,4 @@
-package com.nhatsilas.tripletriad
+package com.silasnhat.tripletriad
 
 import android.content.Intent
 import android.content.res.Configuration
@@ -7,8 +7,8 @@ import android.os.Bundle
 import android.widget.ImageView
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.nhatsilas.tripletriad.adapter.CardAdapter
-import com.nhatsilas.tripletriad.databinding.ActivityAlbumBinding
+import com.silasnhat.tripletriad.adapter.CardAdapter
+import com.silasnhat.tripletriad.databinding.ActivityAlbumBinding
 
 class AlbumActivity : AppCompatActivity() {
 

@@ -23,15 +23,15 @@
 
     <TextView
         android:id="@+id/textView"
-        android:layout_width="100dp"
+        android:layout_width="50dp"
         android:layout_height="40dp"
-        android:paddingBottom="6dp"
-        android:paddingStart="6dp"
-        android:text="@string/you"
-        android:autoSizeTextType="uniform"
-        android:autoSizeMinTextSize="12sp"
         android:autoSizeMaxTextSize="40sp"
+        android:autoSizeMinTextSize="12sp"
         android:autoSizeStepGranularity="2sp"
+        android:autoSizeTextType="uniform"
+        android:paddingStart="6dp"
+        android:paddingBottom="6dp"
+        android:text="@string/you"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/player_card_four" />
@@ -42,22 +42,24 @@
         android:layout_width="40dp"
         android:layout_height="40dp"
         android:paddingTop="6dp"
+        android:paddingBottom="6dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/bot_mid_space"
+        app:layout_constraintTop_toBottomOf="@+id/bot_left_space"
+        app:layout_constraintStart_toStartOf="@id/bot_left_space"
+        app:layout_constraintEnd_toEndOf="@id/bot_left_space"
         app:srcCompat="@drawable/volumegray" />
 
     <ImageView
         android:id="@+id/resetBtn"
         android:layout_width="40dp"
         android:layout_height="40dp"
-        android:paddingEnd="6dp"
+        android:paddingTop="6dp"
+        android:paddingBottom="6dp"
         android:contentDescription="@string/start_new_game"
+        app:layout_constraintTop_toBottomOf="@id/bot_right_space"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@id/muteBtn"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginEnd="200dp"
+        app:layout_constraintStart_toStartOf="@id/bot_right_space"
+        app:layout_constraintEnd_toEndOf="@id/bot_right_space"
         app:srcCompat="@drawable/reset"/>
 
     <ImageView
@@ -140,7 +142,6 @@
         app:layout_constraintEnd_toStartOf="@id/opponent_card_two"
         app:layout_constraintStart_toEndOf="@id/top_mid_space"
         app:layout_constraintTop_toBottomOf="@id/backBtn"
-        android:layout_marginEnd="6dp"
         app:srcCompat="@drawable/emptycard" />
 
     <ImageView
