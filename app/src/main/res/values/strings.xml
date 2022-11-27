@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Flipping Card Game</string>
+    <string name="app_name">Double Dyad</string>
     <string name="music">Music</string>
     <string name="sfx">SFX</string>
     <string name="english" translatable="false">English</string>
@@ -15,7 +15,7 @@
     <string name="you_lose">You LOSE</string>
     <string name="you_tied">You TIED</string>
     <string name="you_win">You WIN</string>
-    <string name="welcome_main">Welcome to Flipping Card Game</string>
+    <string name="welcome_main">Welcome to Double Dyad</string>
     <string name="spanish" translatable="false">Español</string>
     <string name="longpress">LONG PRESS A CARD TO MOVE IT</string>
     <string name="back_button">back button</string>
@@ -29,7 +29,7 @@
     <string name="album_button">Album button</string>
     <string name="album_icon">Album icon, it is an image of 5 cards spread out</string>
     <string name="settings_button">Settings button</string>
-    <string name="settings_icon" translatable="false">Settings icon, it is an image of a gear</string>
+    <string name="settings_icon">Settings icon, it is an image of a gear</string>
     <string name="change_sound">Change Sound</string>
     <string name="start_new_game">Start New Game</string>
     <string name="top_left_space">Top Left Space</string>
